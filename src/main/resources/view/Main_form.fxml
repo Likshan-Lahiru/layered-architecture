@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane accessibleRole="BUTTON" cache="true" cacheHint="SPEED" depthTest="DISABLE" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.MainFormController">
+   <children>
+      <VBox cache="true" cacheHint="QUALITY" layoutX="14.0" layoutY="16.0" prefHeight="691.0" prefWidth="186.0" spacing="5.0" style="-fx-border-color: #ffb703;" AnchorPane.leftAnchor="18.0">
+         <children>
+            <Line endX="73.5" startX="-100.0" />
+            <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#btnOrderOnAction" prefHeight="41.0" prefWidth="175.0" style="-fx-background-color: #023047;" text="Orders detail" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="66.0" onAction="#btnCustomerOnAction" prefHeight="41.0" prefWidth="175.0" style="-fx-background-color: #023047;" text="Customer detail" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="11.0" layoutY="122.0" onAction="#btnToolOnAction" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #023047;" text="Tool detail" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="15.0" onAction="#btnVehicalOnAction" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: #023047;" text="Vehical detial" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="285.0" onAction="#btnEmployeeOnAction" prefHeight="45.0" prefWidth="175.0" style="-fx-background-color: #023047;" text="Employee" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="399.0" onAction="#btnSupplierOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: #023047;" text="Supplier" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="341.0" onAction="#btnLogOutOnAction" prefHeight="50.0" prefWidth="177.0" style="-fx-background-color: #023047;" text="   Log out" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="210.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="31.0">
+                     <image>
+                        <Image url="@../icon/log-out.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="1.0" top="150.0" />
+         </padding>
+      </VBox>
+      <AnchorPane fx:id="root" layoutX="212.0" prefHeight="720.0" prefWidth="988.0" AnchorPane.leftAnchor="212.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

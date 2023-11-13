@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: #adb5bd;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SignUPFormController">
+   <children>
+      <Pane layoutX="532.0" layoutY="38.0" prefHeight="599.0" prefWidth="533.0" style="-fx-background-radius: 20; -fx-background-color: #0f4c5c;">
+         <children>
+            <JFXTextField fx:id="txtFirstName" blendMode="ADD" focusColor="#52b69a" labelFloat="true" layoutX="55.0" layoutY="139.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="416.0" promptText="   First Name" unFocusColor="WHITE">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXTextField fx:id="txtSecondName" blendMode="ADD" focusColor="#52b69a" labelFloat="true" layoutX="55.0" layoutY="197.0" prefHeight="25.0" prefWidth="416.0" promptText="   Second Name" unFocusColor="WHITE">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXTextField fx:id="txtEmail" blendMode="ADD" focusColor="#52b69a" labelFloat="true" layoutX="55.0" layoutY="299.0" prefHeight="25.0" prefWidth="416.0" promptText="   Email" unFocusColor="WHITE">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <JFXTextField fx:id="txtPassword" blendMode="ADD" focusColor="#52b69a" labelFloat="true" layoutX="55.0" layoutY="356.0" prefHeight="25.0" prefWidth="416.0" promptText="   Password" unFocusColor="WHITE">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></JFXTextField>
+            <Label layoutX="193.0" layoutY="41.0" prefHeight="41.0" prefWidth="139.0" text="Sign Up" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="29.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="203.0" layoutY="430.0" onAction="#btnCreateAccountOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #cce3de;" text="Create Account">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXTextField fx:id="txtUserName" blendMode="ADD" focusColor="#52b69a" labelFloat="true" layoutX="55.0" layoutY="252.0" prefHeight="25.0" prefWidth="416.0" promptText="   User Name" unFocusColor="WHITE">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <JFXButton layoutX="313.0" layoutY="515.0" onAction="#btnBackOnAction" prefHeight="25.0" prefWidth="53.0" ripplerFill="#6fd05a" style="-fx-background-color: #0f4c5c;" text="Sign in" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font></JFXButton>
+            <Label layoutX="179.0" layoutY="513.0" prefHeight="29.0" prefWidth="139.0" text="Already have an account " textFill="#9e9d9d" />
+            <Line endX="76.0" layoutX="156.0" layoutY="493.0" startX="-78.0" stroke="#9e9d9d" />
+            <Label layoutX="249.0" layoutY="484.0" prefHeight="17.0" prefWidth="27.0" text="Or" textFill="#9e9d9d" />
+            <Line endX="58.0" layoutX="377.0" layoutY="492.0" startX="-100.0" stroke="#9e9d9d" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="599.0" fitWidth="416.0" layoutX="133.0" layoutY="38.0">
+         <image>
+            <Image url="@../wallpaper/signUp.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="94.0" layoutX="148.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icon/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

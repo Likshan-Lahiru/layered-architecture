@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.welcomeFormController">
+   <children>
+      <Label layoutX="104.0" layoutY="228.0" prefHeight="85.0" prefWidth="574.0" text="Welcome to  Ashen Enterprise ">
+         <font>
+            <Font name="Calibri Bold" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="104.0" layoutY="275.0" prefHeight="85.0" prefWidth="459.0" text="Digital Toolbox.... ">
+         <font>
+            <Font name="Calibri Bold" size="39.0" />
+         </font>
+      </Label>
+      <Label layoutX="104.0" layoutY="364.0" prefHeight="85.0" prefWidth="424.0" text="Encourage customers to explore your tool selection,&#10;rent what they need,&#10;and unleash their creative potential.&#10;" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="Meiryo UI Italic" size="16.0" />
+         </font>
+      </Label>
+      <Pane layoutX="104.0" layoutY="348.0" prefHeight="4.0" prefWidth="200.0" style="-fx-background-radius: 5; -fx-background-color: #fb8500;" />
+      <Hyperlink layoutX="104.0" layoutY="566.0" prefHeight="20.0" prefWidth="104.0" style="-fx-background-radius: 5; -fx-background-color: #dad7cd;" text="https://drive.google.com/file/d/1Khi7rTfVKPM8vIy9Xf4TcTpQnB607rW1/view?usp=sharing" />
+      <Label layoutX="104.0" layoutY="513.0" prefHeight="40.0" prefWidth="184.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 10;" text="    User guidelines" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Pane layoutX="711.0" layoutY="209.0" prefHeight="436.0" prefWidth="453.0" style="-fx-background-color: #dad7cd; -fx-background-radius: 10;">
+         <children>
+            <JFXButton layoutX="228.0" layoutY="-154.0" prefHeight="34.0" prefWidth="86.0" text="Sign Up">
+               <font>
+                  <Font name="Calibri Bold" size="17.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="408.0" fitWidth="408.0" layoutX="-101.0" layoutY="-154.0">
+               <image>
+                  <Image url="@../icon/ginder.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="316.0" fitWidth="309.0" layoutX="176.0" layoutY="96.0">
+               <image>
+                  <Image url="@../icon/bull.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXButton buttonType="RAISED" layoutX="1044.0" layoutY="54.0" onAction="#loginPageOnAction" prefHeight="33.0" prefWidth="104.0" style="-fx-background-color: #3a86ff;" text="Log In" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="40.0" fitWidth="38.0" layoutX="244.0" layoutY="513.0">
+         <image>
+            <Image url="@../icon/guide.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="436.0" fitWidth="653.0" layoutX="332.0" layoutY="371.0">
+         <image>
+            <Image url="@../icon/kisspng-stock-photography-plumber-construction-worker-plum-construction-worker-5ab9120b89e902.6814390015220782195649.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="264.0" layoutX="749.0" layoutY="427.0">
+         <image>
+            <Image url="@../icon/doosar.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="187.0" fitWidth="187.0" layoutX="103.0" layoutY="54.0">
+         <image>
+            <Image url="@../icon/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
