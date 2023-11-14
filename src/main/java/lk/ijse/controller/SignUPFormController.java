@@ -7,12 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.dto.SignUpDto;
 import lk.ijse.model.SignUpModel;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 
 public class SignUPFormController {
@@ -37,6 +39,16 @@ public class SignUPFormController {
         String UserName = txtUserName.getText();
         String password = txtPassword.getText();
         String email = txtEmail.getText();
+        if(FirstName.isEmpty() ||SecondName.isEmpty()||UserName.isEmpty()||password.isEmpty()||email.isEmpty()){
+
+            if (FirstName.isEmpty()) boarderRedAlert(txtFirstName);
+            if (SecondName.isEmpty()) boarderRedAlert(txtSecondName);
+            if (UserName.isEmpty()) boarderRedAlert(txtUserName);
+            if (password.isEmpty()) boarderRedAlert(txtPassword);
+            if (email.isEmpty())boarderRedAlert(txtEmail);
+            new Alert(Alert.AlertType.ERROR,"Please enter the all detail!").showAndWait();
+            return;
+        }
 
         var dto = new SignUpDto(FirstName,SecondName,UserName,password,email);
 
@@ -45,7 +57,8 @@ public class SignUPFormController {
         try {
             boolean isCreateAccount = model.createAccount(dto);
             if (isCreateAccount){
-                new Alert(Alert.AlertType.CONFIRMATION,"Account create successfull!").show();
+                new Alert(Alert.AlertType.CONFIRMATION,"Account create successfull!").showAndWait();
+                resetBoarderColor();
             }
 
         } catch (SQLException sqlException){
@@ -63,6 +76,19 @@ public class SignUPFormController {
         stage.setScene(scene);
         stage.setTitle("Login Page");
         stage.centerOnScreen();
+    }
+    public void boarderRedAlert(TextField field){
+        field.setStyle("-fx-border-color: #ff004f;");
+    }
+    public void resetBoarderRedAlert(TextField field){
+        field.setStyle("");
+    }
+    public void resetBoarderColor(){
+        resetBoarderRedAlert(txtFirstName);
+        resetBoarderRedAlert(txtSecondName);
+        resetBoarderRedAlert(txtUserName);
+        resetBoarderRedAlert(txtPassword);
+        resetBoarderRedAlert(txtEmail);
     }
 }
 

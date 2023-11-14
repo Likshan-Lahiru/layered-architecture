@@ -1,4 +1,4 @@
 package lk.ijse.controller;
 
-public class CustomerFormController {
+public class CustomerFormController { //customer controller class
 }
