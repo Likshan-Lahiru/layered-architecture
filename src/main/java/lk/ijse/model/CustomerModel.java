@@ -49,4 +49,24 @@ public class CustomerModel {
 
         return customerDtoList;
     }
+
+    public CustomerDto searchCustomer(String txtSearchCustomerIDText) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM customer WHERE customer_id= ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1,txtSearchCustomerIDText);
+        ResultSet resultSet = pstm.executeQuery();
+        CustomerDto dto = null;
+        if (resultSet.next()){
+             dto = new CustomerDto(
+                resultSet.getString("customer_id"),
+                resultSet.getString("customer_name"),
+                resultSet.getString("address"),
+                resultSet.getString("NIC"),
+                resultSet.getString("contact_number")
+            );
+        }
+
+        return dto;
+    }
 }

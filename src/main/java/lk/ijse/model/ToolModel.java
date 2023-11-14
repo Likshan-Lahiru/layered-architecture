@@ -47,7 +47,7 @@ public class ToolModel {
         return dtoList;
     }
 
-    public ToolDto searchToolID(ToolDto dto) throws SQLException {
+    public ToolDto  searchToolID(ToolDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM tool WHERE tool_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);

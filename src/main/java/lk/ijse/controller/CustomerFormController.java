@@ -82,6 +82,22 @@ public class CustomerFormController {
 
     }
     public void btnCustomerIDSearchOnAction(ActionEvent actionEvent) {
+        String txtSearchCustomerIDText = txtSearchCustomerID.getText();
+        if (txtSearchCustomerIDText.isEmpty()){
+            new Alert(Alert.AlertType.ERROR,"Please Enter the customer Id").showAndWait();
+        }
+        CustomerModel model = new CustomerModel();
+        try {
+            CustomerDto dto = model.searchCustomer(txtSearchCustomerIDText);
+            if(dto!=null){
+                cutomerSetField(dto);
+            }else {
+                new Alert(Alert.AlertType.CONFIRMATION,"Customer Does not Found!").showAndWait();
+                clearCustomerField();
+            }
+        }catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        }
 
     }
 
@@ -97,12 +113,8 @@ public class CustomerFormController {
         String txtCustomerNICText = txtCustomerNIC.getText();
         String txtCustomerContactNumberText = txtCustomerContactNumber.getText();
 
-        if (txtCustomerNameText.isEmpty()||
-                txtCustomerIdText.isEmpty()||
-                txtCustomerAddressText.isEmpty()||
-                txtCustomerNICText.isEmpty()||
-                txtCustomerContactNumberText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please insert All details!");
+        if (txtCustomerNameText.isEmpty()|| txtCustomerIdText.isEmpty()|| txtCustomerAddressText.isEmpty()|| txtCustomerNICText.isEmpty()|| txtCustomerContactNumberText.isEmpty()){
+            new Alert(Alert.AlertType.ERROR,"Please insert All details!").showAndWait();
             return;
         }
         CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText);
@@ -146,6 +158,7 @@ public class CustomerFormController {
     public void btnCustomerUpdateOnAction(ActionEvent actionEvent) {
 
 
+
     }
     public void clearCustomerField(){
         txtCustomerId.clear();
@@ -153,5 +166,6 @@ public class CustomerFormController {
         txtCustomerNIC.clear();
         txtCustomerAddress.clear();
         txtCustomerContactNumber.clear();
+        txtSearchCustomerID.clear();
     }
 }
