@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.EmployeeFormController">
    <children>
       <Pane layoutX="16.0" layoutY="23.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;">
@@ -41,13 +40,20 @@
                   </ImageView>
                </graphic>
             </Button>
-            <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="841.0" layoutY="163.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="841.0" layoutY="233.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="841.0" layoutY="357.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Address" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="838.0" layoutY="298.0" prefHeight="25.0" prefWidth="315.0" promptText="Employee NIC" unFocusColor="#0988e5" />
+            <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="822.0" layoutY="282.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5" />
+            <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="822.0" layoutY="352.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5" />
+            <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="822.0" layoutY="476.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Address" unFocusColor="#0988e5" />
+            <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="819.0" layoutY="417.0" prefHeight="25.0" prefWidth="315.0" promptText="Employee NIC" unFocusColor="#0988e5" />
             <JFXButton buttonType="RAISED" layoutX="900.0" layoutY="646.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE" />
             <JFXButton buttonType="RAISED" layoutX="978.0" layoutY="646.0" onAction="#btnEmployeeSaveOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #6930c3;" text="Save" textFill="WHITE" />
             <JFXButton buttonType="RAISED" layoutX="1061.0" layoutY="646.0" onAction="#btnEmployeeUpdateOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #7400b8;" text="Update" textFill="WHITE" />
+            <Pane layoutX="950.0" layoutY="104.0" prefHeight="172.0" prefWidth="163.0" style="-fx-background-radius: 20; -fx-background-color: #f2e9e4;" />
+            <ImageView fitHeight="133.0" fitWidth="160.0" layoutX="967.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/admin.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="861.0" layoutY="219.0" prefHeight="34.0" prefWidth="85.0" text="Add photo" />
          </children>
       </Pane>
    </children>

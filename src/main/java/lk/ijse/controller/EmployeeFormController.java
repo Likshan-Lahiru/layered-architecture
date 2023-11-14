@@ -1,17 +1,23 @@
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.EmployeeDto;
 import lk.ijse.dto.tm.EmployeeTm;
+import lk.ijse.model.CustomerModel;
 import lk.ijse.model.EmployeeModel;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeFormController {
     @FXML
@@ -35,7 +41,59 @@ public class EmployeeFormController {
     @FXML
     private TableView<EmployeeTm> tblEmployee;
 
+    public void initialize(){
+        employeeCellvalueFactory();
+        loadAllEmployee();
+        setEmployee();
+    }
+
+    private void loadAllEmployee() {
+        var model = new EmployeeModel();
+
+        ObservableList<EmployeeTm> employeeTmObservableList = FXCollections.observableArrayList();
+        try {
+            List<EmployeeDto> employeeDtos  =model.getAllEmployee();
+            for (EmployeeDto dto : employeeDtos){
+                employeeTmObservableList.add(
+                        new EmployeeTm(
+                                dto.getEmployeeid(),
+                                dto.getEmployeeName(),
+                                dto.getEmployeeNIC(),
+                                dto.getEmployeeAddress()
+
+                        )
+                );
+            }
+            tblEmployee.setItems(employeeTmObservableList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void employeeCellvalueFactory(){
+        colEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        colEmployeeName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
+        colEmployeeNIC.setCellValueFactory(new PropertyValueFactory<>("employeeNIC"));
+        colEmployeeAddress.setCellValueFactory(new PropertyValueFactory<>("employeeAddress"));
+
+    }
     public void btnEmployeeIDSearchOnAction(ActionEvent actionEvent) {
+        String employeeIDText = txtSearchEmployeeID.getText();
+        if (employeeIDText.isEmpty()){
+            new Alert(Alert.AlertType.ERROR,"Please Enter the Employee Id").showAndWait();
+        }
+        EmployeeModel model = new EmployeeModel();
+        try {
+            EmployeeDto dto = model.searchEmployee(employeeIDText);
+            if(dto!=null){
+                employeeSetFeild(dto);
+            }else {
+                new Alert(Alert.AlertType.CONFIRMATION,"Employee Does not Found!").showAndWait();
+                employeeFeildClear();
+            }
+        }catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        }
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
@@ -73,10 +131,32 @@ public class EmployeeFormController {
 
     public void btnEmployeeUpdateOnAction(ActionEvent actionEvent) {
     }
+    private void setEmployee(){
+        tblEmployee.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldvalue,newValue)->{
+                    EmployeeDto dto = new EmployeeDto(
+                            newValue.getEmployeeId(),
+                            newValue.getEmployeeName(),
+                            newValue.getEmployeeNIC(),
+                            newValue.getEmployeeAddress()
+
+                    );
+                    employeeSetFeild(dto);
+                });
+    }
+
+    private void employeeSetFeild(EmployeeDto dto) {
+        txtEmployeerId.setText(dto.getEmployeeid());
+        txtEmployeeName.setText(dto.getEmployeeName());
+        txtEmployeeNIC.setText(dto.getEmployeeNIC());
+        txtEmployeeAddress.setText(dto.getEmployeeAddress());
+
+    }
     public void employeeFeildClear(){
         txtEmployeerId.clear();
         txtEmployeeNIC.clear();
         txtEmployeeAddress.clear();
         txtEmployeeName.clear();
+        txtSearchEmployeeID.clear();
     }
 }

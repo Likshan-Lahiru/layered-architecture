@@ -1,11 +1,15 @@
 package lk.ijse.model;
 
 import lk.ijse.db.DbConnection;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.EmployeeDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeModel {
 
@@ -22,5 +26,50 @@ public class EmployeeModel {
        boolean isSaved = pstm.executeUpdate()>0;
 
         return isSaved;
+    }
+
+    public List<EmployeeDto> getAllEmployee() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql= "SELECT * FROM employee ";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        List<EmployeeDto> employeeDtos =new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()){
+            String employee_id =resultSet.getString(1);
+            String employee_name =resultSet.getString(2);
+            String customer_nic =resultSet.getString(3);
+            String customer_address=resultSet.getString(4);
+
+
+
+            EmployeeDto dto = new EmployeeDto(employee_id,employee_name,customer_nic,customer_address);
+            employeeDtos.add(dto);
+        }
+
+        return employeeDtos;
+    }
+
+    public EmployeeDto searchEmployee(String employeeIDText) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM employee WHERE employee_id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1,employeeIDText);
+        ResultSet resultSet = pstm.executeQuery();
+        EmployeeDto dto = null;
+        if (resultSet.next()){
+            dto = new EmployeeDto(
+                    resultSet.getString("employee_id"),
+                    resultSet.getString("employee_name"),
+                    resultSet.getString("NIC"),
+                    resultSet.getString("address")
+
+
+            );
+        }
+
+        return dto;
     }
 }
