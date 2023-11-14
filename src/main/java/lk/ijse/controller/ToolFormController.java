@@ -108,10 +108,10 @@ public class ToolFormController {
         String toolNameText = txtToolName.getText();
         int qtyOnHandText = Integer.parseInt(txtToolQtyOnHand.getText());
         double rentPerDayPrice = Double.parseDouble(txtRentPerDayPrice.getText());
-        /*if (toolIdText.isEmpty()||toolNameText.isEmpty()||String.valueOf(qtyOnHandText).isEmpty()||String.valueOf(rentPerDayPrice).isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please enter the all information!").show();
+        if (toolIdText.isEmpty()||toolNameText.isEmpty()||String.valueOf(qtyOnHandText).isEmpty()||String.valueOf(rentPerDayPrice).isEmpty()){
+            new Alert(Alert.AlertType.ERROR,"Please enter the all information!").showAndWait();
             return;
-        }*/
+        }
 
         ToolDto dto = new ToolDto(toolIdText, toolNameText, qtyOnHandText, rentPerDayPrice);
         ToolModel model = new ToolModel();
