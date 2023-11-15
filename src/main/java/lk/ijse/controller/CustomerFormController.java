@@ -129,10 +129,8 @@ public class CustomerFormController {
         }catch (SQLException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
-
-
-
     }
+
     private void setCustomer(){
         tblCustomer.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldvalue,newValue)->{

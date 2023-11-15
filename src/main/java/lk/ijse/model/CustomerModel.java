@@ -2,6 +2,7 @@ package lk.ijse.model;
 
 import lk.ijse.db.DbConnection;
 import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.SupplierDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,4 +70,6 @@ public class CustomerModel {
 
         return dto;
     }
+
+
 }
