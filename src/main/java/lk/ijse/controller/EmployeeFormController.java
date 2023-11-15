@@ -117,7 +117,9 @@ public class EmployeeFormController {
         try {
             boolean isSaved = model.saveEmployee(dto);
             if (isSaved){
+                    loadAllEmployee();
                     new Alert(Alert.AlertType.CONFIRMATION,"New Employee Entered!").showAndWait();
+                    employeeFeildClear();
             }else {
                 new Alert(Alert.AlertType.ERROR,"new Employee enter failed!").showAndWait();
             }
