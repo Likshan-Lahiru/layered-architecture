@@ -5,15 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
+import lk.ijse.util.SystemAlert;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -84,7 +82,9 @@ public class CustomerFormController {
     public void btnCustomerIDSearchOnAction(ActionEvent actionEvent) {
         String txtSearchCustomerIDText = txtSearchCustomerID.getText();
         if (txtSearchCustomerIDText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please Enter the customer Id").showAndWait();
+
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the customer Id!", ButtonType.OK).show();
+            return;
         }
         CustomerModel model = new CustomerModel();
         try {
@@ -114,7 +114,7 @@ public class CustomerFormController {
         String txtCustomerContactNumberText = txtCustomerContactNumber.getText();
 
         if (txtCustomerNameText.isEmpty()|| txtCustomerIdText.isEmpty()|| txtCustomerAddressText.isEmpty()|| txtCustomerNICText.isEmpty()|| txtCustomerContactNumberText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please insert All details!").showAndWait();
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the all Details!", ButtonType.OK).show();
             return;
         }
         CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText);
@@ -123,11 +123,11 @@ public class CustomerFormController {
             boolean isSaved =model.saveCustomer(dto);
             if (isSaved){
                 loadAllCustomer();
-                new Alert(Alert.AlertType.CONFIRMATION,"New Customer Saved!").showAndWait();
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer Enter successfully!", ButtonType.OK).show();
                 clearCustomerField();
             }
         }catch (SQLException e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Somehing went wrong!", ButtonType.OK).show();
         }
     }
 
