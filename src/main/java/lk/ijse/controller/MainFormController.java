@@ -31,11 +31,11 @@ public class MainFormController {
     @FXML
     public void initializeFirstForm() throws IOException {
         this.actionEvent = actionEvent;
-        btnOrderOnAction();
+        btnCustomerOnAction();
     }
 
 
-    public void btnCustomerOnAction(ActionEvent actionEvent) throws IOException {
+    public void btnCustomerOnAction() throws IOException {
         Parent node = FXMLLoader.load(this.getClass().getResource("/view/Customer_form.fxml"));
 
         this.root.getChildren().clear();

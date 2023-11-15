@@ -9,7 +9,7 @@
    <children>
       <Pane layoutX="131.0" layoutY="60.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
-            <Label layoutX="447.0" layoutY="95.0" prefHeight="85.0" prefWidth="220.0" text="vehical Form">
+            <Label layoutX="447.0" layoutY="95.0" prefHeight="85.0" prefWidth="220.0" text="Transport Form">
                <font>
                   <Font size="31.0" />
                </font>
