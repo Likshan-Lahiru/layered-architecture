@@ -1,5 +1,4 @@
 package lk.ijse.controller;
-
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,11 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
-import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.util.SystemAlert;
-
 import java.sql.SQLException;
 import java.util.List;
 
