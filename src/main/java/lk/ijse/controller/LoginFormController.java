@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import lk.ijse.dto.LoginDto;
 import lk.ijse.dto.SignUpDto;
 import lk.ijse.model.LoginModel;
-import lk.ijse.util.Mail;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,6 +23,8 @@ public class LoginFormController {
     private TextField txtPassword;
     @FXML
     private AnchorPane root;
+
+    private String mail;
 
     @FXML
     public void btnSignInOnAction(ActionEvent actionEvent) throws IOException {
@@ -53,6 +54,8 @@ public class LoginFormController {
         model.checkCredentianl(dto);
 
 
+
+
       try {
             boolean checked = model.checkCredentianl(dto);
             if (checked){
@@ -63,13 +66,14 @@ public class LoginFormController {
                 stage.setTitle("Order Form");
                 stage.centerOnScreen();
 
-                Mail mail = new Mail();
+              /*  Mail mail = new Mail();
                 mail.setMsg("Welcome..! \n\n\tYou are successfully logged in to the Ashen Enterprise Management System \n\nThank you..!");
-                mail.setTo(signUpDto.getEmail());
+
+                mail.setTo("");
                 mail.setSubject("Ashen Enterprise Management System Login");
 
                 Thread thread = new Thread(mail);
-                thread.start();
+                thread.start();*/
 
            } else {
                 new Alert(Alert.AlertType.CONFIRMATION,"user name or password invailid...").show();
