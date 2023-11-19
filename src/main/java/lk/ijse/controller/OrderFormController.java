@@ -2,12 +2,26 @@ package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.ToolDto;
+import lk.ijse.model.CustomerModel;
+import lk.ijse.model.OrderModel;
+import lk.ijse.model.ToolModel;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class OrderFormController {
 
@@ -57,6 +71,54 @@ public class OrderFormController {
     private JFXComboBox cmbToolID;
     @FXML
     private Label lblDescription;
+    @FXML
+    private AnchorPane root;
+
+    public void initialize(){
+        generateNextOrderId();
+        loadToolid();
+        loadCustomerIds();
+
+    }
+
+    private void generateNextOrderId() {
+
+        try {
+            String orderId = OrderModel.generateNextOrderId();
+            lblOrderId.setText(orderId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadToolid() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<ToolDto> toolDtoList = ToolModel.getAllTool();
+
+            for (ToolDto toolDto : toolDtoList) {
+                obList.add(toolDto.getToolId());
+            }
+
+            cmbToolID.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void loadCustomerIds() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<CustomerDto> cusList = CustomerModel.getAllCustomer();
+
+            for (CustomerDto dto : cusList) {
+                obList.add(dto.getCustomerId());
+            }
+            cmbCustomerId.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void btnAddToCartOnAction(ActionEvent actionEvent) {
 
@@ -66,15 +128,37 @@ public class OrderFormController {
     }
 
     public void txtQtyOnAction(ActionEvent actionEvent) {
+
     }
 
     public void cmbToolIdOnAction(ActionEvent actionEvent) {
+        String code = (String) cmbToolID.getValue();
+
+        txtQty.requestFocus();
+
+        try {
+            ToolDto dto = ToolModel.searchToolID(code);
+
+            lblDescription.setText(dto.getToolName());
+            lblRentPerDay.setText(String.valueOf(dto.getRentPerDay()));
+            lblQutyOnHand.setText(String.valueOf(dto.getQtyOnhand()));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void cmbCustomerOnAction(ActionEvent actionEvent) {
-        
+    public void cmbCustomerOnAction(ActionEvent actionEvent) throws SQLException {
+        String id = (String) cmbCustomerId.getValue();
+        CustomerDto dto = CustomerModel.searchCustomer(id);
+
+        lblCustomerName.setText(dto.getCustomerName());
     }
 
-    public void btnNewCustomerOnAction(ActionEvent actionEvent) {
+    public void btnNewCustomerOnAction(ActionEvent actionEvent) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/supplier_form.fxml"));
+
+        this.root.getChildren().clear();
+        this.root.getChildren().add(node);
     }
 }

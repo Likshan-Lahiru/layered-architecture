@@ -28,7 +28,7 @@ public class CustomerModel {
         return IsSaved;
     }
 
-    public List<CustomerDto> getAllCustomer() throws SQLException {
+    public static List<CustomerDto> getAllCustomer() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql= "SELECT * FROM customer ";
@@ -51,7 +51,7 @@ public class CustomerModel {
         return customerDtoList;
     }
 
-    public CustomerDto searchCustomer(String txtSearchCustomerIDText) throws SQLException {
+    public static CustomerDto searchCustomer(String txtSearchCustomerIDText) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM customer WHERE customer_id= ?";
         PreparedStatement pstm = connection.prepareStatement(sql);

@@ -27,7 +27,7 @@ public class ToolModel {
 
     }
 
-    public List<ToolDto> getAllTool() throws SQLException {
+    public static List<ToolDto> getAllTool() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "Select * FROM tool";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -47,11 +47,11 @@ public class ToolModel {
         return dtoList;
     }
 
-    public ToolDto  searchToolID(ToolDto dto) throws SQLException {
+    public static ToolDto  searchToolID(String dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM tool WHERE tool_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, dto.getToolId());
+        pstm.setString(1, dto);
         ResultSet resultSet = pstm.executeQuery();
         ToolDto toolDto = null;
         if (resultSet.next()){

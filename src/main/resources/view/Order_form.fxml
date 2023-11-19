@@ -30,7 +30,7 @@
                      <children>
                         <Pane layoutX="496.0" layoutY="123.0" prefHeight="448.0" prefWidth="644.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                            <children>
-                              <TableView fx:id="tblCart" layoutX="20.0" layoutY="14.0" prefHeight="354.0" prefWidth="604.0">
+                              <TableView fx:id="tblCart" layoutX="20.0" layoutY="14.0" prefHeight="354.0" prefWidth="604.0" stylesheets="@../style/table.css">
                                 <columns>
                                   <TableColumn fx:id="colToolId" prefWidth="104.0" text="Tool Id" />
                                     <TableColumn fx:id="ColQty" prefWidth="97.0" text="Qty" />
@@ -138,7 +138,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ced4da;">
                      <children>
-                        <TableView layoutX="22.0" layoutY="14.0" prefHeight="551.0" prefWidth="1033.0">
+                        <TableView layoutX="22.0" layoutY="14.0" prefHeight="551.0" prefWidth="1033.0" stylesheets="@../style/table.css">
                           <columns>
                             <TableColumn fx:id="colOrderDetailsOrderId" prefWidth="189.0" text="Order Id" />
                             <TableColumn fx:id="colOrderDetailsId" prefWidth="183.0" text="Tool Id" />

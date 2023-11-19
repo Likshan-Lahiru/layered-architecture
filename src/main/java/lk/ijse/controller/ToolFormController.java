@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.ToolModel;
+import lk.ijse.util.SystemAlert;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -119,7 +120,10 @@ public class ToolFormController {
 
             boolean isUpdateTool = model.updateToolId(dto);
             if (isUpdateTool){
-                new Alert(Alert.AlertType.CONFIRMATION,"Tool updated!").show();
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Tool Enter successfully!", ButtonType.OK).show();
+            }
+            else {
+                new SystemAlert(Alert.AlertType.WARNING, "Error", "Somehing went wrong!", ButtonType.OK).show();
             }
 
         }catch (SQLException e){
@@ -144,7 +148,7 @@ public class ToolFormController {
         ToolModel model = new ToolModel();
 
         try {
-            ToolDto dto1 = model.searchToolID(dto);
+            ToolDto dto1 = model.searchToolID(searchIdText);
             if (dto1 !=null){
                 toolSetFields(dto1);
             }else {
