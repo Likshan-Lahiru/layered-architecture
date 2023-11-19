@@ -10,11 +10,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lk.ijse.dto.CustomerDto;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.SupplierDto;
-import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.SupplierTm;
-import lk.ijse.model.CustomerModel;
 import lk.ijse.model.SupplierModel;
 
 import java.sql.SQLException;
@@ -22,6 +20,8 @@ import java.util.List;
 
 public class SupplierFormController {
 
+    @FXML
+    private AnchorPane newAnchor;
     @FXML
     private TableView<SupplierTm> tblSupplier;
     @FXML
@@ -171,4 +171,7 @@ public class SupplierFormController {
         txtSupplierNIC.clear();
         txtSearchSupplierID.clear();
     }
+
+
+
 }

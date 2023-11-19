@@ -43,7 +43,7 @@ public class MainFormController {
     }
 
     public void btnVehicalOnAction(ActionEvent actionEvent) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/vehical_form.fxml"));
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/transport_form.fxml"));
 
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
@@ -77,6 +77,7 @@ public class MainFormController {
         stage.setTitle("Order Form");
         stage.centerOnScreen();
     }
+
 
 
 }

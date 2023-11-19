@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.VehicalFormController">
+   <children>
+      <Label layoutX="41.0" layoutY="10.0" prefHeight="77.0" prefWidth="309.0" text="Vehicle Detail">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="37.0" />
+         </font>
+      </Label>
+      <Pane blendMode="DARKEN" layoutX="53.0" layoutY="101.0" prefHeight="274.0" prefWidth="1117.0" style="-fx-background-color: #d6ccc2; -fx-background-radius: 10;">
+         <children>
+            <Label layoutX="151.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="492.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="180.0" fitWidth="334.0" layoutX="34.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/lorry.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="180.0" fitWidth="341.0" layoutX="411.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/lorry%202.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="537.0" layoutY="216.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
+            <ImageView fitHeight="212.0" fitWidth="438.0" layoutX="713.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/loeer%203.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="879.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="407.0" prefHeight="274.0" prefWidth="622.0">
+         <columns>
+            <TableColumn fx:id="colVehicleId" prefWidth="100.0" text="Vehicle ID" />
+            <TableColumn fx:id="colVehicleStatus" prefWidth="250.0" text="Status" />
+            <TableColumn fx:id="colVehicleServiceDate" prefWidth="150.0" text="Last Service Date" />
+            <TableColumn fx:id="colNumberplateNo" prefWidth="120.0" text="Number plate NO" />
+         </columns>
+      </TableView>
+      <Pane layoutX="705.0" layoutY="409.0" prefHeight="274.0" prefWidth="465.0" style="-fx-background-color: #d6ccc2; -fx-background-radius: 15;">
+         <children>
+            <JFXTextField fx:id="txtVehicleId" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="168.0" promptText="Vehicle ID">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+
+                     </light>
+                  </Lighting>
+               </effect>
+            </JFXTextField>
+            <JFXTextField fx:id="txtNumPlateNo" focusColor="BLACK" labelFloat="true" layoutX="230.0" layoutY="20.0" prefHeight="25.0" prefWidth="179.0" promptText="Number plate NO">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                     </light>
+                  </Lighting>
+               </effect>
+            </JFXTextField>
+            <JFXTextField fx:id="txtVehicleStatus" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="398.0" promptText="Vehicle Status">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+
+                     </light>
+                  </Lighting>
+               </effect>
+            </JFXTextField>
+            <JFXButton buttonType="RAISED" layoutX="147.0" layoutY="227.0" onAction="#btnVehcleSaveOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #fcbf49;" text="Save" />
+            <JFXButton buttonType="RAISED" layoutX="222.0" layoutY="227.0" onAction="#btnVehcleUpdateOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #2ec4b6;" text="Update" />
+            <JFXButton buttonType="RAISED" layoutX="384.0" layoutY="227.0" onAction="#btnVehcleDeleteOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #da2c38;" text="Delete" />
+            <JFXButton buttonType="RAISED" layoutX="301.0" layoutY="227.0" onAction="#btnVehcleEditOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #f1faee;" text="Clear" />
+            <DatePicker fx:id="pickerLastServiceDate" blendMode="MULTIPLY" layoutX="14.0" layoutY="146.0" promptText="Last Service Date" style="-fx-background-color: #fefae0;" />
+         </children>
+      </Pane>
+   </children>
+
+</AnchorPane>

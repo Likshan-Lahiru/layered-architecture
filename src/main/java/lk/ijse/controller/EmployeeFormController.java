@@ -10,16 +10,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lk.ijse.dto.CustomerDto;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.EmployeeDto;
 import lk.ijse.dto.tm.EmployeeTm;
-import lk.ijse.model.CustomerModel;
 import lk.ijse.model.EmployeeModel;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeFormController {
+    @FXML
+    private AnchorPane rootTestId;
     @FXML
     private JFXTextField txtEmployeeNIC;
     @FXML
@@ -161,4 +162,6 @@ public class EmployeeFormController {
         txtEmployeeName.clear();
         txtSearchEmployeeID.clear();
     }
+
+
 }

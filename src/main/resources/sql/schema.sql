@@ -53,7 +53,6 @@ create table employee_attandance(
 );
 
 create table user(
-
     user_name varchar(35) primary key ,
     user_first_name varchar(20) not null ,
     user_sconde_name varchar(20) not null ,
@@ -64,12 +63,11 @@ create table user(
 
 create table orders(
     customer_id varchar(35) ,
-    user_name varchar(35),
     order_id varchar(35) primary key ,
-    order_date date not null ,
+    order_date date primary key,
     description text ,
-    constraint foreign key (customer_id) references customer (customer_id) on DELETE cascade on UPDATE cascade ,
-    constraint foreign key (user_name) references user (user_name) on DELETE cascade on UPDATE cascade
+    constraint foreign key (customer_id) references customer (customer_id) on DELETE cascade on UPDATE cascade
+
 );
 
 create table order_detail(
@@ -77,6 +75,8 @@ create table order_detail(
     order_id varchar(35) ,
     qty int not null ,
     unit_price double not null,
+    order_date date,
+    constraint foreign key (order_date) references orders (order_date) on DELETE cascade on UPDATE cascade,//test
     constraint foreign key (tool_id) references tool (tool_id) on delete cascade on UPDATE cascade ,
     constraint foreign key (order_id) references orders (order_id) on delete cascade on UPDATE cascade
 );
@@ -84,7 +84,8 @@ create table order_detail(
 create table vehical(
     vehical_id varchar(35) primary key ,
     status text not null ,
-    last_service_date date not null
+    last_service_date varchar not null,
+    number_plate_no varchar(20)
 );
 
 create table delivery(
