@@ -1,44 +1,49 @@
 package lk.ijse.controller;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.ToolDto;
+import lk.ijse.dto.tm.CartTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.OrderModel;
 import lk.ijse.model.ToolModel;
+import lk.ijse.util.SystemAlert;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderFormController {
 
     @FXML
-    private TableColumn colOrderDetailsAction;
+    private TableColumn colToolName;
     @FXML
-    private TableColumn colOrderDetailsStatus;
+    private Label lblOrderDate;
     @FXML
-    private TableColumn colOrderDetailsUnitPrice;
+    private Label lblNetTotal;
     @FXML
-    private TableColumn colOrderDetailsQty;
+    private TableColumn<?, ?> colOrderDetailsAction;
     @FXML
-    private TableColumn colOrderDetailsId;
+    private TableColumn<?, ?> colOrderDetailsStatus;
     @FXML
-    private TableColumn colOrderDetailsOrderId;
+    private TableColumn<?, ?> colOrderDetailsUnitPrice;
     @FXML
-    private JFXButton btnAddToCart;
+    private TableColumn<?, ?> colOrderDetailsQty;
+    @FXML
+    private TableColumn<?, ?> colOrderDetailsId;
+    @FXML
+    private TableColumn<?, ?> colOrderDetailsOrderId;
     @FXML
     private TextField txtRentalDays;
     @FXML
@@ -48,19 +53,19 @@ public class OrderFormController {
     @FXML
     private Label lblRentPerDay;
     @FXML
-    private TableView tblCart;
+    private TableView<CartTm> tblCart;
     @FXML
-    private TableColumn colToolId;
+    private TableColumn<?, ?> colToolId;
     @FXML
-    private TableColumn ColQty;
+    private TableColumn<?, ?> ColQty;
     @FXML
-    private TableColumn ColRentPerDayPrice;
+    private TableColumn<?, ?> ColRentPerDayPrice;
     @FXML
-    private TableColumn colRentalDaysCount;
+    private TableColumn<?, ?> colRentalDaysCount;
     @FXML
-    private TableColumn colTotalPrice;
+    private TableColumn<?, ?> colTotalPrice;
     @FXML
-    private TableColumn colAction;
+    private TableColumn<?, ?> colAction;
     @FXML
     private Label lblOrderId;
     @FXML
@@ -74,12 +79,34 @@ public class OrderFormController {
     @FXML
     private AnchorPane root;
 
+    private final ObservableList<CartTm> obList = FXCollections.observableArrayList();
+
+    public OrderFormController() {
+    }
+
     public void initialize(){
+        setCellValueFactory();
         generateNextOrderId();
         loadToolid();
         loadCustomerIds();
+        setDateToday();
 
     }
+
+    private void setDateToday() {
+        lblOrderDate.setText(java.time.LocalDate.now().toString());
+    }
+
+    private void setCellValueFactory() {
+        colToolId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
+        colToolName.setCellValueFactory(new PropertyValueFactory<>("lblDescriptionText"));
+        ColQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        ColRentPerDayPrice.setCellValueFactory(new PropertyValueFactory<>("rentPerDay"));
+        colRentalDaysCount.setCellValueFactory(new PropertyValueFactory<>("rentalDaysText"));
+        colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
+    }
+
 
     private void generateNextOrderId() {
 
@@ -121,13 +148,128 @@ public class OrderFormController {
     }
 
     public void btnAddToCartOnAction(ActionEvent actionEvent) {
+        try {
+            String castToolId = (String) cmbToolID.getValue();
+            String castDescription = lblDescription.getText();
+            String castCustomer =lblCustomerName.getText();
+            String castQty=txtQty.getText();
+            String castRentalDays=txtRentalDays.getText();
+            String castRentPerDay=lblRentPerDay.getText();
 
+            if (castToolId.isEmpty()||castCustomer.isEmpty()||castDescription.isEmpty()||castQty.isEmpty()||castRentalDays.isEmpty()||castRentPerDay.isEmpty()){
+                new SystemAlert(Alert.AlertType.WARNING,"Warning","Please Enter the all details!",ButtonType.OK).show();
+                return;
+            }
+        }catch (Exception e){
+            new SystemAlert(Alert.AlertType.WARNING,"Warning","Please Enter the all details!",ButtonType.OK).show();
+            return;
+        }
+
+
+        String toolId = (String) cmbToolID.getValue();
+        String lblDescriptionText = lblDescription.getText();
+        int qty = Integer.valueOf(txtQty.getText());
+        int rentalDaysText = Integer.valueOf(txtRentalDays.getText());
+        double rentaperDay = Double.parseDouble(lblRentPerDay.getText());
+
+
+        Double total = calTotal(qty,rentalDaysText,rentaperDay);
+        Button btn = new Button("remove");
+        btn.setCursor(Cursor.HAND);
+
+        btn.setOnAction((e) -> {
+            ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION,"Information", "Are you sure to remove?", yes, no).showAndWait();
+
+            if (type.orElse(no) == yes) {
+                int index = tblCart.getSelectionModel().getSelectedIndex();
+
+                if (index >= 0 && index < obList.size()) {
+                    obList.remove(index);
+                    tblCart.refresh();
+                    calculateNetTotal();
+                } else {
+
+                    new Alert(Alert.AlertType.WARNING, "Please select an item to remove.", ButtonType.OK).show();
+                }
+            }
+        });
+
+        for (int i = 0; i < tblCart.getItems().size(); i++) {
+            if (toolId.equals(colToolId.getCellData(i))) {
+                qty += (int) colOrderDetailsQty.getCellData(i);
+                total = qty * rentaperDay * rentalDaysText;
+
+                obList.get(i).setQty(qty);
+                obList.get(i).setTotal(total);
+
+                tblCart.refresh();
+                calculateNetTotal();
+                return;
+            }
+        }
+
+        obList.add(new CartTm(toolId, lblDescriptionText ,qty, rentalDaysText, rentaperDay, total, btn));
+
+        tblCart.setItems(obList);
+        calculateNetTotal();
+        txtQty.clear();
+        txtRentalDays.clear();
+        lblDescription.setText("");
+        lblRentPerDay.setText("");
+        lblQutyOnHand.setText("");
+        cmbToolID.requestFocus();
+        cmbCustomerId.requestFocus();
+        
+
+
+
+    }
+
+    private void calculateNetTotal() {
+        double total = 0;
+        for (int i = 0; i < tblCart.getItems().size(); i++) {
+            total += (double) colTotalPrice.getCellData(i);
+        }
+
+        lblNetTotal.setText(String.valueOf(total));
+    }
+
+    private Double calTotal(int qty, int rentalDaysText, double rentaperDay) {
+           Double total = qty*rentaperDay*rentalDaysText;
+
+        return total;
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+        String orderId = lblOrderId.getText();
+        String customerId = (String) cmbCustomerId.getValue();
+        String orderDate = lblOrderDate.getText();
+
+
+
+
     }
 
+
+
     public void txtQtyOnAction(ActionEvent actionEvent) {
+        String toolid = (String) cmbToolID.getValue();
+
+        txtQty.requestFocus();
+
+        try {
+            ToolDto dto = ToolModel.searchToolID(toolid);
+
+            lblDescription.setText(dto.getToolName());
+            lblRentPerDay.setText(String.valueOf(dto.getRentPerDay()));
+            lblQutyOnHand.setText(String.valueOf(dto.getQtyOnhand()));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

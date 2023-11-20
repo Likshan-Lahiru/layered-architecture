@@ -28,6 +28,6 @@ public class OrderModel {
             id++;
             return "O00" + id;
         }
-        return "O002";
+        return "O001";
     }
 }

@@ -5,14 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.dto.LoginDto;
-import lk.ijse.dto.SignUpDto;
-import lk.ijse.model.LoginModel;
-import lk.ijse.util.Mail;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,7 +20,7 @@ public class LoginFormController {
     @FXML
     private AnchorPane root;
 
-    private String hiru="lahiru212001@gmail.com";
+    private String hiru = "lahiru212001@gmail.com";
 
     @FXML
     public void btnSignInOnAction(ActionEvent actionEvent) throws IOException {
@@ -38,9 +33,9 @@ public class LoginFormController {
     }
 
 
-    public void btnLoginPageOnAction(ActionEvent actionEvent) throws SQLException,IOException {
+    public void btnLoginPageOnAction(ActionEvent actionEvent) throws SQLException, IOException {
 
-        String nameText = txtUserName.getText();
+       /* String nameText = txtUserName.getText();
         String passwordText = txtPassword.getText();
         if (nameText.isEmpty()||passwordText.isEmpty()){
             new Alert(Alert.AlertType.ERROR,"User Name or password is empty!").show();
@@ -59,15 +54,15 @@ public class LoginFormController {
 
       try {
             boolean checked = model.checkCredentianl(dto);
-            if (checked){
-                AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/Main_form.fxml"));
-                Scene scene = new Scene(anchorPane);
-                Stage stage =(Stage)root.getScene().getWindow();
-                stage.setScene(scene);
-                stage.setTitle("Order Form");
-                stage.centerOnScreen();
+            if (checked){*/
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/Main_form.fxml"));
+        Scene scene = new Scene(anchorPane);
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Order Form");
+        stage.centerOnScreen();
 
-               Mail mail = new Mail();
+              /* Mail mail = new Mail();
                 mail.setMsg("Welcome..! \n\n\tYou are successfully logged in to the Ashen Enterprise Management System \n\nThank you..!");
 
                 mail.setTo(hiru);
@@ -83,5 +78,6 @@ public class LoginFormController {
 
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
       }
+    }*/
     }
 }
