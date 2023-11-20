@@ -366,7 +366,7 @@ public class OrderFormController {
     }
 
     public void btnNewCustomerOnAction(ActionEvent actionEvent) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/supplier_form.fxml"));
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/Customer_form.fxml"));
 
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
