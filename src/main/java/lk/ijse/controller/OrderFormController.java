@@ -21,7 +21,6 @@ import lk.ijse.model.OrderModel;
 import lk.ijse.model.OrderPlaceModel;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -310,6 +309,7 @@ public class OrderFormController {
             if (isAdded){
 
                 new SystemAlert(Alert.AlertType.CONFIRMATION,"Information","Order Placed Successfully!",ButtonType.OK).show();
+                loadAllOrderDetails();
                 generateNextOrderId();
 
             }else {
