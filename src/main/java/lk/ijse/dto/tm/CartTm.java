@@ -13,10 +13,18 @@ import lombok.Setter;
 public class CartTm {
     private String toolId;
     private String lblDescriptionText;
-    private double qty;
-    private double rentalDaysText;
+    private int qty;
+    private int rentalDaysText;
     private double rentPerDay;
     private double total;
     private Button btn;
+    private String orderId;
+    private String orderDate;
 
+    public CartTm(String toolId, String orderId, int qty, double unitprice, String date) {
+        this.toolId = toolId;
+        this.orderId = orderId;
+        this.qty = qty;
+        this.rentPerDay = unitprice;
+    }
 }

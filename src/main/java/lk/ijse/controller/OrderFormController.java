@@ -12,20 +12,26 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.PlaceOrderDto;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.CartTm;
+import lk.ijse.dto.OrderDetailsDto;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.OrderModel;
+import lk.ijse.model.OrderPlaceModel;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class OrderFormController {
 
+    @FXML
+    private TableView <CartTm> tblOrderDetails;
     @FXML
     private TableColumn colToolName;
     @FXML
@@ -86,9 +92,11 @@ public class OrderFormController {
 
     public void initialize(){
         setCellValueFactory();
+        setOrderDetailCellValueFactory();
         generateNextOrderId();
         loadToolid();
         loadCustomerIds();
+        loadAllOrderDetails();
         setDateToday();
 
     }
@@ -98,6 +106,13 @@ public class OrderFormController {
     }
 
     private void setCellValueFactory() {
+        colOrderDetailsId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
+        colOrderDetailsOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        colOrderDetailsQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colOrderDetailsUnitPrice.setCellValueFactory(new PropertyValueFactory<>("rentPerDay"));
+
+    }
+    private void setOrderDetailCellValueFactory() {
         colToolId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
         colToolName.setCellValueFactory(new PropertyValueFactory<>("lblDescriptionText"));
         ColQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
@@ -105,6 +120,38 @@ public class OrderFormController {
         colRentalDaysCount.setCellValueFactory(new PropertyValueFactory<>("rentalDaysText"));
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
+    }
+    public void loadAllOrderDetails(){
+        String cmbToolIDValue  = (String) cmbToolID.getValue();
+        String txtQtyText = txtQty.getText();
+        String lblRentPerDayText = lblRentPerDay.getText();
+        String orderId = lblOrderId.getText();
+        String orderDate = lblOrderDate.getText();
+
+        new OrderDetailsDto(cmbToolIDValue,orderId,txtQtyText,lblRentPerDayText,orderDate);
+        var model = new OrderModel();
+
+        ObservableList<CartTm> OrderDetilsTmObservableList = FXCollections.observableArrayList();
+        try {
+            List<OrderDetailsDto> orderDetailsDtos =model.getAllOrderDetails();
+            for (OrderDetailsDto dto : orderDetailsDtos){
+                OrderDetilsTmObservableList.add(
+                        new CartTm(
+                                dto.getToolId(),
+                                dto.getOrderId(),
+                                Integer.valueOf(dto.getQty()),
+                                Double.valueOf(dto.getUnitprice()),
+                                dto.getDate()
+
+                        )
+                );
+            }
+            tblOrderDetails.setItems(OrderDetilsTmObservableList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+
     }
 
 
@@ -171,6 +218,8 @@ public class OrderFormController {
         int qty = Integer.valueOf(txtQty.getText());
         int rentalDaysText = Integer.valueOf(txtRentalDays.getText());
         double rentaperDay = Double.parseDouble(lblRentPerDay.getText());
+        String lblOrderIdText= lblOrderId.getText();
+        String orderDateText = lblOrderDate.getText();
 
 
         Double total = calTotal(qty,rentalDaysText,rentaperDay);
@@ -211,7 +260,7 @@ public class OrderFormController {
             }
         }
 
-        obList.add(new CartTm(toolId, lblDescriptionText ,qty, rentalDaysText, rentaperDay, total, btn));
+        obList.add(new CartTm(toolId, lblDescriptionText ,qty, rentalDaysText, rentaperDay, total, btn,lblOrderIdText,lblDescriptionText));
 
         tblCart.setItems(obList);
         calculateNetTotal();
@@ -222,10 +271,6 @@ public class OrderFormController {
         lblQutyOnHand.setText("");
         cmbToolID.requestFocus();
         cmbCustomerId.requestFocus();
-        
-
-
-
     }
 
     private void calculateNetTotal() {
@@ -233,23 +278,46 @@ public class OrderFormController {
         for (int i = 0; i < tblCart.getItems().size(); i++) {
             total += (double) colTotalPrice.getCellData(i);
         }
-
         lblNetTotal.setText(String.valueOf(total));
     }
 
     private Double calTotal(int qty, int rentalDaysText, double rentaperDay) {
            Double total = qty*rentaperDay*rentalDaysText;
-
-        return total;
+           return total;
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
         String orderId = lblOrderId.getText();
         String customerId = (String) cmbCustomerId.getValue();
         String orderDate = lblOrderDate.getText();
+        String descriptionText = lblDescription.getText();
 
 
 
+
+        List<CartTm> cartTmList = new ArrayList<>();
+
+        for (CartTm cartTm : obList) {
+            cartTmList.add(cartTm);
+        }
+
+        var dto = new PlaceOrderDto(orderId, customerId, orderDate, cartTmList,descriptionText);
+
+
+        OrderPlaceModel model = new OrderPlaceModel();
+        try {
+            boolean isAdded=model.placeOrder(dto);
+            if (isAdded){
+
+                new SystemAlert(Alert.AlertType.CONFIRMATION,"Information","Order Placed Successfully!",ButtonType.OK).show();
+                generateNextOrderId();
+
+            }else {
+                new SystemAlert(Alert.AlertType.WARNING,"Error","Order Not Placed!",ButtonType.OK).show();
+            }
+        }catch (SQLException e){
+            new SystemAlert(Alert.AlertType.ERROR,"Error",e.getMessage(),ButtonType.OK).show();
+        }
 
     }
 
