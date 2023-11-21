@@ -123,11 +123,11 @@
                            <children>
                               <TableView fx:id="tblStockList" layoutX="1.0" layoutY="2.0" prefHeight="549.0" prefWidth="682.0" stylesheets="@../style/table.css">
                                  <columns>
-                                    <TableColumn fx:id="colOrderDetailsOrderId" prefWidth="131.99996948242188" text="Tool Code" />
-                                    <TableColumn fx:id="colOrderDetailsId" prefWidth="155.0" text="Tool Name" />
-                                    <TableColumn fx:id="colOrderDetailsQty" prefWidth="126.0" text="Qty On Hand" />
-                                    <TableColumn fx:id="colOrderDetailsUnitPrice" prefWidth="129.0" text="Waste Tool Count" />
-                                    <TableColumn fx:id="colOrderDetailsAction" prefWidth="136.0" text="Update Date" />
+                                    <TableColumn fx:id="colStockListId" prefWidth="131.99996948242188" text="Tool Code" />
+                                    <TableColumn fx:id="colStockListName" prefWidth="155.0" text="Tool Name" />
+                                    <TableColumn fx:id="colStockQtyOnHand" prefWidth="126.0" text="Qty On Hand" />
+                                    <TableColumn fx:id="colStockListWasteCount" prefWidth="129.0" text="Waste Tool Count" />
+                                    <TableColumn fx:id="colStockListUpdatedate" prefWidth="136.0" text="Update Date" />
                                  </columns>
                               </TableView>
                            </children>

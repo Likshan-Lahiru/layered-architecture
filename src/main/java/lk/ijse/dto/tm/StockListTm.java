@@ -16,10 +16,18 @@ public class StockListTm {
     private String supplierName;
     private String toolId;
     private String toolName;
+    private String orderDate;
     private int qtyOnHand;
     private int qty;
     private double unitPrice;
     private double total;
     private Button btn;
+    private String lastUpdatedDate;
+    private String wasteCount;
 
+    public StockListTm(String toolId, String toolName, int qtyOnhand) {
+        this.toolId = toolId;
+        this.toolName = toolName;
+        this.qtyOnHand = qtyOnhand;
+    }
 }

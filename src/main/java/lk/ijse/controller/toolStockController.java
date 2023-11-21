@@ -16,6 +16,7 @@ import lk.ijse.dto.StockListDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.StockListTm;
+import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.StockListModel;
 import lk.ijse.model.SupplierModel;
 import lk.ijse.model.ToolModel;
@@ -29,6 +30,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class toolStockController {
+    @FXML
+    private TableColumn colStockQtyOnHand;
     @FXML
     private AnchorPane root;
     @FXML
@@ -52,8 +55,6 @@ public class toolStockController {
     @FXML
     private Label lblNetTotal;
     @FXML
-    private JFXButton btnNewCustomerOnAction;
-    @FXML
     private JFXComboBox cmbSupplierId;
     @FXML
     private Label lblSupplierName;
@@ -66,17 +67,17 @@ public class toolStockController {
     @FXML
     private TextField txtToolQuantitySuppliedCount;
     @FXML
-    private TableView tblStockList;
+    private TableView <StockListTm> tblStockList;
     @FXML
-    private TableColumn <?, ?> colOrderDetailsOrderId;
+    private TableColumn <?, ?> colStockListName;
     @FXML
-    private TableColumn <?, ?>colOrderDetailsId;
+    private TableColumn <?, ?>colStockListId;
     @FXML
     private TableColumn <?, ?> colOrderDetailsQty;
     @FXML
-    private TableColumn <?, ?> colOrderDetailsUnitPrice;
+    private TableColumn <?, ?> colStockListWasteCount;
     @FXML
-    private TableColumn <?, ?> colOrderDetailsAction;
+    private TableColumn <?, ?>colStockListUpdatedate;
     private Label lblToolId;
     @FXML
     private DatePicker pickerStockListLastUpdateDate;
@@ -96,9 +97,13 @@ public class toolStockController {
         loadSupplierIds();
         setDate();
         setCellValueFactory();
+        setStockListCellValueFactory();
+        loadStockList();
 
 
     }
+
+
 
     private void setCellValueFactory() {
         colToolId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
@@ -107,6 +112,42 @@ public class toolStockController {
         ColQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
+    }
+    private void setStockListCellValueFactory() {
+        colStockListId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
+        colStockListName.setCellValueFactory(new PropertyValueFactory<>("toolName"));
+        colStockListUpdatedate.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedDate"));
+        colStockListWasteCount.setCellValueFactory(new PropertyValueFactory<>("wasteCount"));
+        colStockQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
+
+
+    }
+    private void loadStockList() {
+        var model = new ToolModel();
+
+        ObservableList<StockListTm> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ToolDto> dtoList = model.getAllTool();
+
+            for(ToolDto dto : dtoList) {
+                obList.add(
+                        new StockListTm(
+                                dto.getToolId(),
+                                dto.getToolName(),
+                                dto.getQtyOnhand()
+
+
+                        )
+                );
+            }
+
+            tblStockList.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
     private void setDate() {
         String date = String.valueOf(LocalDate.now());
@@ -149,16 +190,24 @@ public class toolStockController {
         Double toolPriceUnit = Double.valueOf(txtToolPriceUnit.getText());
         String supplierNameText = lblSupplierName.getText();
         String orderDate =lblSuppliedDate.getText();
+       String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
+       String wasteCount =txtStckListWasteCount.getText();
 
-        if (supplierId.isEmpty() ||
-                toolID.isEmpty() ||
-                toolName.isEmpty() ||
-                String.valueOf(qtyOnHand).isEmpty() ||
-                String.valueOf(toolQuantitySuppliedCount).isEmpty()||
-                String.valueOf(toolPriceUnit).isEmpty()) {
+        try {
+            if (supplierId.isEmpty() ||
+                    toolID.isEmpty() ||
+                    toolName.isEmpty() ||
+                    String.valueOf(qtyOnHand).isEmpty() ||
+                    String.valueOf(toolQuantitySuppliedCount).isEmpty()||
+                    String.valueOf(toolPriceUnit).isEmpty()) {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
+                return;
+            }
+        }catch (NumberFormatException e){
             new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
             return;
         }
+
        Double total = calTotal(toolPriceUnit,toolQuantitySuppliedCount);
         Button btn = new Button("remove");
         btn.setCursor(Cursor.HAND);
@@ -196,10 +245,30 @@ public class toolStockController {
             }
         }
 
-        obList.add(new StockListTm(supplierId,supplierNameText,toolID,toolName,qtyOnHand,toolQuantitySuppliedCount,toolPriceUnit,total,btn));
+        obList.add(new StockListTm(
+                supplierId,
+                supplierNameText,
+                toolID,toolName,
+                orderDate,qtyOnHand,
+                toolQuantitySuppliedCount,
+                toolPriceUnit,
+                total,
+                btn,
+                lastUpdatedDate,
+                wasteCount));
+
         tblSuppliedDetail.setItems(obList);
         calculateNetTotal();
-
+        clearHistory();
+    }
+    public  void clearHistory(){
+        lblSupplierName.setText("");
+        lblToolName.setText("");
+        lblQtyOnHand.setText("");
+        txtToolQuantitySuppliedCount.clear();
+        txtToolPriceUnit.clear();
+        cmbSupplierId.getSelectionModel().clearSelection();
+        cmbToolID.getSelectionModel().clearSelection();
     }
 
     private void calculateNetTotal() {

@@ -3,6 +3,7 @@ package lk.ijse.model;
 import lk.ijse.db.DbConnection;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.CartTm;
+import lk.ijse.dto.tm.StockListTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -105,4 +106,29 @@ public class ToolModel {
         return pstm.executeUpdate() > 0;
     }
 
+    public boolean addStockList(List<StockListTm> stockListTms) throws SQLException {
+        for (StockListTm stockListTm : stockListTms) {
+            if(!updateQty2(stockListTm)) {
+                return false;
+            }
+        }
+        return true;
+
+
+    }
+
+    private boolean updateQty2(StockListTm stockListTm) throws SQLException {
+        System.out.printf(String.valueOf(stockListTm.getQty()));
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "UPDATE tool SET qty_on_hand = qty_on_hand + ? WHERE tool_id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setInt(1, stockListTm.getQty());
+        pstm.setString(2, stockListTm.getToolId());
+
+
+
+        return pstm.executeUpdate() > 0;
+
+    }
 }

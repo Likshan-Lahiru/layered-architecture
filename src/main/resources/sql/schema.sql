@@ -25,7 +25,7 @@ create table supplier_tool(
                               supplier_name varchar(155),
                               tool_id varchar(35),
                               tool_name varchar(20),
-                              supplied_date date,
+                              supplied_date varchar(20),
                               quantity_supplied int not null,
                               constraint foreign key (supplier_id) references Supplier (supplier_id) on delete cascade on UPDATE cascade,
                               constraint foreign key (tool_id) references tool (tool_id) on delete  cascade on UPDATE cascade

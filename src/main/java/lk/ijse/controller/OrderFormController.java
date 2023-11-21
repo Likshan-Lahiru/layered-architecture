@@ -263,6 +263,9 @@ public class OrderFormController {
 
         tblCart.setItems(obList);
         calculateNetTotal();
+
+    }
+    private void clearHistory(){
         txtQty.clear();
         txtRentalDays.clear();
         lblDescription.setText("");

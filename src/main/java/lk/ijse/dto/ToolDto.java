@@ -19,4 +19,6 @@ public class ToolDto {
     public ToolDto(String searchIdText) {
         this.toolId = searchIdText;
     }
+
+
 }
