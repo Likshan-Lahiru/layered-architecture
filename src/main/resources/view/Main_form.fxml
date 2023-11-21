@@ -42,6 +42,11 @@
                   <Insets />
                </VBox.margin>
             </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="387.0" onAction="#btnStockListOnAction" prefHeight="48.0" prefWidth="210.0" style="-fx-background-color: #023047;" text="Stock List" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
             <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="399.0" onAction="#btnSupplierOnAction" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: #023047;" text="Supplier" textFill="WHITE">
                <font>
                   <Font size="17.0" />

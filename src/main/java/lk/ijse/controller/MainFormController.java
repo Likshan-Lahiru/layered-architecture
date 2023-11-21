@@ -79,5 +79,11 @@ public class MainFormController {
     }
 
 
+    public void btnStockListOnAction(ActionEvent actionEvent) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/tool_sctock_form.fxml"));
 
+        this.root.getChildren().clear();
+        this.root.getChildren().add(node);
+
+    }
 }

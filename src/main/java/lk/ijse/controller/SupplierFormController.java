@@ -5,21 +5,27 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.SupplierTm;
 import lk.ijse.model.SupplierModel;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class SupplierFormController {
 
+    @FXML
+    private AnchorPane root;
     @FXML
     private AnchorPane newAnchor;
     @FXML
@@ -173,5 +179,10 @@ public class SupplierFormController {
     }
 
 
+    public void btnStockListOnAction(ActionEvent actionEvent) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/tool_sctock_form.fxml"));
 
+        this.root.getChildren().clear();
+        this.root.getChildren().add(node);
+    }
 }

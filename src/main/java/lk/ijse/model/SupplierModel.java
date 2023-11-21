@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierModel {
-    public List<SupplierDto> getAllSupplier() throws SQLException {
+    public static List<SupplierDto> getAllSupplier() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql= "SELECT * FROM supplier ";
@@ -51,7 +51,7 @@ public class SupplierModel {
         return isSvaed;
     }
 
-    public SupplierDto searchSupplier(String searchSupplierIDText) throws SQLException {
+    public static SupplierDto searchSupplier(String searchSupplierIDText) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM supplier WHERE supplier_id= ?";
         PreparedStatement pstm = connection.prepareStatement(sql);

@@ -22,11 +22,20 @@ create table tool(
 
 create table supplier_tool(
                               supplier_id varchar(35),
+                              supplier_name varchar(155),
                               tool_id varchar(35),
+                              tool_name varchar(20),
                               supplied_date date,
                               quantity_supplied int not null,
                               constraint foreign key (supplier_id) references Supplier (supplier_id) on delete cascade on UPDATE cascade,
                               constraint foreign key (tool_id) references tool (tool_id) on delete  cascade on UPDATE cascade
+);
+create table stock_list(
+                tool_id varchar(35),
+                tool_name varchar(20),
+                qty_on_hand int not null,
+                waste_tool int,
+                constraint foreign key (tool_id) references tool (tool_id) on delete  cascade on UPDATE cascade
 );
 
 create table customer(

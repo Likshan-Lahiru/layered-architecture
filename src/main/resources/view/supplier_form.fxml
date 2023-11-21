@@ -21,6 +21,7 @@
             <JFXButton buttonType="RAISED" layoutX="924.0" layoutY="637.0" onAction="#btnSupplierUpdateOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #7400b8;" text="Update" textFill="WHITE" />
             <JFXButton buttonType="RAISED" layoutX="1020.0" layoutY="637.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE" />
             <JFXButton buttonType="RAISED" layoutX="740.0" layoutY="637.0" onAction="#btnSupplierDeleteOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #6930c3;" text="Delete" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="813.0" layoutY="41.0" onAction="#btnStockListOnAction" style="-fx-background-color: #ffc8dd;" text="Stock List" />
          </children>
       </Pane>
       <Label layoutX="40.0" layoutY="24.0" prefHeight="77.0" prefWidth="245.0" text="Supplier Detail">
