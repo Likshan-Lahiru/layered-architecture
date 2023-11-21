@@ -14,6 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.EmployeeDto;
 import lk.ijse.dto.tm.EmployeeTm;
 import lk.ijse.model.EmployeeModel;
+import lk.ijse.util.RegExPatterns;
+import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -107,10 +110,44 @@ public class EmployeeFormController {
         String employeeNICText = txtEmployeeNIC.getText();
         String employeeAddressText = txtEmployeeAddress.getText();
 
-        if(employeeIDText.isEmpty()||employeeNameText.isEmpty()||employeeNICText.isEmpty()||employeeAddressText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please enter all details!").showAndWait();
+        if (!(txtEmployeerId.getText().isEmpty()||txtEmployeeName.getText().isEmpty()||txtEmployeeNIC.getText().isEmpty()||txtEmployeeAddress.getText().isEmpty())){
+            if (RegExPatterns.getEmployeeId().matcher(txtEmployeerId.getText()).matches()){
+                TxtColours.setDefaultColours(txtEmployeerId);
+                if (RegExPatterns.getNamePattern().matcher(txtEmployeeName.getText()).matches()){
+                    TxtColours.setDefaultColours(txtEmployeeName);
+                    if (RegExPatterns.getNICPattern().matcher(txtEmployeeNIC.getText()).matches()){
+                        TxtColours.setDefaultColours(txtEmployeeNIC);
+                        if (RegExPatterns.getAddressPattern().matcher(txtEmployeeAddress.getText()).matches()){
+                            TxtColours.setDefaultColours(txtEmployeeAddress);
+                        }else {
+                            TxtColours.setErrorColours(txtEmployeeAddress);
+                            new Alert(Alert.AlertType.ERROR,"Please Enter a valid Address!").showAndWait();
+                            return;
+                        }
+                    }else {
+                        TxtColours.setErrorColours(txtEmployeeNIC);
+                        new Alert(Alert.AlertType.ERROR,"Please Enter a valid NIC!").showAndWait();
+                        return;
+                    }
+                }else {
+                    TxtColours.setErrorColours(txtEmployeeName);
+                    new Alert(Alert.AlertType.ERROR,"Please Enter a valid Name!").showAndWait();
+                    return;
+                }
+            }else {
+                TxtColours.setErrorColours(txtEmployeerId);
+                new Alert(Alert.AlertType.ERROR,"Please Enter a valid Employee Id!").showAndWait();
+                return;
+            }
+        }else {
+            TxtColours.setErrorColours(txtEmployeeAddress);
+            TxtColours.setErrorColours(txtEmployeeNIC);
+            TxtColours.setErrorColours(txtEmployeeName);
+            TxtColours.setErrorColours(txtEmployeerId);
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
             return;
         }
+
 
         EmployeeDto dto = new EmployeeDto(employeeIDText, employeeNameText, employeeNICText, employeeAddressText);
         EmployeeModel model = new EmployeeModel();

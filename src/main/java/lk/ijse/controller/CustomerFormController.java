@@ -9,9 +9,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
+import lk.ijse.util.RegExPatterns;
 import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
+
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CustomerFormController {
     @FXML
@@ -104,16 +108,54 @@ public class CustomerFormController {
     }
 
     public void btnCustomerSaveOnAction(ActionEvent actionEvent) {
+
         String txtCustomerIdText = txtCustomerId.getText();
         String txtCustomerNameText = txtCustomerName.getText();
         String txtCustomerAddressText = txtCustomerAddress.getText();
         String txtCustomerNICText = txtCustomerNIC.getText();
         String txtCustomerContactNumberText = txtCustomerContactNumber.getText();
 
-        if (txtCustomerNameText.isEmpty()|| txtCustomerIdText.isEmpty()|| txtCustomerAddressText.isEmpty()|| txtCustomerNICText.isEmpty()|| txtCustomerContactNumberText.isEmpty()){
-            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the all Details!", ButtonType.OK).show();
+        if (!(txtCustomerId.getText().isEmpty()||txtCustomerName.getText().isEmpty()||txtCustomerAddress.getText().isEmpty()||txtCustomerNIC.getText().isEmpty()||txtCustomerContactNumber.getText().isEmpty())){
+            if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()){
+                TxtColours.setDefaultColours(txtCustomerId);
+                if (RegExPatterns.getNamePattern().matcher(txtCustomerName.getText()).matches()){
+                    TxtColours.setDefaultColours(txtCustomerName);
+                    if (RegExPatterns. getNICPattern().matcher(txtCustomerNICText).matches()){
+                        TxtColours.setDefaultColours(txtCustomerNIC);
+                        if (RegExPatterns.getContactNumberPattern().matcher(txtCustomerContactNumberText).matches()){
+                            TxtColours.setDefaultColours(txtCustomerContactNumber);
+                        }else {
+                            TxtColours.setErrorColours(txtCustomerContactNumber);
+                            return;
+
+                        }
+                    }else {
+                        TxtColours.setErrorColours(txtCustomerNIC);
+                        return;
+                    }
+                }else {
+                    TxtColours.setErrorColours(txtCustomerName);
+                    return;
+                }
+            }else {
+                TxtColours.setErrorColours(txtCustomerId);
+                return;
+            }
+        } else {
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
             return;
         }
+
+
+       /* if (txtCustomerNameText.isEmpty()|| txtCustomerIdText.isEmpty()|| txtCustomerAddressText.isEmpty()|| txtCustomerNICText.isEmpty()|| txtCustomerContactNumberText.isEmpty()){
+
+            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all Details!", ButtonType.OK).show();
+            return;
+        }*/
+
+
+
+
         CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText);
         CustomerModel model = new CustomerModel();
         try {
@@ -124,7 +166,7 @@ public class CustomerFormController {
                 clearCustomerField();
             }
         }catch (SQLException e){
-            new SystemAlert(Alert.AlertType.ERROR, "Error", "Somehing went wrong!", ButtonType.OK).show();
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
         }
     }
 
