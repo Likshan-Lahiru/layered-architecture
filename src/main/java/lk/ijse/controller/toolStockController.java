@@ -12,9 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.dto.StockListDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.StockListTm;
+import lk.ijse.model.StockListModel;
 import lk.ijse.model.SupplierModel;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
@@ -22,6 +24,7 @@ import lk.ijse.util.SystemAlert;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +32,7 @@ public class toolStockController {
     @FXML
     private AnchorPane root;
     @FXML
-    private Label lblOrderDate;
+    private Label lblSuppliedDate;
     @FXML
     private TextField txtToolPriceUnit;
     @FXML
@@ -107,7 +110,7 @@ public class toolStockController {
     }
     private void setDate() {
         String date = String.valueOf(LocalDate.now());
-        lblOrderDate.setText(date);
+        lblSuppliedDate.setText(date);
     }
 
     private void loadToolid() {
@@ -144,6 +147,8 @@ public class toolStockController {
         int  qtyOnHand = Integer.valueOf(lblQtyOnHand.getText());
         int  toolQuantitySuppliedCount = Integer.valueOf(txtToolQuantitySuppliedCount.getText());
         Double toolPriceUnit = Double.valueOf(txtToolPriceUnit.getText());
+        String supplierNameText = lblSupplierName.getText();
+        String orderDate =lblSuppliedDate.getText();
 
         if (supplierId.isEmpty() ||
                 toolID.isEmpty() ||
@@ -191,7 +196,7 @@ public class toolStockController {
             }
         }
 
-        obList.add(new StockListTm(supplierId,toolID,toolName,qtyOnHand,toolQuantitySuppliedCount,toolPriceUnit,total,btn));
+        obList.add(new StockListTm(supplierId,supplierNameText,toolID,toolName,qtyOnHand,toolQuantitySuppliedCount,toolPriceUnit,total,btn));
         tblSuppliedDetail.setItems(obList);
         calculateNetTotal();
 
@@ -232,6 +237,22 @@ public class toolStockController {
 
 
     public void btnPlaceNewStockOnAction(ActionEvent actionEvent) {
+
+       List<StockListTm> stockList = new ArrayList<>();
+       for (StockListTm stockListTm : obList) {
+            stockList.add(stockListTm);
+        }
+        var stockListDto = new StockListDto(stockList);
+       try {
+           boolean isAdded = StockListModel.addStockList(stockListDto);
+           if (isAdded) {
+               new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Stock List Added Successfully!", ButtonType.OK).show();
+           }else {
+               new SystemAlert(Alert.AlertType.WARNING, "Error", "Stock List Not Added!", ButtonType.OK).show();
+           }
+       }catch (SQLException e){
+           new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+       }
 
     }
 

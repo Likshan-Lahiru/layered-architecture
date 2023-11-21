@@ -13,7 +13,7 @@ public class StockListTm {
 
 
     private String supplierId;
-   // private String supplierName;
+    private String supplierName;
     private String toolId;
     private String toolName;
     private int qtyOnHand;
