@@ -15,40 +15,76 @@
 
 <AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.CustomerFormController">
    <children>
-      <Pane layoutX="131.0" layoutY="60.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+      <TextField fx:id="txtSearchCustomerID" layoutX="957.0" layoutY="59.0" prefHeight="34.0" prefWidth="184.0" promptText="Customer Id" style="-fx-background-radius: 30;" />
+      <Button layoutX="1127.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnCustomerIDSearchOnAction" prefHeight="34.0" prefWidth="40.0">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0">
+               <image>
+                  <Image url="@../icon/Search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Pane layoutX="20.0" layoutY="93.0" prefHeight="616.0" prefWidth="739.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 15;">
          <children>
-            <TableView fx:id="tblCustomer" layoutX="14.0" layoutY="127.0" prefHeight="511.0" prefWidth="902.0" stylesheets="@../style/table.css">
+            <TableView fx:id="tblCustomer" layoutX="10.0" layoutY="8.0" prefHeight="588.0" prefWidth="720.0" stylesheets="@../style/table.css">
               <columns>
                 <TableColumn fx:id="colCustomerId" prefWidth="100.0" text="Customer ID" />
-                <TableColumn fx:id="colcustomerName" prefWidth="200.0" text="Customer Name" />
-                  <TableColumn fx:id="colCustomerAddress" prefWidth="350.0" text="Customer Address" />
-                  <TableColumn fx:id="colCustomerNIC" prefWidth="150.0" text="NIC" />
-                  <TableColumn fx:id="colCustomerContactNumber" prefWidth="100.0" text="Contact Number" />
+                <TableColumn fx:id="colcustomerName" prefWidth="126.99996948242188" text="Customer Name" />
+                  <TableColumn fx:id="colCustomerAddress" prefWidth="190.0" text="Customer Address" />
+                  <TableColumn fx:id="colCustomerNIC" prefWidth="99.0" text="NIC" />
+                  <TableColumn fx:id="colCustomerContactNumber" prefWidth="201.0" text="Contact Number" />
               </columns>
             </TableView>
-            <Label layoutX="14.0" layoutY="18.0" prefHeight="77.0" prefWidth="309.0" text="Customer Detail">
+         </children>
+      </Pane>
+      <Label alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="-100.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="Customer Detail" textFill="WHITE">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
+         </font>
+      </Label>
+      <Pane layoutX="792.0" layoutY="158.0" prefHeight="511.0" prefWidth="402.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 15;">
+         <children>
+            <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="26.0" layoutY="318.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer ID" unFocusColor="#0988e5">
                <font>
-                  <Font name="Barlow Condensed SemiBold" size="37.0" />
+                  <Font size="15.0" />
                </font>
-            </Label>
-            <TextField fx:id="txtSearchCustomerID" layoutX="890.0" layoutY="40.0" prefHeight="34.0" prefWidth="184.0" promptText="Customer Id" style="-fx-background-radius: 30;" />
-            <Button layoutX="1074.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnCustomerIDSearchOnAction" prefHeight="27.0" prefWidth="36.0">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0">
-                     <image>
-                        <Image url="@../icon/Search.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="926.0" layoutY="175.0" prefHeight="25.0" prefWidth="230.0" promptText="Customer ID" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtCustomerName" labelFloat="true" layoutX="926.0" layoutY="225.0" prefHeight="25.0" prefWidth="230.0" promptText="Customer Name" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtCustomerAddress" labelFloat="true" layoutX="926.0" layoutY="281.0" prefHeight="25.0" prefWidth="230.0" promptText="Address" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtCustomerNIC" labelFloat="true" layoutX="926.0" layoutY="348.0" prefHeight="25.0" prefWidth="230.0" promptText="NIC" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtCustomerContactNumber" labelFloat="true" layoutX="926.0" layoutY="411.0" prefHeight="25.0" prefWidth="230.0" promptText="Contact Number" unFocusColor="#0988e5" />
-            <JFXButton buttonType="RAISED" layoutX="900.0" layoutY="646.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="978.0" layoutY="646.0" onAction="#btnCustomerSaveOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #6930c3;" text="Save" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="1061.0" layoutY="646.0" onAction="#btnCustomerUpdateOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #7400b8;" text="Update" textFill="WHITE" />
+            </JFXTextField>
+            <JFXTextField fx:id="txtCustomerNIC" labelFloat="true" layoutX="26.0" layoutY="248.0" prefHeight="31.0" prefWidth="319.0" promptText="NIC" unFocusColor="#0988e5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtCustomerAddress" labelFloat="true" layoutX="26.0" layoutY="187.0" prefHeight="31.0" prefWidth="319.0" promptText="Address" unFocusColor="#0988e5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtCustomerContactNumber" labelFloat="true" layoutX="26.0" layoutY="115.0" prefHeight="31.0" prefWidth="319.0" promptText="Contact Number" unFocusColor="#0988e5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtCustomerName" labelFloat="true" layoutX="26.0" layoutY="48.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer Name" unFocusColor="#0988e5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton buttonType="RAISED" layoutX="307.0" layoutY="460.0" onAction="#btnClearOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #f1faee;" text="Clear">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="118.0" layoutY="460.0" onAction="#btnCustomerSaveOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #fcbf49;" text="Save">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="211.0" layoutY="460.0" onAction="#btnCustomerUpdateOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #2ec4b6;" text="Update">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
    </children>
