@@ -85,6 +85,7 @@ create table order_detail(
                              qty int not null ,
                              unit_price double not null,
                              order_date varchar(20),
+                             status varchar(20) not null ,
                              constraint foreign key (tool_id) references tool (tool_id) on delete cascade on UPDATE cascade ,
                              constraint foreign key (order_id) references orders (order_id) on delete cascade on UPDATE cascade
 );

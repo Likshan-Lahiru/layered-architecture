@@ -46,7 +46,7 @@ public class OrderFormController {
     @FXML
     private Label lblNetTotal;
     @FXML
-    private TableColumn<?, ?> colOrderDetailsAction;
+    private TableColumn<?, ?> colOrderDetailsDate;
     @FXML
     private TableColumn<?, ?> colOrderDetailsStatus;
     @FXML
@@ -92,6 +92,8 @@ public class OrderFormController {
     @FXML
     private AnchorPane root;
 
+    private String status ;
+
     private final ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
     public OrderFormController() {
@@ -118,6 +120,8 @@ public class OrderFormController {
         colOrderDetailsOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colOrderDetailsQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colOrderDetailsUnitPrice.setCellValueFactory(new PropertyValueFactory<>("rentPerDay"));
+       // colOrderDetailsDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+        colOrderDetailsStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
     }
     private void setOrderDetailCellValueFactory() {
@@ -135,8 +139,9 @@ public class OrderFormController {
         String lblRentPerDayText = lblRentPerDay.getText();
         String orderId = lblOrderId.getText();
         String orderDate = lblOrderDate.getText();
+        String status = txtReStatus.getText();
 
-        new OrderDetailsDto(cmbToolIDValue,orderId,txtQtyText,lblRentPerDayText,orderDate);
+        new OrderDetailsDto(cmbToolIDValue,orderId,txtQtyText,lblRentPerDayText,orderDate,status);
         var model = new OrderModel();
 
         ObservableList<CartTm> OrderDetilsTmObservableList = FXCollections.observableArrayList();
@@ -149,7 +154,8 @@ public class OrderFormController {
                                 dto.getOrderId(),
                                 Integer.valueOf(dto.getQty()),
                                 Double.valueOf(dto.getUnitprice()),
-                                dto.getDate()
+                                dto.getDate(),
+                                dto.getStatus()
 
                         )
                 );
@@ -228,6 +234,7 @@ public class OrderFormController {
         double rentaperDay = Double.parseDouble(lblRentPerDay.getText());
         String lblOrderIdText= lblOrderId.getText();
         String orderDateText = lblOrderDate.getText();
+        status = "pending";
 
 
         Double total = calTotal(qty,rentalDaysText,rentaperDay);
@@ -268,7 +275,7 @@ public class OrderFormController {
             }
         }
 
-        obList.add(new CartTm(toolId, lblDescriptionText ,qty, rentalDaysText, rentaperDay, total, btn,lblOrderIdText,lblDescriptionText));
+        obList.add(new CartTm(toolId, lblDescriptionText ,qty, rentalDaysText, rentaperDay, total, btn,lblOrderIdText,orderDateText,status));
 
         tblCart.setItems(obList);
         calculateNetTotal();
@@ -419,6 +426,9 @@ public class OrderFormController {
           new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
           return;
       }
+
+
+
 
 
 

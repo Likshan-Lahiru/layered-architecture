@@ -15,6 +15,7 @@ public class OrderDetailsDto {
     private String qty;
     private String unitprice;
     private String date;
+    private String status;
 
     public OrderDetailsDto(String orderId, String toolId, int qty) {
         this.orderId = orderId;

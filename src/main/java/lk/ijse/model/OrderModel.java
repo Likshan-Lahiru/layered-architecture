@@ -69,9 +69,10 @@ public class OrderModel {
             String qty = resultSet.getString(3);
             String unit_price  = resultSet.getString(4);
             String order_date = resultSet.getString(5);
+            String status = resultSet.getString(6);
 
 
-            var dto = new OrderDetailsDto(tool_id, order_id,qty, unit_price,order_date);
+            var dto = new OrderDetailsDto(tool_id, order_id,qty, unit_price,order_date,status);
             dtoList.add(dto);
         }
         return dtoList;

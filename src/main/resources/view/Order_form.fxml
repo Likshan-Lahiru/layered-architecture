@@ -162,7 +162,7 @@
                                               <TableColumn fx:id="colOrderDetailsQty" prefWidth="101.0" text="Qty" />
                                               <TableColumn fx:id="colOrderDetailsUnitPrice" prefWidth="119.0" text="Unit Price" />
                                               <TableColumn fx:id="colOrderDetailsStatus" prefWidth="93.0" text="Status" />
-                                              <TableColumn fx:id="colOrderDetailsAction" prefWidth="82.0" text="Action" />
+                                              <TableColumn fx:id="colOrderDetailsdate" prefWidth="82.0" text="Action" />
                                           </columns>
                                       </TableView>
                            </children>

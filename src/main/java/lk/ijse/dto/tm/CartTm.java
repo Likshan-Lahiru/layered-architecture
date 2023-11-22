@@ -20,11 +20,14 @@ public class CartTm {
     private Button btn;
     private String orderId;
     private String orderDate;
+    private String status;
 
-    public CartTm(String toolId, String orderId, int qty, double unitprice, String date) {
+    public CartTm(String toolId, String orderId, int qty, double unitprice, String date, String status) {
         this.toolId = toolId;
         this.orderId = orderId;
         this.qty = qty;
         this.rentPerDay = unitprice;
+        this.orderDate = date;
+        this.status = status;
     }
 }
