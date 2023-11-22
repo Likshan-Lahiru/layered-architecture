@@ -17,7 +17,7 @@
    <children>
       <Pane layoutX="131.0" layoutY="60.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
-            <TableView fx:id="tblCustomer" layoutX="14.0" layoutY="127.0" prefHeight="511.0" prefWidth="902.0" style="-fx-background-color: #4361ee;">
+            <TableView fx:id="tblCustomer" layoutX="14.0" layoutY="127.0" prefHeight="511.0" prefWidth="902.0" stylesheets="@../style/table.css">
               <columns>
                 <TableColumn fx:id="colCustomerId" prefWidth="100.0" text="Customer ID" />
                 <TableColumn fx:id="colcustomerName" prefWidth="200.0" text="Customer Name" />

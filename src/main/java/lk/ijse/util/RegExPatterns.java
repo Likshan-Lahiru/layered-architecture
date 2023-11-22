@@ -19,6 +19,8 @@ public class RegExPatterns {
     private static final Pattern addressPattern = Pattern.compile("[a-zA-Z]{15}");
 
 
+
+
     public static Pattern getContactNumberPattern() {
         return contactNumberPattern;
     }

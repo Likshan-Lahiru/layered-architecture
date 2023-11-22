@@ -17,12 +17,12 @@
    <children>
       <Pane layoutX="16.0" layoutY="23.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;">
          <children>
-            <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="103.0" prefHeight="535.0" prefWidth="770.0" style="-fx-background-color: #4361ee;">
+            <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="103.0" prefHeight="535.0" prefWidth="770.0" stylesheets="@../style/table.css">
                <columns>
                   <TableColumn fx:id="colEmployeeId" prefWidth="150.0" text="Employee ID" />
                   <TableColumn fx:id="colEmployeeName" prefWidth="250.0" text="Employee Name" />
                   <TableColumn fx:id="colEmployeeNIC" prefWidth="150.0" text="NIC" />
-                  <TableColumn fx:id="colEmployeeAddress" prefWidth="200.0" text="Employee Address" />
+                  <TableColumn fx:id="colEmployeeAddress" prefWidth="214.0" text="Employee Address" />
                </columns>
             </TableView>
             <Label layoutX="14.0" layoutY="18.0" prefHeight="77.0" prefWidth="309.0" text="Employee Detail">

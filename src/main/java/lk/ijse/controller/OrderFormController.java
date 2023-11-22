@@ -1,6 +1,7 @@
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,16 +12,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.dto.CustomerDto;
-import lk.ijse.dto.PlaceOrderDto;
-import lk.ijse.dto.ToolDto;
+import lk.ijse.dto.*;
 import lk.ijse.dto.tm.CartTm;
-import lk.ijse.dto.OrderDetailsDto;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.OrderModel;
 import lk.ijse.model.OrderPlaceModel;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,9 +30,17 @@ import java.util.Optional;
 public class OrderFormController {
 
     @FXML
+    private JFXTextField txtReStatus;
+    @FXML
+    private Label lblReOrderId;
+    @FXML
+    private Label lblReToolId;
+    @FXML
+    private Label lblReQty;
+    @FXML
     private TableView <CartTm> tblOrderDetails;
     @FXML
-    private TableColumn colToolName;
+    private TableColumn<?, ?> colToolName;
     @FXML
     private Label lblOrderDate;
     @FXML
@@ -97,6 +105,7 @@ public class OrderFormController {
         loadCustomerIds();
         loadAllOrderDetails();
         setDateToday();
+        setReOrder();
 
     }
 
@@ -373,5 +382,47 @@ public class OrderFormController {
 
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
+    }
+    private void setReOrder(){
+        tblOrderDetails.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldvalue,newValue)->{
+                    OrderDetailsDto dto = new OrderDetailsDto(
+                            newValue.getOrderId(),
+                            newValue.getToolId(),
+                            newValue.getQty()
+
+
+
+                    );
+                    orderSetfeild(dto);
+                });
+    }
+    private void orderSetfeild(OrderDetailsDto dto) {
+        lblReOrderId.setText(dto.getOrderId());
+        lblReToolId.setText(dto.getToolId());
+        lblReQty.setText(dto.getQty());
+
+
+    }
+
+    public void btnFinishOnAction(ActionEvent actionEvent) {
+
+       String lblReOrderIdText = lblReOrderId.getText();
+      String lblReToolIdText = lblReToolId.getText();
+      String lblReQtyText = lblReQty.getText();
+      String txtReStatusText = txtReStatus.getText();
+
+      if ((lblReOrderId.getText().isEmpty()||lblReToolIdText.isEmpty()||lblReQtyText.isEmpty()||txtReStatusText.isEmpty())){
+          TxtColours.setDefaultColours(txtReStatus);
+      }else {
+          TxtColours.setErrorColours(txtReStatus);
+          new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
+          return;
+      }
+
+
+
+
+        
     }
 }

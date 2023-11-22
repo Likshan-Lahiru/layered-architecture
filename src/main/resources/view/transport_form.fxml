@@ -45,7 +45,7 @@
             <Label layoutX="879.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
          </children>
       </Pane>
-      <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="407.0" prefHeight="274.0" prefWidth="622.0">
+      <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="407.0" prefHeight="274.0" prefWidth="622.0" stylesheets="@../style/table.css">
          <columns>
             <TableColumn fx:id="colVehicleId" prefWidth="100.0" text="Vehicle ID" />
             <TableColumn fx:id="colVehicleStatus" prefWidth="250.0" text="Status" />

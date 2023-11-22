@@ -15,4 +15,10 @@ public class OrderDetailsDto {
     private String qty;
     private String unitprice;
     private String date;
+
+    public OrderDetailsDto(String orderId, String toolId, int qty) {
+        this.orderId = orderId;
+        this.toolId = toolId;
+        this.qty = String.valueOf(qty);
+    }
 }
