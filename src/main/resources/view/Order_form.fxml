@@ -67,6 +67,11 @@
                                                 <Font name="System Bold" size="22.0" />
                                             </font>
                                         </Label>
+                              <JFXButton buttonType="RAISED" layoutX="370.0" layoutY="387.0" onAction="#btnPrintOnAction" prefHeight="34.0" prefWidth="120.0" style="-fx-background-color: #34495e;" text="print" textFill="WHITE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
                                     </children>
                                 </Pane>
                                 <Label layoutX="828.0" layoutY="58.0" prefHeight="41.0" prefWidth="286.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="  Order Id    : " textFill="#4361ee">
@@ -99,7 +104,7 @@
                                                 <Font size="16.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="lblCustomerName" layoutX="227.0" layoutY="57.0" prefHeight="28.0" prefWidth="209.0" style="-fx-background-color: #e0e2db;" />
+                                        <Label fx:id="lblCustomerName" layoutX="227.0" layoutY="58.0" prefHeight="28.0" prefWidth="209.0" style="-fx-background-color: #e0e2db;" />
                                         <JFXComboBox fx:id="cmbToolID" layoutX="14.0" layoutY="117.0" onAction="#cmbToolIdOnAction" prefHeight="36.0" prefWidth="191.0" promptText="   Tool code" unFocusColor="#0033ff" />
                                         <Label layoutX="21.0" layoutY="193.0" prefHeight="26.0" prefWidth="118.0" text="Tool Name">
                                             <font>
@@ -149,7 +154,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab closable="false" text="                                                          OrderDetail">
+                <Tab closable="false" text="OrderDetail">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ced4da;">
                             <children>
@@ -162,7 +167,9 @@
                                               <TableColumn fx:id="colOrderDetailsQty" prefWidth="101.0" text="Qty" />
                                               <TableColumn fx:id="colOrderDetailsUnitPrice" prefWidth="119.0" text="Unit Price" />
                                               <TableColumn fx:id="colOrderDetailsStatus" prefWidth="93.0" text="Status" />
-                                              <TableColumn fx:id="colOrderDetailsdate" prefWidth="82.0" text="Action" />
+                                    <TableColumn fx:id="colDate" prefWidth="93.0" text="date" />
+
+
                                           </columns>
                                       </TableView>
                            </children>

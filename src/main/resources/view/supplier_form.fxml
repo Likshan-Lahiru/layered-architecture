@@ -15,43 +15,99 @@
 
 <AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SupplierFormController">
    <children>
-      <Pane layoutX="14.0" layoutY="13.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="13.0">
+      <Pane layoutX="6.0" layoutY="64.0" prefHeight="619.0" prefWidth="1188.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="64.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="832.0" layoutY="637.0" onAction="#btnCustomerSaveOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #6930c3;" text="Save" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="924.0" layoutY="637.0" onAction="#btnSupplierUpdateOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #7400b8;" text="Update" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="1020.0" layoutY="637.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="740.0" layoutY="637.0" onAction="#btnSupplierDeleteOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #6930c3;" text="Delete" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="813.0" layoutY="41.0" onAction="#btnStockListOnAction" style="-fx-background-color: #ffc8dd;" text="Stock List" />
+            <JFXButton buttonType="RAISED" layoutX="17.0" layoutY="11.0" onAction="#btnStockListOnAction" style="-fx-background-color: #2a9d8f;" text="Stock List">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-list-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <Pane layoutX="17.0" layoutY="61.0" prefHeight="524.0" prefWidth="753.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <children>
+                  <TableView fx:id="tblSupplier" layoutX="9.0" layoutY="10.0" prefHeight="492.0" prefWidth="736.0" stylesheets="@../style/table.css">
+                     <columns>
+                        <TableColumn fx:id="colSupplierD" minWidth="40.0" prefWidth="144.0" text="Supplier ID" />
+                        <TableColumn fx:id="colSupplierName" prefWidth="156.0" text="Supplier Name" />
+                        <TableColumn fx:id="colSupplierNIC" prefWidth="132.0" text="NIC" />
+                        <TableColumn fx:id="colSupplierAddress" prefWidth="169.0" text="Address" />
+                        <TableColumn fx:id="colSupplierContactNumber" prefWidth="144.0" text="Contact Number" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane layoutX="789.0" layoutY="69.0" prefHeight="504.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <children>
+                  <JFXTextField fx:id="txtSupplierContactNumber" labelFloat="true" layoutX="21.0" layoutY="295.0" prefHeight="37.0" prefWidth="292.0" promptText="Contact Number" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtSupplierAddress" labelFloat="true" layoutX="21.0" layoutY="224.0" prefHeight="37.0" prefWidth="292.0" promptText="Supplier Address" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtSupplierNIC" labelFloat="true" layoutX="21.0" layoutY="156.0" prefHeight="37.0" prefWidth="292.0" promptText="Supplier NIC" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtSupplierName" labelFloat="true" layoutX="21.0" layoutY="91.0" prefHeight="37.0" prefWidth="292.0" promptText="Supplier Name" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtSupplierId" labelFloat="true" layoutX="21.0" layoutY="27.0" prefHeight="37.0" prefWidth="292.0" promptText="Supplier ID" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="456.0" onAction="#btnSupplierDeleteOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="101.0" layoutY="456.0" onAction="#btnCustomerSaveOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="178.0" layoutY="457.0" onAction="#btnSupplierUpdateOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="271.0" layoutY="456.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="60.0" fitWidth="55.0" layoutX="320.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-id-verified-50.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <TextField fx:id="txtSearchSupplierID" layoutX="895.0" layoutY="18.0" prefHeight="34.0" prefWidth="184.0" promptText="Supplier Id" style="-fx-background-radius: 30;" />
+            <Button layoutX="1079.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnSupplierIDSearchOnAction" prefHeight="27.0" prefWidth="36.0">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0">
+                     <image>
+                        <Image url="@../icon/Search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
-      <Label layoutX="40.0" layoutY="24.0" prefHeight="77.0" prefWidth="245.0" text="Supplier Detail">
+      <Label alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="-105.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="suppliers  Details" textFill="WHITE">
          <font>
-            <Font name="Barlow Condensed SemiBold" size="37.0" />
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
-      <TableView fx:id="tblSupplier" layoutX="40.0" layoutY="114.0" prefHeight="522.0" prefWidth="852.0" stylesheets="@../style/table.css">
-         <columns>
-            <TableColumn fx:id="colSupplierD" minWidth="40.0" prefWidth="100.0" text="Supplier ID" />
-            <TableColumn fx:id="colSupplierName" prefWidth="200.0" text="Supplier Name" />
-            <TableColumn fx:id="colSupplierNIC" prefWidth="150.0" text="NIC" />
-            <TableColumn fx:id="colSupplierAddress" prefWidth="250.0" text="Address" />
-            <TableColumn fx:id="colSupplierContactNumber" prefWidth="150.0" text="Contact Number" />
-         </columns>
-      </TableView>
-      <TextField fx:id="txtSearchSupplierID" layoutX="900.0" layoutY="50.0" prefHeight="34.0" prefWidth="184.0" promptText="Supplier Id" style="-fx-background-radius: 30;" />
-      <JFXTextField fx:id="txtSupplierId" labelFloat="true" layoutX="936.0" layoutY="185.0" prefHeight="25.0" prefWidth="230.0" promptText="Supplier ID" unFocusColor="#0988e5" />
-      <JFXTextField fx:id="txtSupplierName" labelFloat="true" layoutX="936.0" layoutY="235.0" prefHeight="25.0" prefWidth="230.0" promptText="Supplier Name" unFocusColor="#0988e5" />
-      <JFXTextField fx:id="txtSupplierNIC" labelFloat="true" layoutX="936.0" layoutY="291.0" prefHeight="25.0" prefWidth="230.0" promptText="Supplier NIC" unFocusColor="#0988e5" />
-      <JFXTextField fx:id="txtSupplierAddress" labelFloat="true" layoutX="936.0" layoutY="358.0" prefHeight="25.0" prefWidth="230.0" promptText="Supplier Address" unFocusColor="#0988e5" />
-      <JFXTextField fx:id="txtSupplierContactNumber" labelFloat="true" layoutX="936.0" layoutY="421.0" prefHeight="25.0" prefWidth="230.0" promptText="Contact Number" unFocusColor="#0988e5" />
-      <Button layoutX="1084.0" layoutY="51.0" mnemonicParsing="false" onAction="#btnSupplierIDSearchOnAction" prefHeight="27.0" prefWidth="36.0">
-         <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0">
-               <image>
-                  <Image url="@../icon/Search.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

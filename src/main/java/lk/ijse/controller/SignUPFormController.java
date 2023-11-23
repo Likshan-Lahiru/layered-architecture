@@ -12,6 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.dto.SignUpDto;
 import lk.ijse.model.SignUpModel;
+import lk.ijse.util.RegExPatterns;
+import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -39,7 +42,7 @@ public class SignUPFormController {
         String UserName = txtUserName.getText();
         String password = txtPassword.getText();
         String email = txtEmail.getText();
-        if(FirstName.isEmpty() ||SecondName.isEmpty()||UserName.isEmpty()||password.isEmpty()||email.isEmpty()){
+       /* if(FirstName.isEmpty() ||SecondName.isEmpty()||UserName.isEmpty()||password.isEmpty()||email.isEmpty()){
 
             if (FirstName.isEmpty()) boarderRedAlert(txtFirstName);
             if (SecondName.isEmpty()) boarderRedAlert(txtSecondName);
@@ -48,7 +51,41 @@ public class SignUPFormController {
             if (email.isEmpty())boarderRedAlert(txtEmail);
             new Alert(Alert.AlertType.ERROR,"Please enter the all detail!").showAndWait();
             return;
-        }
+        }*/
+            if (!(FirstName.isEmpty() ||SecondName.isEmpty()||UserName.isEmpty()||password.isEmpty()||email.isEmpty())){
+                if (RegExPatterns.getNamePattern().matcher(FirstName).matches()){
+                    TxtColours.setDefaultColours(txtFirstName);
+                    if (RegExPatterns.getNamePattern().matcher(SecondName).matches()){
+                        TxtColours.setDefaultColours(txtSecondName);
+                        if(RegExPatterns.getPasswordPattern().matcher(password).matches()){
+                            TxtColours.setDefaultColours(txtPassword);
+                            if (RegExPatterns.getEmailPattern().matcher(email).matches()){
+                                TxtColours.setDefaultColours(txtEmail);
+                            }else {
+                                boarderRedAlert(txtEmail);
+                                new Alert(Alert.AlertType.ERROR,"Please enter valid email!").showAndWait();
+                                return;}
+                        }else {
+                            boarderRedAlert(txtPassword);
+                            new Alert(Alert.AlertType.ERROR,"Please enter valid password!").showAndWait();
+                            return;}
+                    }else {
+                        boarderRedAlert(txtSecondName);
+                        new Alert(Alert.AlertType.ERROR,"Please enter valid second name!").showAndWait();
+                        return;}
+                }else {
+                    boarderRedAlert(txtFirstName);
+                    new Alert(Alert.AlertType.ERROR,"Please enter valid first name!").showAndWait();
+                    return;}
+            }else {
+                boarderRedAlert(txtFirstName);
+                boarderRedAlert(txtSecondName);
+                boarderRedAlert(txtUserName);
+                boarderRedAlert(txtPassword);
+                boarderRedAlert(txtEmail);
+                new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
+                return;
+            }
 
         var dto = new SignUpDto(FirstName,SecondName,UserName,password,email);
 
@@ -57,7 +94,7 @@ public class SignUPFormController {
         try {
             boolean isCreateAccount = model.createAccount(dto);
             if (isCreateAccount){
-                new Alert(Alert.AlertType.CONFIRMATION,"Account create successfull!").showAndWait();
+               new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Account Created Successfully").showAndWait();
                 resetBoarderColor();
             }
 

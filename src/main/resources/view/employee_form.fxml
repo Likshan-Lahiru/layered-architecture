@@ -15,23 +15,10 @@
 
 <AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.EmployeeFormController">
    <children>
-      <Pane layoutX="16.0" layoutY="23.0" prefHeight="691.0" prefWidth="1169.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;">
+      <Pane layoutX="16.0" layoutY="23.0" prefHeight="619.0" prefWidth="1188.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="64.0">
          <children>
-            <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="103.0" prefHeight="535.0" prefWidth="770.0" stylesheets="@../style/table.css">
-               <columns>
-                  <TableColumn fx:id="colEmployeeId" prefWidth="150.0" text="Employee ID" />
-                  <TableColumn fx:id="colEmployeeName" prefWidth="250.0" text="Employee Name" />
-                  <TableColumn fx:id="colEmployeeNIC" prefWidth="150.0" text="NIC" />
-                  <TableColumn fx:id="colEmployeeAddress" prefWidth="214.0" text="Employee Address" />
-               </columns>
-            </TableView>
-            <Label layoutX="14.0" layoutY="18.0" prefHeight="77.0" prefWidth="309.0" text="Employee Detail">
-               <font>
-                  <Font name="Barlow Condensed SemiBold" size="37.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtSearchEmployeeID" layoutX="890.0" layoutY="40.0" prefHeight="34.0" prefWidth="184.0" promptText="Employee Id" style="-fx-background-radius: 30;" />
-            <Button layoutX="1074.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnEmployeeIDSearchOnAction" prefHeight="27.0" prefWidth="36.0">
+            <TextField fx:id="txtSearchEmployeeID" layoutX="890.0" layoutY="15.0" prefHeight="34.0" prefWidth="184.0" promptText="Employee Id" style="-fx-background-radius: 30;" />
+            <Button layoutX="1074.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEmployeeIDSearchOnAction" prefHeight="27.0" prefWidth="36.0">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0">
                      <image>
@@ -40,21 +27,83 @@
                   </ImageView>
                </graphic>
             </Button>
-            <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="822.0" layoutY="282.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="822.0" layoutY="352.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="822.0" layoutY="476.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Address" unFocusColor="#0988e5" />
-            <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="819.0" layoutY="417.0" prefHeight="25.0" prefWidth="315.0" promptText="Employee NIC" unFocusColor="#0988e5" />
-            <JFXButton buttonType="RAISED" layoutX="900.0" layoutY="646.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="978.0" layoutY="646.0" onAction="#btnEmployeeSaveOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #6930c3;" text="Save" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="1061.0" layoutY="646.0" onAction="#btnEmployeeUpdateOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #7400b8;" text="Update" textFill="WHITE" />
-            <Pane layoutX="950.0" layoutY="104.0" prefHeight="172.0" prefWidth="163.0" style="-fx-background-radius: 20; -fx-background-color: #f2e9e4;" />
-            <ImageView fitHeight="133.0" fitWidth="160.0" layoutX="967.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icon/admin.png" />
-               </image>
-            </ImageView>
-            <JFXButton layoutX="861.0" layoutY="219.0" prefHeight="34.0" prefWidth="85.0" text="Add photo" />
+            <Pane layoutX="14.0" layoutY="62.0" prefHeight="577.0" prefWidth="661.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <children>
+                  <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="9.0" prefHeight="559.0" prefWidth="626.0" style="-fx-background-radius: 15;" stylesheets="@../style/table.css">
+                     <columns>
+                        <TableColumn fx:id="colEmployeeId" prefWidth="150.0" text="Employee ID" />
+                        <TableColumn fx:id="colEmployeeName" prefWidth="171.0" text="Employee Name" />
+                        <TableColumn fx:id="colEmployeeNIC" prefWidth="130.0" text="NIC" />
+                        <TableColumn fx:id="colEmployeeAddress" prefWidth="169.0" text="Employee Address" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane layoutX="694.0" layoutY="66.0" prefHeight="569.0" prefWidth="441.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <children>
+                  <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="23.0" layoutY="383.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Address" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="23.0" layoutY="197.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton buttonType="RAISED" layoutX="327.0" layoutY="511.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="141.0" layoutY="511.0" onAction="#btnEmployeeSaveOnAction" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="234.0" layoutY="511.0" onAction="#btnEmployeeUpdateOnAction" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Pane layoutX="285.0" layoutY="14.0" prefHeight="164.0" prefWidth="134.0" style="-fx-background-radius: 20; -fx-background-color: #f2e9e4;">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="164.0" fitWidth="134.0" layoutX="-2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icon/admin.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <JFXButton fx:id="btnImageChoosers" buttonType="RAISED" layoutX="193.0" layoutY="134.0" onAction="#btnImageChooserOnAction" prefHeight="25.0" prefWidth="75.0" text="Add photo" />
+                  <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="23.0" layoutY="321.0" prefHeight="25.0" prefWidth="315.0" promptText="Employee NIC" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="23.0" layoutY="259.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton buttonType="RAISED" layoutX="45.0" layoutY="511.0" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-user-menu-male-50.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
+      <Label alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="-101.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="Emoloyee Details" textFill="WHITE">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

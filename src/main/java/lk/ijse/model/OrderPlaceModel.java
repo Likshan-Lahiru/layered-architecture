@@ -13,19 +13,19 @@ public class OrderPlaceModel {
 
     public boolean placeOrder(PlaceOrderDto dto) throws SQLException {
       boolean result = false;
-        /*Connection connection = null;
+        Connection connection = null;
         try {
             connection = DbConnection.getInstance().getConnection();
-            connection.setAutoCommit(false);*/
+            connection.setAutoCommit(false);
 
 
             boolean isOrderSaved = OrderModel.saveOrder(dto.getCustomerId(),dto.getOrderId(),dto.getOrderDate(),dto.getName());
-       //  if (isOrderSaved) {
+         if (isOrderSaved) {
 
                 boolean isUpdated = toolModel.updateTool(dto.getCartTms());
-             //  if(isUpdated) {
+               if(isUpdated) {
                     boolean isOrderDetailSaved = orderDetailModel.saveOrderDetail(dto.getOrderId(), dto.getCartTms());
-                  /* if(isOrderDetailSaved) {
+                  if(isOrderDetailSaved) {
                       connection.commit();
 
                         result = true;
@@ -36,7 +36,7 @@ public class OrderPlaceModel {
             connection.rollback();
         } finally {
             connection.setAutoCommit(true);
-        }*/
+        }
         return result;
 
 

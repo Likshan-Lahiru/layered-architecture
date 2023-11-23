@@ -5,22 +5,55 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.dto.LoginDto;
+import lk.ijse.dto.SignUpDto;
+import lk.ijse.model.LoginModel;
+import lk.ijse.util.Mail;
+import lk.ijse.util.SystemAlert;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Timer;
 
 public class LoginFormController {
     @FXML
+    private Label lblTime;
+    @FXML
+    private ImageView lblClose;
+    private ImageView lbprivate ;
+    @FXML
+    private ImageView lblOpenEye;
+    @FXML
+    private TextField txtShowPassword;
+    @FXML
     private TextField txtUserName;
     @FXML
-    private TextField txtPassword;
+    private PasswordField txtPassword;
     @FXML
     private AnchorPane root;
 
+
+    String time;
+
     private String hiru = "lahiru212001@gmail.com";
+    public void initialize(){
+        // txtShowPassword.setVisible(false);
+        // lblOpenEye.setVisible(false);
+        setTime();
+    }
+    public void setTime(){
+       lblTime.setText(java.time.LocalTime.now().toString());
+
+    }
+
+    public LoginFormController() {
+    }
 
     @FXML
     public void btnSignInOnAction(ActionEvent actionEvent) throws IOException {
@@ -35,10 +68,11 @@ public class LoginFormController {
 
     public void btnLoginPageOnAction(ActionEvent actionEvent) throws SQLException, IOException {
 
-       /* String nameText = txtUserName.getText();
+        String nameText = txtUserName.getText();
+
         String passwordText = txtPassword.getText();
         if (nameText.isEmpty()||passwordText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"User Name or password is empty!").show();
+            new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
             return;
         }
 
@@ -54,7 +88,7 @@ public class LoginFormController {
 
       try {
             boolean checked = model.checkCredentianl(dto);
-            if (checked){*/
+            if (checked){
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/Main_form.fxml"));
         Scene scene = new Scene(anchorPane);
         Stage stage = (Stage) root.getScene().getWindow();
@@ -62,8 +96,8 @@ public class LoginFormController {
         stage.setTitle("Order Form");
         stage.centerOnScreen();
 
-              /* Mail mail = new Mail();
-                mail.setMsg("Welcome..! \n\n\tYou are successfully logged in to the Ashen Enterprise Management System \n\nThank you..!");
+              Mail mail = new Mail();
+                mail.setMsg(nameText+"emplloyee Login into Ashen Enterprise management System at"+" "+lblTime.getText());
 
                 mail.setTo(hiru);
                 mail.setSubject("Ashen Enterprise Management System Login");
@@ -72,12 +106,38 @@ public class LoginFormController {
                 thread.start();
 
            } else {
-                new Alert(Alert.AlertType.CONFIRMATION,"user name or password invailid...").show();
+                new SystemAlert(Alert.AlertType.WARNING, "Error", "User Name or password is wrong!", ButtonType.OK).show();
+
             }
         }catch (SQLException e){
 
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
       }
-    }*/
+    }
+
+
+
+    public void showPasswordOnAction(KeyEvent keyEvent) {
+      //  Password = txtPassword.getText();
+      //  txtShowPassword.setText(Password);
+    }
+
+    public void HidePasswordOnAction(KeyEvent keyEvent) {
+      //  Password = txtShowPassword.getText();
+       // txtPassword.setText(Password);
+    }
+
+    public void openOnAction(MouseEvent mouseEvent) {
+       // txtShowPassword.setVisible(true);
+       // lblOpenEye.setVisible(true);
+        //lblClose.setVisible(false);
+     //   txtPassword.setVisible(false);
+    }
+
+    public void colseOnAction(MouseEvent mouseEvent) {
+        txtShowPassword.setVisible(false);
+        lblOpenEye.setVisible(false);
+        lblClose.setVisible(true);
+        txtPassword.setVisible(true);
     }
 }

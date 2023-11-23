@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.db.DbConnection;
 import lk.ijse.dto.*;
 import lk.ijse.dto.tm.CartTm;
 import lk.ijse.model.CustomerModel;
@@ -20,8 +21,15 @@ import lk.ijse.model.OrderPlaceModel;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +37,8 @@ import java.util.Optional;
 
 public class OrderFormController {
 
+    @FXML
+    private TableColumn<?, ?> colDate;
     @FXML
     private JFXTextField txtReStatus;
     @FXML
@@ -38,15 +48,14 @@ public class OrderFormController {
     @FXML
     private Label lblReQty;
     @FXML
-    private TableView <CartTm> tblOrderDetails;
+    private TableView<CartTm> tblOrderDetails;
     @FXML
     private TableColumn<?, ?> colToolName;
     @FXML
     private Label lblOrderDate;
     @FXML
     private Label lblNetTotal;
-    @FXML
-    private TableColumn<?, ?> colOrderDetailsDate;
+
     @FXML
     private TableColumn<?, ?> colOrderDetailsStatus;
     @FXML
@@ -92,14 +101,14 @@ public class OrderFormController {
     @FXML
     private AnchorPane root;
 
-    private String status ;
+    private String status;
 
     private final ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
     public OrderFormController() {
     }
 
-    public void initialize(){
+    public void initialize() {
         setCellValueFactory();
         setOrderDetailCellValueFactory();
         generateNextOrderId();
@@ -120,10 +129,11 @@ public class OrderFormController {
         colOrderDetailsOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colOrderDetailsQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colOrderDetailsUnitPrice.setCellValueFactory(new PropertyValueFactory<>("rentPerDay"));
-       // colOrderDetailsDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         colOrderDetailsStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
     }
+
     private void setOrderDetailCellValueFactory() {
         colToolId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
         colToolName.setCellValueFactory(new PropertyValueFactory<>("lblDescriptionText"));
@@ -133,21 +143,22 @@ public class OrderFormController {
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
     }
-    public void loadAllOrderDetails(){
-        String cmbToolIDValue  = (String) cmbToolID.getValue();
+
+    public void loadAllOrderDetails() {
+        String cmbToolIDValue = (String) cmbToolID.getValue();
         String txtQtyText = txtQty.getText();
         String lblRentPerDayText = lblRentPerDay.getText();
         String orderId = lblOrderId.getText();
         String orderDate = lblOrderDate.getText();
         String status = txtReStatus.getText();
 
-        new OrderDetailsDto(cmbToolIDValue,orderId,txtQtyText,lblRentPerDayText,orderDate,status);
+        new OrderDetailsDto(cmbToolIDValue, orderId, txtQtyText, lblRentPerDayText, orderDate, status);
         var model = new OrderModel();
 
         ObservableList<CartTm> OrderDetilsTmObservableList = FXCollections.observableArrayList();
         try {
-            List<OrderDetailsDto> orderDetailsDtos =model.getAllOrderDetails();
-            for (OrderDetailsDto dto : orderDetailsDtos){
+            List<OrderDetailsDto> orderDetailsDtos = model.getAllOrderDetails();
+            for (OrderDetailsDto dto : orderDetailsDtos) {
                 OrderDetilsTmObservableList.add(
                         new CartTm(
                                 dto.getToolId(),
@@ -161,7 +172,7 @@ public class OrderFormController {
                 );
             }
             tblOrderDetails.setItems(OrderDetilsTmObservableList);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -194,6 +205,7 @@ public class OrderFormController {
             throw new RuntimeException(e);
         }
     }
+
     private void loadCustomerIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
@@ -212,17 +224,17 @@ public class OrderFormController {
         try {
             String castToolId = (String) cmbToolID.getValue();
             String castDescription = lblDescription.getText();
-            String castCustomer =lblCustomerName.getText();
-            String castQty=txtQty.getText();
-            String castRentalDays=txtRentalDays.getText();
-            String castRentPerDay=lblRentPerDay.getText();
+            String castCustomer = lblCustomerName.getText();
+            String castQty = txtQty.getText();
+            String castRentalDays = txtRentalDays.getText();
+            String castRentPerDay = lblRentPerDay.getText();
 
-            if (castToolId.isEmpty()||castCustomer.isEmpty()||castDescription.isEmpty()||castQty.isEmpty()||castRentalDays.isEmpty()||castRentPerDay.isEmpty()){
-                new SystemAlert(Alert.AlertType.WARNING,"Warning","Please Enter the all details!",ButtonType.OK).show();
+            if (castToolId.isEmpty() || castCustomer.isEmpty() || castDescription.isEmpty() || castQty.isEmpty() || castRentalDays.isEmpty() || castRentPerDay.isEmpty()) {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
                 return;
             }
-        }catch (Exception e){
-            new SystemAlert(Alert.AlertType.WARNING,"Warning","Please Enter the all details!",ButtonType.OK).show();
+        } catch (Exception e) {
+            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
             return;
         }
 
@@ -232,12 +244,12 @@ public class OrderFormController {
         int qty = Integer.valueOf(txtQty.getText());
         int rentalDaysText = Integer.valueOf(txtRentalDays.getText());
         double rentaperDay = Double.parseDouble(lblRentPerDay.getText());
-        String lblOrderIdText= lblOrderId.getText();
+        String lblOrderIdText = lblOrderId.getText();
         String orderDateText = lblOrderDate.getText();
         status = "pending";
 
 
-        Double total = calTotal(qty,rentalDaysText,rentaperDay);
+        Double total = calTotal(qty, rentalDaysText, rentaperDay);
         Button btn = new Button("remove");
         btn.setCursor(Cursor.HAND);
 
@@ -245,7 +257,7 @@ public class OrderFormController {
             ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
             ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION,"Information", "Are you sure to remove?", yes, no).showAndWait();
+            Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Are you sure to remove?", yes, no).showAndWait();
 
             if (type.orElse(no) == yes) {
                 int index = tblCart.getSelectionModel().getSelectedIndex();
@@ -275,13 +287,14 @@ public class OrderFormController {
             }
         }
 
-        obList.add(new CartTm(toolId, lblDescriptionText ,qty, rentalDaysText, rentaperDay, total, btn,lblOrderIdText,orderDateText,status));
+        obList.add(new CartTm(toolId, lblDescriptionText, qty, rentalDaysText, rentaperDay, total, btn, lblOrderIdText, orderDateText, status));
 
         tblCart.setItems(obList);
         calculateNetTotal();
 
     }
-    private void clearHistory(){
+
+    private void clearHistory() {
         txtQty.clear();
         txtRentalDays.clear();
         lblDescription.setText("");
@@ -300,8 +313,8 @@ public class OrderFormController {
     }
 
     private Double calTotal(int qty, int rentalDaysText, double rentaperDay) {
-           Double total = qty*rentaperDay*rentalDaysText;
-           return total;
+        Double total = qty * rentaperDay * rentalDaysText;
+        return total;
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
@@ -311,35 +324,34 @@ public class OrderFormController {
         String descriptionText = lblDescription.getText();
 
 
-
-
         List<CartTm> cartTmList = new ArrayList<>();
 
         for (CartTm cartTm : obList) {
             cartTmList.add(cartTm);
         }
 
-        var dto = new PlaceOrderDto(orderId, customerId, orderDate, cartTmList,descriptionText);
+        var dto = new PlaceOrderDto(orderId, customerId, orderDate, cartTmList, descriptionText);
 
 
         OrderPlaceModel model = new OrderPlaceModel();
         try {
-            boolean isAdded=model.placeOrder(dto);
-            if (isAdded){
+            boolean isAdded = model.placeOrder(dto);
+            if (isAdded) {
 
-                new SystemAlert(Alert.AlertType.CONFIRMATION,"Information","Order Placed Successfully!",ButtonType.OK).show();
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Information", "Order Placed Successfully!", ButtonType.OK).show();
+                setOrderDetailCellValueFactory();
                 loadAllOrderDetails();
+                tblCart.getItems().clear();
                 generateNextOrderId();
 
-            }else {
-                new SystemAlert(Alert.AlertType.WARNING,"Error","Order Not Placed!",ButtonType.OK).show();
+            } else {
+                new SystemAlert(Alert.AlertType.WARNING, "Error", "Order Not Placed!", ButtonType.OK).show();
             }
-        }catch (SQLException e){
-            new SystemAlert(Alert.AlertType.ERROR,"Error",e.getMessage(),ButtonType.OK).show();
+        } catch (SQLException e) {
+            new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
         }
 
     }
-
 
 
     public void txtQtyOnAction(ActionEvent actionEvent) {
@@ -390,20 +402,21 @@ public class OrderFormController {
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
     }
-    private void setReOrder(){
+
+    private void setReOrder() {
         tblOrderDetails.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldvalue,newValue)->{
+                .addListener((observable, oldvalue, newValue) -> {
                     OrderDetailsDto dto = new OrderDetailsDto(
                             newValue.getOrderId(),
                             newValue.getToolId(),
                             newValue.getQty()
 
 
-
                     );
                     orderSetfeild(dto);
                 });
     }
+
     private void orderSetfeild(OrderDetailsDto dto) {
         lblReOrderId.setText(dto.getOrderId());
         lblReToolId.setText(dto.getToolId());
@@ -414,25 +427,49 @@ public class OrderFormController {
 
     public void btnFinishOnAction(ActionEvent actionEvent) {
 
-       String lblReOrderIdText = lblReOrderId.getText();
-      String lblReToolIdText = lblReToolId.getText();
-      String lblReQtyText = lblReQty.getText();
-      String txtReStatusText = txtReStatus.getText();
+        String lblReOrderIdText = lblReOrderId.getText();
+        String lblReToolIdText = lblReToolId.getText();
+        String lblReQtyText = lblReQty.getText();
+        String txtReStatusText = txtReStatus.getText();
 
-      if ((lblReOrderId.getText().isEmpty()||lblReToolIdText.isEmpty()||lblReQtyText.isEmpty()||txtReStatusText.isEmpty())){
-          TxtColours.setDefaultColours(txtReStatus);
-      }else {
-          TxtColours.setErrorColours(txtReStatus);
-          new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
-          return;
-      }
-
-
+        if ((lblReOrderId.getText().isEmpty() || lblReToolIdText.isEmpty() || lblReQtyText.isEmpty() || txtReStatusText.isEmpty())) {
+            TxtColours.setDefaultColours(txtReStatus);
+        } else {
+            TxtColours.setErrorColours(txtReStatus);
+            new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
+            return;
+        }
 
 
+    }
 
+    @FXML
+    void btnPrintOnAction(ActionEvent event) throws IOException, JRException, SQLException {
+        try {
+            InputStream design = getClass().getResourceAsStream("/report/Invoice_form.jrxml");
+           // System.out.println(getClass().getResource("../report/Invoice_form.jrxml"));
+            JasperDesign load = JRXmlLoader.load(design);
 
+            JasperReport jasperReport = JasperCompileManager.compileReport(load);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
 
-        
+        } catch (JRException e) {
+           e.getMessage();
+
+            //new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+        }
+       /* InputStream resourseAsStream = getClass().getResourceAsStream("src/main/java/lk/ijse/report/OrderForm.jrxml");
+        JasperDesign load = JRXmlLoader.load(resourseAsStream);
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(
+                        jasperReport,
+                        null,
+                        DbConnection.getInstance().getConnection()
+                );
+        JasperViewer.viewReport(jasperPrint, false);
+    }*/
     }
 }

@@ -31,7 +31,7 @@ public class MainFormController {
     @FXML
     public void initializeFirstForm() throws IOException {
         this.actionEvent = actionEvent;
-        btnCustomerOnAction();
+        btnOrderOnAction();
     }
 
 

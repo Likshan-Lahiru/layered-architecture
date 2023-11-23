@@ -2,7 +2,11 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,29 +26,46 @@
             <Image url="@../wallpaper/Untitled-1.jpg" />
          </image>
       </ImageView>
-      <Pane layoutX="125.0" layoutY="167.0" opacity="0.66" prefHeight="483.0" prefWidth="388.0" style="-fx-background-color: gray; -fx-background-radius: 10;" />
+      <Pane layoutX="125.0" layoutY="167.0" opacity="0.66" prefHeight="483.0" prefWidth="388.0" style="-fx-background-color: gray; -fx-background-radius: 10;">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="296.0" onAction="#btnLoginPageOnAction" prefHeight="36.0" prefWidth="115.0" style="-fx-background-color: #FFC107; -fx-background-radius: 5;" text="Login" textFill="#111111">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </JFXButton>
+            <ImageView fx:id="lblClose" fitHeight="36.0" fitWidth="39.0" layoutX="339.0" layoutY="195.0" onMouseClicked="#colseOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/icons8-hide-50.png" />
+               </image>
+            </ImageView>
+            <PasswordField fx:id="txtPassword" layoutX="23.0" layoutY="192.0" onKeyReleased="#HidePasswordOnAction" prefHeight="43.0" prefWidth="310.0" promptText="         Password" style="-fx-background-radius: 20;">
+               <font>
+                  <Font size="16.0" />
+               </font></PasswordField>
+         </children></Pane>
       <Label layoutX="273.0" layoutY="186.0" prefHeight="36.0" prefWidth="88.0" text="Login" textAlignment="CENTER">
          <font>
             <Font name="Cambria Math" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUserName" layoutX="162.0" layoutY="270.0" prefHeight="43.0" prefWidth="310.0" promptText="         User name" style="-fx-background-radius: 20;">
+      <TextField fx:id="txtUserName" layoutX="147.0" layoutY="270.0" prefHeight="43.0" prefWidth="310.0" promptText="         User name" style="-fx-background-radius: 20;">
          <font>
-            <Font name="Calibri Italic" size="16.0" />
+            <Font size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtPassword" layoutX="162.0" layoutY="358.0" prefHeight="43.0" prefWidth="310.0" promptText="         Password" style="-fx-background-radius: 20;">
-         <font>
-            <Font name="Calibri Italic" size="16.0" />
-         </font></TextField>
-      <JFXButton buttonType="RAISED" layoutX="246.0" layoutY="434.0" onAction="#btnLoginPageOnAction" prefHeight="36.0" prefWidth="115.0" style="-fx-background-color: #FFC107; -fx-background-radius: 5;" text="Login">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
       <Line endX="173.0" layoutX="305.0" layoutY="525.0" startX="-146.0" />
       <Label layoutX="221.0" layoutY="545.0" prefHeight="17.0" prefWidth="122.0" text="Don't have account?" />
-      <JFXButton buttonType="RAISED" layoutX="329.0" layoutY="541.0" onAction="#btnSignInOnAction" ripplerFill="WHITE" text="Sign Up" textFill="#00a8ff" />
+      <JFXButton buttonType="RAISED" layoutX="329.0" layoutY="541.0" onAction="#btnSignInOnAction" ripplerFill="WHITE" text="Sign Up" textFill="#0013ff" />
       <Label layoutX="553.0" layoutY="220.0" prefHeight="55.0" prefWidth="185.0" text="Welcome!">
          <font>
             <Font name="Bodoni MT" size="39.0" />
@@ -66,5 +87,6 @@
             <Font name="Calibri" size="17.0" />
          </font>
       </Label>
+      <Label fx:id="lblTime" layoutX="1076.0" layoutY="763.0" prefHeight="17.0" prefWidth="122.0" />
    </children>
 </AnchorPane>

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.db.DbConnection;
 import lk.ijse.dto.StockListDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.ToolDto;
@@ -21,8 +22,13 @@ import lk.ijse.model.StockListModel;
 import lk.ijse.model.SupplierModel;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -333,9 +339,26 @@ public class toolStockController {
     }
 
     public void btnNewSupplierOnAction(ActionEvent actionEvent) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/Customer_form.fxml"));
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/supplierForm.fxml"));
 
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
+    }
+
+    public void btnGetReportOnAction(ActionEvent actionEvent) throws SQLException {
+        try {
+            InputStream design = getClass().getResourceAsStream("/report/New.jrxml");
+            // System.out.println(getClass().getResource("../report/Invoice_form.jrxml"));
+            JasperDesign load = JRXmlLoader.load(design);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(load);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            e.getMessage();
+
+            //new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+}
     }
 }

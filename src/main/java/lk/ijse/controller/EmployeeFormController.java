@@ -1,5 +1,6 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +11,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import lk.ijse.dto.EmployeeDto;
 import lk.ijse.dto.tm.EmployeeTm;
 import lk.ijse.model.EmployeeModel;
@@ -18,10 +22,19 @@ import lk.ijse.util.RegExPatterns;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeFormController {
+    @FXML
+    private JFXButton btnImageChoosers;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private ImageView btnImageChooser;
     @FXML
     private AnchorPane rootTestId;
     @FXML
@@ -44,6 +57,7 @@ public class EmployeeFormController {
     private TableColumn<?, ?> colEmployeeId;
     @FXML
     private TableView<EmployeeTm> tblEmployee;
+    private File file;
 
     public void initialize(){
         employeeCellvalueFactory();
@@ -201,4 +215,20 @@ public class EmployeeFormController {
     }
 
 
+    public void btnImageChooserOnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select the image");
+        FileChooser.ExtensionFilter imageFilter =
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        file = fileChooser.showOpenDialog(btnImageChoosers.getScene().getWindow());
+        if (file != null) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                imageView.setImage(new Image(fileInputStream,179,171,false,true));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
