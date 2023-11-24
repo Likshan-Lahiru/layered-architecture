@@ -17,12 +17,7 @@
 
 <AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.VehicalFormController">
    <children>
-      <Label layoutX="41.0" layoutY="10.0" prefHeight="77.0" prefWidth="309.0" text="Vehicle Detail">
-         <font>
-            <Font name="Barlow Condensed SemiBold" size="37.0" />
-         </font>
-      </Label>
-      <Pane blendMode="DARKEN" layoutX="53.0" layoutY="101.0" prefHeight="274.0" prefWidth="1117.0" style="-fx-background-color: #d6ccc2; -fx-background-radius: 10;">
+      <Pane blendMode="DARKEN" layoutX="53.0" layoutY="101.0" prefHeight="274.0" prefWidth="1117.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 10;">
          <children>
             <Label layoutX="151.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="492.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
@@ -53,7 +48,7 @@
             <TableColumn fx:id="colNumberplateNo" prefWidth="120.0" text="Number plate NO" />
          </columns>
       </TableView>
-      <Pane layoutX="705.0" layoutY="409.0" prefHeight="274.0" prefWidth="465.0" style="-fx-background-color: #d6ccc2; -fx-background-radius: 15;">
+      <Pane layoutX="705.0" layoutY="409.0" prefHeight="274.0" prefWidth="465.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 15;">
          <children>
             <JFXTextField fx:id="txtVehicleId" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="168.0" promptText="Vehicle ID">
                <cursor>
@@ -106,6 +101,11 @@
             <DatePicker fx:id="pickerLastServiceDate" blendMode="MULTIPLY" layoutX="14.0" layoutY="146.0" promptText="Last Service Date" style="-fx-background-color: #fefae0;" />
          </children>
       </Pane>
+      <Label alignment="BOTTOM_CENTER" layoutY="-97.0" prefHeight="147.0" prefWidth="1240.0" style="-fx-background-color: #164863;" text="Vehicle Detail" textFill="WHITE">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
+         </font>
+      </Label>
    </children>
 
 </AnchorPane>

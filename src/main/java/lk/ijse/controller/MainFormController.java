@@ -1,23 +1,55 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lk.ijse.util.SystemAlert;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainFormController {
+    public Button btnImageChoosers;
+    public ImageView imageView;
+    File file;
+    public JFXButton btnOrderId;
     @FXML
     private AnchorPane root;
     @FXML
     private ActionEvent actionEvent;
+    @FXML
+    private JFXButton brnCustomerDetail;
+
+    @FXML
+    private JFXButton btnToolDetail;
+
+    @FXML
+    private JFXButton btnVehicle;
+
+    @FXML
+    private JFXButton btnEmployee;
+
+    @FXML
+    private JFXButton btnStockList;
+
+    @FXML
+    private JFXButton btnSupplier;
 
     public void initialize() throws IOException{
             initializeFirstForm();
@@ -39,6 +71,7 @@ public class MainFormController {
 
 
     public void btnCustomerOnAction() throws IOException {
+
         Parent node = FXMLLoader.load(this.getClass().getResource("/view/Customer_form.fxml"));
 
         this.root.getChildren().clear();
@@ -90,4 +123,138 @@ public class MainFormController {
         this.root.getChildren().add(node);
 
     }
+
+
+    public void TestOnAction(MouseEvent mouseEvent) {
+       btnOrderId.setStyle("-fx-background-color: #0077b6;");
+       /* brnCustomerDetail.setStyle("-fx-background-color:  #023047;");
+        btnToolDetail.setStyle("-fx-background-color:  #023047;");
+        btnVehicle.setStyle("-fx-background-color:  #023047;");
+        btnEmployee.setStyle("-fx-background-color:  #023047;");
+        btnStockList.setStyle("-fx-background-color:  #023047;");
+        btnSupplier.setStyle("-fx-background-color:  #023047;");*/
+
+        brnCustomerDetail.setStyle("");
+        btnToolDetail.setStyle("");
+        btnEmployee.setStyle("");
+        btnSupplier.setStyle("");
+        btnStockList.setStyle("");
+    }
+
+
+    public void customerEffectOnAction(MouseEvent mouseEvent) {
+        brnCustomerDetail.setStyle("-fx-background-color: #0077b6;");
+      /*  btnOrderId.setStyle("-fx-background-color:  #023047;");
+        btnToolDetail.setStyle("-fx-background-color:  #023047;");
+        btnVehicle.setStyle("-fx-background-color:  #023047;");
+        btnEmployee.setStyle("-fx-background-color:  #023047;");
+        btnStockList.setStyle("-fx-background-color:  #023047;");
+        btnSupplier.setStyle("-fx-background-color:  #023047;");*/
+        btnOrderId.setStyle("");
+        btnVehicle.setStyle("");
+        btnToolDetail.setStyle("");
+        btnEmployee.setStyle("");
+        btnSupplier.setStyle("");
+        btnStockList.setStyle("");
+    }
+
+    public void toolEffectOnAction(MouseEvent mouseEvent) {
+        btnToolDetail.setStyle("-fx-background-color: #0077b6;");
+       /* btnOrderId.setStyle("-fx-background-color:  #023047;");
+        brnCustomerDetail.setStyle("-fx-background-color:  #023047;");
+        btnVehicle.setStyle("-fx-background-color:  #023047;");
+        btnEmployee.setStyle("-fx-background-color:  #023047;");
+        btnStockList.setStyle("-fx-background-color:  #023047;");
+        btnSupplier.setStyle("-fx-background-color:  #023047;");*/
+        btnOrderId.setStyle("");
+        brnCustomerDetail.setStyle("");
+        btnVehicle.setStyle("");
+        btnEmployee.setStyle("");
+        btnSupplier.setStyle("");
+        btnStockList.setStyle("");
+    }
+
+    public void vehicleEffectOnAction(MouseEvent mouseEvent) {
+        btnVehicle.setStyle("-fx-background-color: #0077b6;");
+       /* btnOrderId.setStyle("-fx-background-color:  #023047;");
+        brnCustomerDetail.setStyle("-fx-background-color:  #023047;");
+        btnToolDetail.setStyle("-fx-background-color:  #023047;");
+        btnEmployee.setStyle("-fx-background-color:  #023047;");
+        btnStockList.setStyle("-fx-background-color:  #023047;");
+        btnSupplier.setStyle("-fx-background-color:  #023047;");*/
+        btnOrderId.setStyle("");
+        brnCustomerDetail.setStyle("");
+        btnToolDetail.setStyle("");
+        btnEmployee.setStyle("");
+        btnSupplier.setStyle("");
+        btnStockList.setStyle("");
+    }
+
+    public void employeeEffectOnAction(MouseEvent mouseEvent) {
+        btnEmployee.setStyle("-fx-background-color: #0077b6;");
+      /*  btnOrderId.setStyle("-fx-background-color:  #023047;");
+        brnCustomerDetail.setStyle("-fx-background-color:  #023047;");
+        btnToolDetail.setStyle("-fx-background-color:  #023047;");
+        btnVehicle.setStyle("-fx-background-color:  #023047;");
+        btnStockList.setStyle("-fx-background-color:  #023047;");
+        btnSupplier.setStyle("-fx-background-color:  #023047;");*/
+        btnOrderId.setStyle("");
+        brnCustomerDetail.setStyle("");
+        btnToolDetail.setStyle("");
+        btnVehicle.setStyle("");
+        btnSupplier.setStyle("");
+        btnStockList.setStyle("");
+    }
+
+    public void stockListEffectOnAction(MouseEvent mouseEvent) {
+        btnStockList.setStyle("-fx-background-color: #0077b6;");
+       /* btnOrderId.setStyle("-fx-background-color:  #023047;");
+        brnCustomerDetail.setStyle("-fx-background-color:  #023047;");
+        btnToolDetail.setStyle("-fx-background-color:  #023047;");
+        btnVehicle.setStyle("-fx-background-color:  #023047;");
+        btnEmployee.setStyle("-fx-background-color:  #023047;");
+        btnSupplier.setStyle("-fx-background-color:  #023047;");*/
+        btnSupplier.setStyle("");
+        btnOrderId.setStyle("");
+        brnCustomerDetail.setStyle("");
+        btnToolDetail.setStyle("");
+        btnVehicle.setStyle("");
+        btnEmployee.setStyle("");
+
+    }
+
+    public void supplierEffectOnAction(MouseEvent mouseEvent) {
+
+        btnSupplier.setStyle("-fx-background-color: #0077b6;");
+       /* btnOrderId.setStyle("-fx-background-color:  #023047;");
+        brnCustomerDetail.setStyle("-fx-background-color:  #023047;");
+        btnToolDetail.setStyle("-fx-background-color:  #023047;");
+        btnVehicle.setStyle("-fx-background-color:  #023047;");
+        btnEmployee.setStyle("-fx-background-color:  #023047;");
+        btnStockList.setStyle("-fx-background-color:  #023047;");*/
+        btnOrderId.setStyle("");
+        brnCustomerDetail.setStyle("");
+        btnToolDetail.setStyle("");
+        btnVehicle.setStyle("");
+        btnEmployee.setStyle("");
+        btnStockList.setStyle("");
+
+    }
+    public void btnImageChooserOnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select the image");
+        FileChooser.ExtensionFilter imageFilter =
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        file = fileChooser.showOpenDialog(btnImageChoosers.getScene().getWindow());
+        if (file != null) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                imageView.setImage(new Image(fileInputStream,179,171,false,true));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

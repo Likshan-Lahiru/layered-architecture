@@ -21,11 +21,6 @@
 
 <AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.OrderFormController">
     <children>
-        <Label alignment="BOTTOM_CENTER" layoutY="-110.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="Order " textFill="WHITE">
-            <font>
-                <Font name="Barlow Condensed SemiBold" size="32.0" />
-            </font>
-        </Label>
         <TabPane layoutX="19.0" layoutY="71.0" prefHeight="633.0" prefWidth="1163.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="                                                              Order    ">
@@ -150,6 +145,16 @@
                                         </JFXButton>
                                     </children>
                                 </Pane>
+                          <Label layoutX="972.0" layoutY="-1.0" prefHeight="26.0" prefWidth="47.0" text="Date:">
+                              <font>
+                                  <Font name="System Bold" size="17.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="lblOrderDate" layoutX="1021.0" prefHeight="24.0" prefWidth="143.0" textFill="#0033ff">
+                              <font>
+                                  <Font name="System Bold" size="16.0" />
+                              </font>
+                          </Label>
                             </children>
                         </AnchorPane>
                     </content>
@@ -224,15 +229,10 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <Label layoutX="969.0" layoutY="42.0" prefHeight="26.0" prefWidth="47.0" text="Date:">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Label>
-        <Label fx:id="lblOrderDate" layoutX="1016.0" layoutY="43.0" prefHeight="24.0" prefWidth="143.0" textFill="#0033ff">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
+      <Label alignment="BOTTOM_CENTER" layoutY="-91.0" prefHeight="147.0" prefWidth="1230.0" style="-fx-background-color: #164863;" text="Order">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

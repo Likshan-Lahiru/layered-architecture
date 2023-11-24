@@ -18,11 +18,6 @@
 
 <AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.toolStockController">
    <children>
-      <Label alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="-100.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="Stock List" textFill="WHITE">
-         <font>
-            <Font name="Barlow Condensed SemiBold" size="32.0" />
-         </font>
-      </Label>
       <TabPane layoutX="29.0" layoutY="81.0" prefHeight="633.0" prefWidth="1163.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="                                                              add new stock     ">
@@ -181,6 +176,11 @@
       <Label fx:id="lblSuppliedDate" layoutX="1026.0" layoutY="53.0" prefHeight="24.0" prefWidth="143.0" textFill="#0033ff">
          <font>
             <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="BOTTOM_CENTER" layoutX="-6.0" layoutY="-94.0" prefHeight="147.0" prefWidth="1255.0" style="-fx-background-color: #164863;" text="Stock Detail" textFill="WHITE">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
    </children>

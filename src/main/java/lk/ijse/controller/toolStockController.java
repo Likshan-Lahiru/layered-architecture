@@ -292,6 +292,7 @@ public class toolStockController {
         return total;
     }
 
+    @FXML
     public void cmbToolIdOnAction(ActionEvent actionEvent) {
         String code = (String) cmbToolID.getValue();
 
@@ -348,7 +349,6 @@ public class toolStockController {
     public void btnGetReportOnAction(ActionEvent actionEvent) throws SQLException {
         try {
             InputStream design = getClass().getResourceAsStream("/report/New.jrxml");
-            // System.out.println(getClass().getResource("../report/Invoice_form.jrxml"));
             JasperDesign load = JRXmlLoader.load(design);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(load);
@@ -358,7 +358,7 @@ public class toolStockController {
         } catch (JRException e) {
             e.getMessage();
 
-            //new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
-}
+
+        }
     }
 }

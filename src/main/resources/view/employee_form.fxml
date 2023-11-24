@@ -100,7 +100,7 @@
             </Pane>
          </children>
       </Pane>
-      <Label alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="-101.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="Emoloyee Details" textFill="WHITE">
+      <Label alignment="BOTTOM_CENTER" layoutY="-101.0" prefHeight="147.0" prefWidth="1220.0" style="-fx-background-color: #164863;" text="Emoloyee Details" textFill="WHITE">
          <font>
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>

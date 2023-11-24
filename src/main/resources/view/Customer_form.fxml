@@ -15,11 +15,6 @@
 
 <AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.CustomerFormController">
    <children>
-      <Label alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="-100.0" prefHeight="147.0" prefWidth="1200.0" style="-fx-background-radius: 40; -fx-background-color: #4361ee;" text="Customer Detail" textFill="WHITE">
-         <font>
-            <Font name="Barlow Condensed SemiBold" size="32.0" />
-         </font>
-      </Label>
       <Pane layoutX="13.0" layoutY="72.0" prefHeight="638.0" prefWidth="1184.0" style="-fx-background-color: #ced4da; -fx-background-radius: 20;">
          <children>
             <Pane layoutX="777.0" layoutY="85.0" prefHeight="518.0" prefWidth="382.0" style="-fx-background-color: #caf0f8; -fx-background-radius: 15;">
@@ -101,5 +96,10 @@
             </Button>
          </children>
       </Pane>
+      <Label alignment="BOTTOM_CENTER" layoutY="-99.0" prefHeight="147.0" prefWidth="1250.0" style="-fx-background-color: #164863;" text="Customer Detail" textFill="WHITE">
+         <font>
+            <Font name="Barlow Condensed SemiBold" size="32.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
