@@ -72,7 +72,9 @@ public class LoginFormController {
 
         String passwordText = txtPassword.getText();
         if (nameText.isEmpty()||passwordText.isEmpty()){
-            new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
+            txtPassword.setStyle("-fx-border-color: #ff004f;");
+            txtUserName.setStyle("-fx-border-color: #ff004f;");
+            //new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
             return;
         }
 
@@ -106,6 +108,8 @@ public class LoginFormController {
                 thread.start();
 
            } else {
+                txtPassword.setStyle("-fx-border-color: #ff004f;");
+                txtUserName.setStyle("-fx-border-color: #ff004f;");
                 new SystemAlert(Alert.AlertType.WARNING, "Error", "User Name or password is wrong!", ButtonType.OK).show();
 
             }
@@ -139,5 +143,16 @@ public class LoginFormController {
         lblOpenEye.setVisible(false);
         lblClose.setVisible(true);
         txtPassword.setVisible(true);
+    }
+
+    public void btnUserNameClearOnAction(MouseEvent mouseEvent) {
+        txtUserName.setStyle("");
+
+        txtUserName.clear();
+    }
+
+    public void btnUserPasswordClearOnAction(MouseEvent mouseEvent) {
+        txtPassword.setStyle("");
+        txtPassword.clear();
     }
 }

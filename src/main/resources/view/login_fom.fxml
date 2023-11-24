@@ -38,7 +38,6 @@
                         <Shadow />
                      </bumpInput>
                      <light>
-                        <Light.Distant />
                      </light>
                   </Lighting>
                </effect>
@@ -48,7 +47,7 @@
                   <Image url="@../icon/icons8-hide-50.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="txtPassword" layoutX="23.0" layoutY="192.0" onKeyReleased="#HidePasswordOnAction" prefHeight="43.0" prefWidth="310.0" promptText="         Password" style="-fx-background-radius: 20;">
+            <PasswordField fx:id="txtPassword" layoutX="23.0" layoutY="192.0" onKeyReleased="#HidePasswordOnAction" onMouseClicked="#btnUserPasswordClearOnAction" prefHeight="43.0" prefWidth="310.0" promptText="         Password" style="-fx-background-radius: 20;">
                <font>
                   <Font size="16.0" />
                </font></PasswordField>
@@ -58,7 +57,7 @@
             <Font name="Cambria Math" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUserName" layoutX="147.0" layoutY="270.0" prefHeight="43.0" prefWidth="310.0" promptText="         User name" style="-fx-background-radius: 20;">
+      <TextField fx:id="txtUserName" layoutX="147.0" layoutY="270.0" onMouseClicked="#btnUserNameClearOnAction" prefHeight="43.0" prefWidth="310.0" promptText="         User name" style="-fx-background-radius: 20;">
          <font>
             <Font size="16.0" />
          </font>
