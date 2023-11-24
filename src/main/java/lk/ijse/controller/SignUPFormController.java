@@ -1,6 +1,5 @@
 package lk.ijse.controller;
 
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.dto.SignUpDto;
@@ -47,26 +47,38 @@ public class SignUPFormController {
                     TxtColours.setDefaultColours(txtFirstName);
                     if (RegExPatterns.getNamePattern().matcher(SecondName).matches()){
                         TxtColours.setDefaultColours(txtSecondName);
-                        if(RegExPatterns.getPasswordPattern().matcher(password).matches()){
-                            TxtColours.setDefaultColours(txtPassword);
-                            if (RegExPatterns.getEmailPattern().matcher(email).matches()){
-                                TxtColours.setDefaultColours(txtEmail);
-                            }else {
-                                boarderRedAlert(txtEmail);
-                                new Alert(Alert.AlertType.ERROR,"Please enter valid email!").showAndWait();
-                                return;}
+                        if (RegExPatterns.getUserName().matcher(UserName).matches()){
+                            TxtColours.setDefaultColours(txtUserName);
+                                if(RegExPatterns.getPasswordPattern().matcher(password).matches()) {
+                                 TxtColours.setDefaultColours(txtPassword);
+                                  if (RegExPatterns.getEmailPattern().matcher(email).matches()) {
+                                     TxtColours.setDefaultColours(txtEmail);
+                                  } else {
+                                     boarderRedAlert(txtEmail);
+                                     txtEmail.setText("Please enter valid email!");
+                                     return;
+                                 }
+                             }else {
+                                 boarderRedAlert(txtPassword);
+                                 txtPassword.setText("Password must minimum 5 or more character and need to include number");
+                                 return;
+                             }
                         }else {
-                            boarderRedAlert(txtPassword);
-                            new Alert(Alert.AlertType.ERROR,"Please enter valid password!").showAndWait();
-                            return;}
+                            boarderRedAlert(txtUserName);
+                            txtUserName.setText("UserName must minimum 8 length and include 1 lowercase and uppercase special character, number");
+                            new SystemAlert(Alert.AlertType.INFORMATION, "Information", "UserName must minimum 8 length and include 1 lowercase and uppercase special character, number").showAndWait();
+                            return;
+                        }
                     }else {
                         boarderRedAlert(txtSecondName);
-                        new Alert(Alert.AlertType.ERROR,"Please enter valid second name!").showAndWait();
-                        return;}
+                        txtSecondName.setText("Name must minimum 4 or more character");
+                        return;
+                    }
                 }else {
                     boarderRedAlert(txtFirstName);
-                    new Alert(Alert.AlertType.ERROR,"Please enter valid first name!").showAndWait();
-                    return;}
+                    txtFirstName.setText("Name must minimum 4 or more character");
+                    return;
+                }
             }else {
                 boarderRedAlert(txtFirstName);
                 boarderRedAlert(txtSecondName);
@@ -118,6 +130,37 @@ public class SignUPFormController {
         resetBoarderRedAlert(txtPassword);
         resetBoarderRedAlert(txtEmail);
     }
+
+
+    @FXML
+    public void btnfirstnameOn(MouseEvent mouseEvent) {
+        resetBoarderRedAlert(txtFirstName);
+        txtFirstName.clear();
+    }
+    @FXML
+    void btnEmail(MouseEvent event) {
+        resetBoarderRedAlert(txtEmail);
+        txtEmail.clear();
+    }
+
+    @FXML
+    void btnPassword(MouseEvent event) {
+        resetBoarderRedAlert(txtPassword);
+        txtPassword.clear();
+    }
+
+    @FXML
+    void btnSecondname(MouseEvent event) {
+        resetBoarderRedAlert(txtSecondName);
+        txtSecondName.clear();
+    }
+
+    @FXML
+    void btnUserName(MouseEvent event) {
+        resetBoarderRedAlert(txtUserName);
+        txtUserName.clear();
+    }
+
 }
 
 

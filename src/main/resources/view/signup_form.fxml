@@ -15,20 +15,20 @@
    <children>
       <Pane layoutX="575.0" layoutY="38.0" prefHeight="599.0" prefWidth="452.0" style="-fx-background-radius: 20; -fx-background-color: #e9ecef;">
          <children>
-            <JFXTextField fx:id="txtFirstName" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="139.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="371.0" promptText="   First Name" unFocusColor="BLACK">
+            <JFXTextField fx:id="txtFirstName" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="139.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#btnfirstnameOn" prefHeight="25.0" prefWidth="371.0" promptText="   First Name" unFocusColor="BLACK">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </JFXTextField>
-            <JFXTextField fx:id="txtSecondName" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="197.0" prefHeight="25.0" prefWidth="371.0" promptText="   Second Name" unFocusColor="BLACK">
+            <JFXTextField fx:id="txtSecondName" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="197.0" onMouseClicked="#btnSecondname" prefHeight="25.0" prefWidth="371.0" promptText="   Second Name" unFocusColor="BLACK">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></JFXTextField>
-            <JFXTextField fx:id="txtEmail" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="299.0" prefHeight="25.0" prefWidth="371.0" promptText="   Email" unFocusColor="BLACK">
+            <JFXTextField fx:id="txtEmail" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="299.0" onMouseClicked="#btnEmail" prefHeight="25.0" prefWidth="371.0" promptText="   Email" unFocusColor="BLACK">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></JFXTextField>
-            <JFXTextField fx:id="txtPassword" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="356.0" prefHeight="25.0" prefWidth="371.0" promptText="   Password" unFocusColor="BLACK">
+            <JFXTextField fx:id="txtPassword" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="356.0" onMouseClicked="#btnPassword" prefHeight="25.0" prefWidth="371.0" promptText="   Password" unFocusColor="BLACK">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></JFXTextField>
@@ -42,7 +42,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXTextField fx:id="txtUserName" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="252.0" prefHeight="25.0" prefWidth="371.0" promptText="   User Name" unFocusColor="BLACK">
+            <JFXTextField fx:id="txtUserName" blendMode="MULTIPLY" focusColor="#0095ff" labelFloat="true" layoutX="55.0" layoutY="252.0" onMouseClicked="#btnUserName" prefHeight="25.0" prefWidth="371.0" promptText="   User Name" unFocusColor="BLACK">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
