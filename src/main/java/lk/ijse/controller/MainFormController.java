@@ -5,8 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.util.SystemAlert;
 
 import java.io.IOException;
 
@@ -70,6 +73,7 @@ public class MainFormController {
         this.root.getChildren().add(node);
     }
     public void btnLogOutOnAction(ActionEvent actionEvent) throws IOException {
+        new SystemAlert(Alert.AlertType.INFORMATION, "Logout", "Do you want to Logout!", ButtonType.OK).showAndWait();
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/login_fom.fxml"));
         Scene scene = new Scene(anchorPane);
         Stage stage =(Stage)root.getScene().getWindow();

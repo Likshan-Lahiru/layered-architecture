@@ -12,12 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.dto.SignUpDto;
 import lk.ijse.model.SignUpModel;
+import lk.ijse.util.ButtonSounds;
 import lk.ijse.util.RegExPatterns;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
-
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.sql.SQLException;
 
 public class SignUPFormController {
@@ -42,16 +41,7 @@ public class SignUPFormController {
         String UserName = txtUserName.getText();
         String password = txtPassword.getText();
         String email = txtEmail.getText();
-       /* if(FirstName.isEmpty() ||SecondName.isEmpty()||UserName.isEmpty()||password.isEmpty()||email.isEmpty()){
 
-            if (FirstName.isEmpty()) boarderRedAlert(txtFirstName);
-            if (SecondName.isEmpty()) boarderRedAlert(txtSecondName);
-            if (UserName.isEmpty()) boarderRedAlert(txtUserName);
-            if (password.isEmpty()) boarderRedAlert(txtPassword);
-            if (email.isEmpty())boarderRedAlert(txtEmail);
-            new Alert(Alert.AlertType.ERROR,"Please enter the all detail!").showAndWait();
-            return;
-        }*/
             if (!(FirstName.isEmpty() ||SecondName.isEmpty()||UserName.isEmpty()||password.isEmpty()||email.isEmpty())){
                 if (RegExPatterns.getNamePattern().matcher(FirstName).matches()){
                     TxtColours.setDefaultColours(txtFirstName);
@@ -94,8 +84,9 @@ public class SignUPFormController {
         try {
             boolean isCreateAccount = model.createAccount(dto);
             if (isCreateAccount){
-               new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Account Created Successfully").showAndWait();
+               new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Account Created Successfully").show();
                 resetBoarderColor();
+                new ButtonSounds().sounds();
             }
 
         } catch (SQLException sqlException){

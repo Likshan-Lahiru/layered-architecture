@@ -14,7 +14,7 @@
 
 <AnchorPane accessibleRole="BUTTON" cache="true" cacheHint="SPEED" depthTest="DISABLE" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.MainFormController">
    <children>
-      <VBox cache="true" cacheHint="QUALITY" layoutX="14.0" layoutY="233.0" prefHeight="483.0" prefWidth="189.0" spacing="5.0" style="-fx-border-color: #ffb703; -fx-background-color: #dee2e6; -fx-background-radius: 30;" AnchorPane.leftAnchor="14.0">
+      <VBox cache="true" cacheHint="QUALITY" layoutX="12.0" layoutY="229.0" prefHeight="477.0" prefWidth="189.0" spacing="5.0" style="-fx-border-color: #ffb703; -fx-background-color: #dee2e6; -fx-background-radius: 30;" AnchorPane.leftAnchor="12.0">
          <children>
             <Line endX="73.5" startX="-100.0">
                <VBox.margin>
@@ -64,14 +64,7 @@
                   <Insets />
                </VBox.margin>
             </JFXButton>
-         </children>
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="1.0" top="150.0" />
-         </padding>
-      </VBox>
-      <AnchorPane fx:id="root" layoutX="221.0" layoutY="3.0" prefHeight="720.0" prefWidth="988.0" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="3.0">
-         <children>
-            <JFXButton buttonType="RAISED" layoutX="943.0" layoutY="681.0" onAction="#btnLogOutOnAction" prefHeight="38.0" prefWidth="63.0" style="-fx-background-color: #023047;" text="." textFill="WHITE">
+            <JFXButton buttonType="RAISED" onAction="#btnLogOutOnAction" prefHeight="38.0" prefWidth="63.0" style="-fx-background-color: #023047;" text="." textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -82,8 +75,16 @@
                      </image>
                   </ImageView>
                </graphic>
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
             </JFXButton>
-         </children></AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="1.0" top="150.0" />
+         </padding>
+      </VBox>
+      <AnchorPane fx:id="root" layoutX="221.0" layoutY="3.0" prefHeight="720.0" prefWidth="988.0" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="3.0" />
       <Pane layoutX="12.0" layoutY="15.0" prefHeight="205.0" prefWidth="189.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 30;">
          <children>
             <ImageView fx:id="imageView" fitHeight="99.0" fitWidth="120.0" layoutX="37.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
