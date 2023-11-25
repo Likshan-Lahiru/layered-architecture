@@ -15,10 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.db.DbConnection;
 import lk.ijse.dto.*;
 import lk.ijse.dto.tm.CartTm;
-import lk.ijse.model.CustomerModel;
-import lk.ijse.model.OrderModel;
-import lk.ijse.model.OrderPlaceModel;
-import lk.ijse.model.ToolModel;
+import lk.ijse.model.*;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 import net.sf.jasperreports.engine.*;
@@ -130,8 +127,17 @@ public class OrderFormController {
         colOrderDetailsQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colOrderDetailsUnitPrice.setCellValueFactory(new PropertyValueFactory<>("rentPerDay"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-        colOrderDetailsStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+         colOrderDetailsStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+       if (status == "Pending"){
+           colOrderDetailsStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+           setStyleForPending();
+       }
 
+    }
+
+    private void setStyleForPending() {
+        colOrderDetailsStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colOrderDetailsStatus.setStyle("-fx-text-fill: red;");
     }
 
     private void setOrderDetailCellValueFactory() {
@@ -425,23 +431,39 @@ public class OrderFormController {
 
     }
 
-    public void btnFinishOnAction(ActionEvent actionEvent) {
+    public void btnFinishOnAction(ActionEvent actionEvent) throws SQLException {
 
         String lblReOrderIdText = lblReOrderId.getText();
         String lblReToolIdText = lblReToolId.getText();
         String lblReQtyText = lblReQty.getText();
         String txtReStatusText = txtReStatus.getText();
 
-        if ((lblReOrderId.getText().isEmpty() || lblReToolIdText.isEmpty() || lblReQtyText.isEmpty() || txtReStatusText.isEmpty())) {
-            TxtColours.setDefaultColours(txtReStatus);
-        } else {
-            TxtColours.setErrorColours(txtReStatus);
-            new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
-            return;
+
+
+            OrderDetailsDto dto = new OrderDetailsDto(lblReOrderIdText, lblReToolIdText, lblReQtyText, txtReStatusText);
+            OrderDetailModel model = new OrderDetailModel();
+
+
+            try {
+                boolean isUpdated = model.returnOrderDetails(dto);
+                if (isUpdated) {
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Information", "Order Returned Successfully!", ButtonType.OK).show();
+                    loadAllOrderDetails();
+                    setReOrder();
+                    txtReStatus.clear();
+                    lblReOrderId.setText("");
+                    lblReToolId.setText("");
+                    lblReQty.setText("");
+                } else {
+                    new SystemAlert(Alert.AlertType.WARNING, "Error", "Order Not Returned!", ButtonType.OK).show();
+                }
+            } catch (SQLException e) {
+                new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+            }
+
+
         }
 
-
-    }
 
     @FXML
     void btnPrintOnAction(ActionEvent event) throws IOException, JRException, SQLException {

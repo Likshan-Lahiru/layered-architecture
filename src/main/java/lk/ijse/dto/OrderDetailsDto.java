@@ -22,4 +22,11 @@ public class OrderDetailsDto {
         this.toolId = toolId;
         this.qty = String.valueOf(qty);
     }
+
+    public OrderDetailsDto(String lblReOrderIdText, String lblReToolIdText, String lblReQtyText, String txtReStatusText) {
+        this.orderId = lblReOrderIdText;
+        this.toolId = lblReToolIdText;
+        this.qty = lblReQtyText;
+        this.status = txtReStatusText;
+    }
 }

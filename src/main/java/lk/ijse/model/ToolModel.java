@@ -1,6 +1,7 @@
 package lk.ijse.model;
 
 import lk.ijse.db.DbConnection;
+import lk.ijse.dto.OrderDetailsDto;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.CartTm;
 import lk.ijse.dto.tm.StockListTm;
@@ -129,6 +130,20 @@ public class ToolModel {
 
 
         return pstm.executeUpdate() > 0;
+
+    }
+
+    public boolean updateToolReturnQty(OrderDetailsDto dto) throws SQLException {
+
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "UPDATE tool SET qty_on_hand = qty_on_hand + ? WHERE tool_id = ?";
+            PreparedStatement pstm = connection.prepareStatement(sql);
+            pstm.setInt(1, Integer.parseInt(dto.getQty()));
+            pstm.setString(2, dto.getToolId());
+            boolean issaved = pstm.executeUpdate()>0;
+
+
+            return issaved;
 
     }
 }

@@ -46,10 +46,16 @@ public class OrderModel {
         if (currentOrderId != null) {
             String[] split = currentOrderId.split("O");
             int id = Integer.parseInt(split[1]);
+            System.out.println(id);
+            if (id == 11) {
+                id++;
+                System.out.println(id);
+                return "O0" + id;
+            }
             id++;
-            return "O00" + id;
+            return "O0" + id;
         }
-        return "O001";
+        return "O01";
     }
 
 
@@ -78,4 +84,8 @@ public class OrderModel {
         return dtoList;
 
     }
+
+
+
+
 }
