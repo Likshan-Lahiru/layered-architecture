@@ -105,5 +105,14 @@
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
+      <JFXButton buttonType="RAISED" layoutX="1148.0" layoutY="-5.0" prefHeight="53.0" prefWidth="57.0" text="." textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/icons8-home-500.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

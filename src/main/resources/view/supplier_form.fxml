@@ -24,7 +24,8 @@
                         <Image url="@../icon/icons8-list-48.png" />
                      </image>
                   </ImageView>
-               </graphic></JFXButton>
+               </graphic>
+            </JFXButton>
             <Pane layoutX="17.0" layoutY="61.0" prefHeight="524.0" prefWidth="753.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <children>
                   <TableView fx:id="tblSupplier" layoutX="9.0" layoutY="10.0" prefHeight="492.0" prefWidth="736.0" stylesheets="@../style/table.css">
@@ -109,5 +110,14 @@
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
+      <JFXButton buttonType="RAISED" layoutX="1195.0" layoutY="-7.0" prefHeight="53.0" prefWidth="57.0" text="." textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/icons8-home-500.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

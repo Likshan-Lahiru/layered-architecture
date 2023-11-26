@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane accessibleRole="BUTTON" cache="true" cacheHint="SPEED" depthTest="DISABLE" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.MainFormController">
    <children>
-      <VBox cache="true" cacheHint="QUALITY" prefHeight="477.0" prefWidth="189.0" spacing="5.0" style="-fx-border-color: #ffb703; -fx-background-color: #dee2e6; -fx-background-radius: 30;">
+      <AnchorPane fx:id="root" layoutX="213.0" layoutY="-3.0" prefHeight="726.0" prefWidth="962.0" AnchorPane.leftAnchor="213.0" AnchorPane.topAnchor="-3.0">
          <children>
-            <Line endX="73.5" startX="-100.0">
-               <VBox.margin>
-                  <Insets top="-100.0" />
-               </VBox.margin>
-            </Line>
-         </children>
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="1.0" top="150.0" />
-         </padding>
-      </VBox>
-      <AnchorPane fx:id="root" layoutX="213.0" layoutY="-3.0" prefHeight="726.0" prefWidth="996.0" AnchorPane.leftAnchor="213.0" AnchorPane.topAnchor="-3.0">
-         <children>
-            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="122.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="267.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="277.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="291.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXButton buttonType="RAISED" layoutX="909.0" layoutY="14.0" prefHeight="58.0" prefWidth="63.0" text="." textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-home-500.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children></AnchorPane>
       <Pane layoutY="-3.0" prefHeight="729.0" prefWidth="213.0" style="-fx-background-color: #164863;">
          <children>

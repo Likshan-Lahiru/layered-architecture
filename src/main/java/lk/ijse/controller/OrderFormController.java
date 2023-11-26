@@ -181,8 +181,6 @@ public class OrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 
@@ -194,7 +192,6 @@ public class OrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void loadToolid() {
@@ -297,8 +294,8 @@ public class OrderFormController {
 
         tblCart.setItems(obList);
         calculateNetTotal();
-
     }
+
 
     private void clearHistory() {
         txtQty.clear();
