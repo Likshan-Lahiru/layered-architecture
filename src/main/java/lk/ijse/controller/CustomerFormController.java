@@ -111,7 +111,7 @@ public class CustomerFormController {
             if(dto!=null){
                 cutomerSetField(dto);
             }else {
-                new Alert(Alert.AlertType.CONFIRMATION,"Customer Does not Found!").showAndWait();
+                new SystemAlert(Alert.AlertType.ERROR, "Error", "Customer Does not Found!", ButtonType.OK).show();
                 clearCustomerField();
             }
         }catch (SQLException e){
@@ -160,8 +160,17 @@ public class CustomerFormController {
                 return;
             }
         } else {
-            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
 
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").show();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return;
         }
 
