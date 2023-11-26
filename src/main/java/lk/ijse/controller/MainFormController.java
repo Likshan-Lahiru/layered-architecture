@@ -1,6 +1,7 @@
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,10 +24,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.AnchorPane;
+import lk.ijse.controller.CustomerFormController;
 
 public class MainFormController {
+
     public Button btnImageChoosers;
     public ImageView imageView;
+    @FXML
+    private ImageView lblUnMute;
+    @FXML
+    private ImageView lblMute;
+    @FXML
+    private JFXToggleButton testButton;
+    @FXML
+    private  JFXToggleButton soundAssistantToggelButton;
     File file;
     public JFXButton btnOrderId;
     @FXML
@@ -50,10 +65,14 @@ public class MainFormController {
 
     @FXML
     private JFXButton btnSupplier;
+    private FXMLLoader loader;
 
     public void initialize() throws IOException{
             initializeFirstForm();
+
+
     }
+
 
     @FXML
     private void btnOrderOnAction() throws IOException {
@@ -72,10 +91,14 @@ public class MainFormController {
 
     public void btnCustomerOnAction() throws IOException {
 
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/Customer_form.fxml"));
+        FXMLLoader loader =  new FXMLLoader(this.getClass().getResource("/view/Customer_form.fxml"));
+        Parent node1 = loader.load();
+
+        CustomerFormController customerController = loader.getController();
+        customerController.setMainFormController(this);
 
         this.root.getChildren().clear();
-        this.root.getChildren().add(node);
+        this.root.getChildren().add(node1);
     }
 
     public void btnVehicalOnAction(ActionEvent actionEvent) throws IOException {
@@ -256,5 +279,28 @@ public class MainFormController {
             }
         }
     }
+    @FXML
+    public boolean check() {
+        boolean result = false;
+        if (testButton.isSelected()) {
+
+            result = true;
+
+        } else {
+            result = false;
+
+        }
+        return result;
+    }
+    public void lblShow(boolean result) {
+        if (result) {
+
+
+        }
+
+    }
+
+
+
 
 }

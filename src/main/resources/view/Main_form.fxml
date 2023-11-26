@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -22,6 +23,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <Label layoutX="238.0" layoutY="375.0" prefHeight="49.0" prefWidth="63.0" />
          </children></AnchorPane>
       <Pane layoutY="-3.0" prefHeight="729.0" prefWidth="213.0" style="-fx-background-color: #164863;">
          <children>
@@ -144,6 +146,12 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <JFXToggleButton fx:id="testButton" layoutX="92.0" layoutY="674.0" prefHeight="41.0" prefWidth="121.0" text=" sound&#10; assistant" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="9.0" />
+               </font>
+            </JFXToggleButton>
+            <Label layoutX="161.0" layoutY="641.0" prefHeight="22.0" prefWidth="17.0" />
          </children>
       </Pane>
    </children>

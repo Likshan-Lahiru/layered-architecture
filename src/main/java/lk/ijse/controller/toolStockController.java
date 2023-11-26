@@ -2,6 +2,7 @@ package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,6 +37,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class toolStockController {
+
+    @FXML
+    private JFXToggleButton testToggle;
     @FXML
     private TableColumn colStockQtyOnHand;
     @FXML
@@ -95,7 +99,13 @@ public class toolStockController {
     private TextField txtStckListWasteCount;
     @FXML
     private TextField txtStckListQtyOnHand;
+
+
+
     private final ObservableList<StockListTm> obList = FXCollections.observableArrayList();
+
+    public toolStockController() {
+    }
 
     public void initialize(){
 

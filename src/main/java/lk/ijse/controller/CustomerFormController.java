@@ -1,5 +1,6 @@
 package lk.ijse.controller;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.util.RegExPatterns;
+import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 
@@ -18,6 +20,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class CustomerFormController {
+    @FXML
+    private JFXToggleButton soundsAssistToggelBtn;
     @FXML
     private JFXTextField txtCustomerContactNumber;
     @FXML
@@ -42,6 +46,9 @@ public class CustomerFormController {
     private TableColumn<?, ?> colCustomerId;
     @FXML
     private TableView<CustomerTm> tblCustomer;
+    SoundsAssits soundsAssits =  new SoundsAssits();
+    MainFormController mainFormController = new MainFormController();
+
 
     public void initialize(){
         customerCellvalueFactory();
@@ -84,7 +91,18 @@ public class CustomerFormController {
         String txtSearchCustomerIDText = txtSearchCustomerID.getText();
         if (txtSearchCustomerIDText.isEmpty()){
 
-            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the customer Id!", ButtonType.OK).show();
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the valid customer Id!", ButtonType.OK).show();
+            try {
+                   boolean check = mainFormController.check();
+                if(check){
+
+                    soundsAssits.customerContactSound();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
             return;
         }
         CustomerModel model = new CustomerModel();
@@ -143,16 +161,9 @@ public class CustomerFormController {
             }
         } else {
             new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
+
             return;
         }
-
-
-       /* if (txtCustomerNameText.isEmpty()|| txtCustomerIdText.isEmpty()|| txtCustomerAddressText.isEmpty()|| txtCustomerNICText.isEmpty()|| txtCustomerContactNumberText.isEmpty()){
-
-            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all Details!", ButtonType.OK).show();
-            return;
-        }*/
-
 
 
 
@@ -204,5 +215,18 @@ public class CustomerFormController {
         txtCustomerAddress.clear();
         txtCustomerContactNumber.clear();
         txtSearchCustomerID.clear();
+    }
+    public  boolean check(){
+
+        if (soundsAssistToggelBtn.isSelected()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void setMainFormController(MainFormController mainFormController) {
+        this.mainFormController = mainFormController;
+
     }
 }
