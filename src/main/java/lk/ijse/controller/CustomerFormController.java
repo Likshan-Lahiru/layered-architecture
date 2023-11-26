@@ -183,6 +183,15 @@ public class CustomerFormController {
             if (isSaved){
                 loadAllCustomer();
                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer Enter successfully!", ButtonType.OK).show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if(check){
+                        soundsAssits.customerenteredSucces();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 clearCustomerField();
             }
         }catch (SQLException e){
