@@ -112,6 +112,15 @@ public class CustomerFormController {
                 cutomerSetField(dto);
             }else {
                 new SystemAlert(Alert.AlertType.ERROR, "Error", "Customer Does not Found!", ButtonType.OK).show();
+                try {
+                    boolean check = mainFormController.check();
+                    if(check){
+
+                        soundsAssits.customerDoesNotFound();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 clearCustomerField();
             }
         }catch (SQLException e){

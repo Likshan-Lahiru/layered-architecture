@@ -22,4 +22,9 @@ public class SoundsAssits {
         player = new MediaPlayer( new Media(uriString));
         player.play();
     }
+    public void customerDoesNotFound(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\customerDoesNotFound.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
 }
