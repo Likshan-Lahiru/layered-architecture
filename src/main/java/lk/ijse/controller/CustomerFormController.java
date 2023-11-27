@@ -214,8 +214,8 @@ public class CustomerFormController {
                     CustomerDto dto = new CustomerDto(
                             newValue.getCustomerId(),
                             newValue.getCustomerName(),
-                            newValue.getCustomerNIC(),
                             newValue.getCustomerAddress(),
+                            newValue.getCustomerNIC(),
                             newValue.getCustomerNumber()
                     );
                     cutomerSetField(dto);

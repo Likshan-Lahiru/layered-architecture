@@ -97,14 +97,14 @@ public class LoginFormController {
         stage.setTitle("Order Form");
         stage.centerOnScreen();
 
-             /* Mail mail = new Mail();
+             Mail mail = new Mail();
                 mail.setMsg(nameText+"emplloyee Login into Ashen Enterprise management System at"+" "+lblTime.getText());
 
                 mail.setTo(hiru);
                 mail.setSubject("Ashen Enterprise Management System Login");
 
                 Thread thread = new Thread(mail);
-                thread.start();*/
+                thread.start();
 
            } else {
                 txtPassword.setStyle("-fx-border-color: #ff004f;");
