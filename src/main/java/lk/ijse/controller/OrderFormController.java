@@ -466,17 +466,13 @@ public class OrderFormController {
     void btnPrintOnAction(ActionEvent event) throws IOException, JRException, SQLException {
         try {
             InputStream design = getClass().getResourceAsStream("/report/Invoice_form.jrxml");
-           // System.out.println(getClass().getResource("../report/Invoice_form.jrxml"));
             JasperDesign load = JRXmlLoader.load(design);
-
             JasperReport jasperReport = JasperCompileManager.compileReport(load);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
             JasperViewer.viewReport(jasperPrint, false);
 
         } catch (JRException e) {
            e.getMessage();
-
-            //new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
         }
        /* InputStream resourseAsStream = getClass().getResourceAsStream("src/main/java/lk/ijse/report/OrderForm.jrxml");
         JasperDesign load = JRXmlLoader.load(resourseAsStream);

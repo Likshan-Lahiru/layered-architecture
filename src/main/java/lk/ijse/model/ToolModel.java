@@ -74,10 +74,12 @@ public class ToolModel {
         String sql= "UPDATE tool SET  tool_name = ?, qty_on_hand = ?, rent_per_day_price = ? WHERE tool_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
-        pstm.setString(1, dto.getToolId());
-        pstm.setString(2, dto.getToolName());
-        pstm.setInt(3,dto.getQtyOnhand());
-        pstm.setDouble(4,dto.getRentPerDay());
+
+        pstm.setString(1, dto.getToolName());
+        pstm.setInt(2,dto.getQtyOnhand());
+        pstm.setDouble(3,dto.getRentPerDay());
+        pstm.setString(4, dto.getToolId());
+
 
         boolean isUpdate = pstm.executeUpdate() > 0;
         return isUpdate;

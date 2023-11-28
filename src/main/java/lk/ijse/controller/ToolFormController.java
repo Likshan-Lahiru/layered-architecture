@@ -65,15 +65,15 @@ public class ToolFormController {
         ObservableList<ToolTm> toolList = FXCollections.observableArrayList();
         try {
             List<ToolDto> dtoList = model.getAllTool();
-            for (ToolDto dto:dtoList) {
-                toolList.add(
-                        new ToolTm(
-                                dto.getToolId(),
-                                dto.getToolName(),
-                                dto.getQtyOnhand(),
-                                dto.getRentPerDay()
-                        )
-                );
+            if (dtoList != null) {
+                for (ToolDto dto : dtoList) {
+                    toolList.add(new ToolTm(
+                            dto.getToolId(),
+                            dto.getToolName(),
+                            dto.getQtyOnhand(),
+                            dto.getRentPerDay()
+                    ));
+                }
             }
             tblTool.setItems(toolList);
         }catch (SQLException e){
@@ -127,13 +127,15 @@ public class ToolFormController {
             boolean isUpdateTool = model.updateToolId(dto);
             if (isUpdateTool){
                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Tool Enter successfully!", ButtonType.OK).show();
+                loadAllTool();
             }
             else {
                 new SystemAlert(Alert.AlertType.WARNING, "Error", "Somehing went wrong!", ButtonType.OK).show();
             }
 
         }catch (SQLException e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            e.printStackTrace();
+           // new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
 
 

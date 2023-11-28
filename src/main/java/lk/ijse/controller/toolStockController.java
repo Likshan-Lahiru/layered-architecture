@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -351,23 +352,40 @@ public class toolStockController {
     }
 
     public void btnNewSupplierOnAction(ActionEvent actionEvent) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/supplierForm.fxml"));
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/supplier_form.fxml"));
 
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
     }
 
     public void btnGetReportOnAction(ActionEvent actionEvent) throws SQLException {
+        String supplierId = (String) cmbSupplierId.getValue();
+        String toolID = (String) cmbToolID.getValue();
+        String toolName = lblToolName.getText();
+        String supplierNameText = lblSupplierName.getText();
+        String orderDate = lblSuppliedDate.getText();
+        String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
+        String qtyOnHand = lblQtyOnHand.getText();
+        String lblNetTotalText = lblNetTotal.getText();
+
+
+
         try {
-            InputStream design = getClass().getResourceAsStream("/report/New.jrxml");
+            HashMap hashMap = new HashMap();
+            hashMap.put("Name",supplierNameText);
+            hashMap.put("qty",qtyOnHand);
+            hashMap.put("Date",orderDate);
+            hashMap.put("total",lblNetTotalText);
+
+            InputStream design = getClass().getResourceAsStream("/report/test.jrxml");
             JasperDesign load = JRXmlLoader.load(design);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(load);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hashMap, new JREmptyDataSource());
             JasperViewer.viewReport(jasperPrint, false);
 
         } catch (JRException e) {
-            e.getMessage();
+           e.printStackTrace();
 
 
         }
