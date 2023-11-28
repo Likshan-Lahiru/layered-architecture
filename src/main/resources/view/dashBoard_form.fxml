@@ -88,7 +88,7 @@
             </Pane>
             <AnchorPane layoutX="735.0" layoutY="538.0" prefHeight="138.0" prefWidth="242.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px;">
                <children>
-                  <Label fx:id="lblTime" layoutX="19.0" layoutY="14.0" prefHeight="75.0" prefWidth="217.0" text="08:16:45" textAlignment="RIGHT" textFill="#013a63">
+                  <Label fx:id="lblTime" layoutX="19.0" layoutY="14.0" prefHeight="75.0" prefWidth="217.0" text="08:16:45" textAlignment="RIGHT" textFill="#37acff">
                      <font>
                         <Font name="System Bold" size="52.0" />
                      </font>
@@ -100,9 +100,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="735.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="723.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
                <image>
-                  <Image url="@../../../../../../Desktop/Final%20Project/final%20project%20pic/png/—Pngtree—letter%20a%20logo_5066607.png" />
+                  <Image url="@../icon/logo.png" />
                </image>
             </ImageView>
          </children>

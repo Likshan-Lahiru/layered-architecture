@@ -68,7 +68,7 @@ public class MainFormController {
     private FXMLLoader loader;
 
     public void initialize() throws IOException{
-            initializeFirstForm();
+            dashBoard();
 
 
     }
@@ -87,7 +87,12 @@ public class MainFormController {
         this.actionEvent = actionEvent;
         btnOrderOnAction();
     }
+    public void dashBoard() throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
 
+        this.root.getChildren().clear();
+        this.root.getChildren().add(node);
+    }
 
     public void btnCustomerOnAction() throws IOException {
 
