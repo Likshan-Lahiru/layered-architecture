@@ -26,7 +26,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <Pane layoutX="17.0" layoutY="61.0" prefHeight="524.0" prefWidth="753.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Pane layoutX="17.0" layoutY="61.0" prefHeight="524.0" prefWidth="753.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <TableView fx:id="tblSupplier" layoutX="9.0" layoutY="10.0" prefHeight="492.0" prefWidth="736.0" stylesheets="@../style/table.css">
                      <columns>
@@ -39,7 +39,7 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane layoutX="789.0" layoutY="69.0" prefHeight="504.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Pane layoutX="789.0" layoutY="69.0" prefHeight="504.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <JFXTextField fx:id="txtSupplierContactNumber" labelFloat="true" layoutX="21.0" layoutY="295.0" prefHeight="37.0" prefWidth="292.0" promptText="Contact Number" unFocusColor="#0988e5">
                      <font>

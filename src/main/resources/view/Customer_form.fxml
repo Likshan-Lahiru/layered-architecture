@@ -17,7 +17,7 @@
    <children>
       <Pane layoutX="13.0" layoutY="72.0" prefHeight="638.0" prefWidth="1184.0" style="-fx-background-color: #ced4da; -fx-background-radius: 20;">
          <children>
-            <Pane layoutX="777.0" layoutY="85.0" prefHeight="518.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Pane layoutX="777.0" layoutY="85.0" prefHeight="518.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="26.0" layoutY="91.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer ID" unFocusColor="#0988e5">
                      <font>
@@ -71,7 +71,7 @@
                   </JFXButton>
                </children>
             </Pane>
-            <Pane layoutX="14.0" layoutY="35.0" prefHeight="572.0" prefWidth="739.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Pane layoutX="14.0" layoutY="35.0" prefHeight="572.0" prefWidth="739.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <TableView fx:id="tblCustomer" layoutX="10.0" layoutY="8.0" prefHeight="507.0" prefWidth="720.0" stylesheets="@../style/table.css">
                     <columns>
