@@ -491,4 +491,14 @@ public class OrderFormController {
         JasperViewer.viewReport(jasperPrint, false);
     }*/
     }
+    @FXML
+    void btnDashBoardOnAction(ActionEvent event) {
+        try {
+            Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+            this.root.getChildren().clear();
+            this.root.getChildren().add(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

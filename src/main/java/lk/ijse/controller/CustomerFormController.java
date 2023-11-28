@@ -5,8 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.model.CustomerModel;
@@ -15,11 +18,14 @@ import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class CustomerFormController {
+    @FXML
+    private AnchorPane root;
     @FXML
     private JFXToggleButton soundsAssistToggelBtn;
     @FXML
@@ -255,5 +261,15 @@ public class CustomerFormController {
     public void setMainFormController(MainFormController mainFormController) {
         this.mainFormController = mainFormController;
 
+    }
+
+    public void btnDashBoardOnAction(ActionEvent actionEvent) {
+        try {
+            Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+            this.root.getChildren().clear();
+            this.root.getChildren().add(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

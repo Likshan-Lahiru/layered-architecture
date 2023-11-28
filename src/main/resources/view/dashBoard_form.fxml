@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashBoardController">
+   <children>
+      <Pane prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: #e9ecef;" stylesheets="@../style/style.css">
+         <children>
+            <Pane layoutX="37.0" layoutY="38.0" prefHeight="242.0" prefWidth="302.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+               <children>
+                  <Label layoutX="30.0" layoutY="158.0" prefHeight="70.0" prefWidth="242.0" text="Total Employees" textFill="#8ac926">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblEmployee" layoutX="27.0" layoutY="45.0" prefHeight="70.0" prefWidth="85.0" text="45" textFill="#8ac926">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="103.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-employee-80.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="402.0" layoutY="38.0" prefHeight="242.0" prefWidth="302.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+               <children>
+                  <Label layoutX="30.0" layoutY="174.0" prefHeight="54.0" prefWidth="242.0" text="Total Customers" textFill="#4cc9f0">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCustomer" layoutX="22.0" layoutY="51.0" prefHeight="70.0" prefWidth="85.0" text="78" textFill="#4cc9f0">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="107.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-attract-customers-500.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Pane layoutX="787.0" layoutY="38.0" prefHeight="242.0" prefWidth="302.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+               <children>
+                  <Label layoutX="24.0" layoutY="174.0" prefHeight="54.0" prefWidth="242.0" text="Total Orders" textFill="#ffbd00">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCustomer1" layoutX="23.0" layoutY="50.0" prefHeight="70.0" prefWidth="85.0" text="78" textFill="#ffbd00">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="145.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/icons8-delivery-box-64.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Pane layoutX="37.0" layoutY="315.0" prefHeight="382.0" prefWidth="667.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+               <children>
+                  <BarChart fx:id="barChart" layoutX="7.0" layoutY="53.0" prefHeight="338.0" prefWidth="643.0" style="-fx-background-radius: 15px; -fx-alternative-column-fill-visible: black;" styleClass="chart">
+                     <xAxis>
+                        <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis fx:id="numberAxis" side="LEFT" />
+                     </yAxis>
+                  </BarChart>
+                  <Label layoutX="16.0" layoutY="7.0" prefHeight="31.0" prefWidth="183.0" text="Income" textFill="#013a63">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <AnchorPane layoutX="735.0" layoutY="538.0" prefHeight="138.0" prefWidth="242.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px;">
+               <children>
+                  <Label fx:id="lblTime" layoutX="19.0" layoutY="14.0" prefHeight="75.0" prefWidth="217.0" text="08:16:45" textAlignment="RIGHT" textFill="#013a63">
+                     <font>
+                        <Font name="System Bold" size="52.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDate" layoutX="26.0" layoutY="89.0" prefHeight="31.0" prefWidth="110.0" text="24/03/2024" textAlignment="RIGHT" textFill="#013a63">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="735.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+               <image>
+                  <Image url="@../../../../../../Desktop/Final%20Project/final%20project%20pic/png/—Pngtree—letter%20a%20logo_5066607.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="890.0" layoutY="333.0" prefHeight="138.0" prefWidth="459.0" styleClass="shadow" stylesheets="@../style/style.css" text="Digital &#10;Toolbox.... ">
+         <font>
+            <Font name="Calibri Bold" size="39.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

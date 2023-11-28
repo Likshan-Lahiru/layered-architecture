@@ -24,7 +24,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="613.0" prefWidth="1163.0" style="-fx-background-color: #ced4da;">
                      <children>
-                        <Pane layoutX="496.0" layoutY="123.0" prefHeight="448.0" prefWidth="644.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                        <Pane layoutX="496.0" layoutY="123.0" prefHeight="448.0" prefWidth="644.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                            <children>
                               <TableView fx:id="tblSuppliedDetail" layoutX="5.0" layoutY="5.0" prefHeight="363.0" prefWidth="638.0" stylesheets="@../style/table.css">
                                  <columns>
@@ -65,7 +65,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <Pane layoutX="20.0" layoutY="52.0" prefHeight="520.0" prefWidth="454.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                        <Pane layoutX="20.0" layoutY="52.0" prefHeight="520.0" prefWidth="454.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../style/style.css">
                            <children>
                               <JFXComboBox fx:id="cmbSupplierId" layoutX="14.0" layoutY="49.0" onAction="#cmbSupplierIdOnAction" prefHeight="36.0" prefWidth="191.0" promptText="Supplier ID" unFocusColor="#0033ff" />
                               <Label layoutX="235.0" layoutY="25.0" prefHeight="26.0" prefWidth="126.0" text="Supplier Name">
@@ -183,7 +183,7 @@
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="1187.0" layoutY="3.0" prefHeight="53.0" prefWidth="57.0" text="." textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="1187.0" layoutY="3.0" onAction="#btnDashBoardOnAction" prefHeight="53.0" prefWidth="57.0" text="." textFill="WHITE">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -49,17 +49,17 @@ public class toolStockController {
     @FXML
     private TextField txtToolPriceUnit;
     @FXML
-    private TableColumn <?, ?> colToolId;
+    private TableColumn<?, ?> colToolId;
     @FXML
-    private TableColumn <?, ?> colToolName;
+    private TableColumn<?, ?> colToolName;
     @FXML
-    private TableColumn <?, ?> colToolUnitPrice;
+    private TableColumn<?, ?> colToolUnitPrice;
     @FXML
-    private TableColumn <?, ?> ColQty;
+    private TableColumn<?, ?> ColQty;
     @FXML
-    private TableColumn <?, ?> colTotalPrice;
+    private TableColumn<?, ?> colTotalPrice;
     @FXML
-    private TableColumn <?, ?> colAction;
+    private TableColumn<?, ?> colAction;
     @FXML
     private TableView tblSuppliedDetail;
     @FXML
@@ -77,17 +77,17 @@ public class toolStockController {
     @FXML
     private TextField txtToolQuantitySuppliedCount;
     @FXML
-    private TableView <StockListTm> tblStockList;
+    private TableView<StockListTm> tblStockList;
     @FXML
-    private TableColumn <?, ?> colStockListName;
+    private TableColumn<?, ?> colStockListName;
     @FXML
-    private TableColumn <?, ?>colStockListId;
+    private TableColumn<?, ?> colStockListId;
     @FXML
-    private TableColumn <?, ?> colOrderDetailsQty;
+    private TableColumn<?, ?> colOrderDetailsQty;
     @FXML
-    private TableColumn <?, ?> colStockListWasteCount;
+    private TableColumn<?, ?> colStockListWasteCount;
     @FXML
-    private TableColumn <?, ?>colStockListUpdatedate;
+    private TableColumn<?, ?> colStockListUpdatedate;
     private Label lblToolId;
     @FXML
     private DatePicker pickerStockListLastUpdateDate;
@@ -101,13 +101,12 @@ public class toolStockController {
     private TextField txtStckListQtyOnHand;
 
 
-
     private final ObservableList<StockListTm> obList = FXCollections.observableArrayList();
 
     public toolStockController() {
     }
 
-    public void initialize(){
+    public void initialize() {
 
         loadToolid();
         loadSupplierIds();
@@ -120,7 +119,6 @@ public class toolStockController {
     }
 
 
-
     private void setCellValueFactory() {
         colToolId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
         colToolName.setCellValueFactory(new PropertyValueFactory<>("toolName"));
@@ -129,6 +127,7 @@ public class toolStockController {
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btn"));
     }
+
     private void setStockListCellValueFactory() {
         colStockListId.setCellValueFactory(new PropertyValueFactory<>("toolId"));
         colStockListName.setCellValueFactory(new PropertyValueFactory<>("toolName"));
@@ -138,6 +137,7 @@ public class toolStockController {
 
 
     }
+
     private void loadStockList() {
         var model = new ToolModel();
 
@@ -146,7 +146,7 @@ public class toolStockController {
         try {
             List<ToolDto> dtoList = model.getAllTool();
 
-            for(ToolDto dto : dtoList) {
+            for (ToolDto dto : dtoList) {
                 obList.add(
                         new StockListTm(
                                 dto.getToolId(),
@@ -165,6 +165,7 @@ public class toolStockController {
 
 
     }
+
     private void setDate() {
         String date = String.valueOf(LocalDate.now());
         lblSuppliedDate.setText(date);
@@ -184,6 +185,7 @@ public class toolStockController {
             throw new RuntimeException(e);
         }
     }
+
     private void loadSupplierIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
@@ -197,34 +199,35 @@ public class toolStockController {
             throw new RuntimeException(e);
         }
     }
+
     public void btnAddToListOnAction(ActionEvent actionEvent) {
         String supplierId = (String) cmbSupplierId.getValue();
         String toolID = (String) cmbToolID.getValue();
-        String toolName =lblToolName.getText();
-        int  qtyOnHand = Integer.valueOf(lblQtyOnHand.getText());
-        int  toolQuantitySuppliedCount = Integer.valueOf(txtToolQuantitySuppliedCount.getText());
+        String toolName = lblToolName.getText();
+        int qtyOnHand = Integer.valueOf(lblQtyOnHand.getText());
+        int toolQuantitySuppliedCount = Integer.valueOf(txtToolQuantitySuppliedCount.getText());
         Double toolPriceUnit = Double.valueOf(txtToolPriceUnit.getText());
         String supplierNameText = lblSupplierName.getText();
-        String orderDate =lblSuppliedDate.getText();
-       String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
-       String wasteCount =txtStckListWasteCount.getText();
+        String orderDate = lblSuppliedDate.getText();
+        String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
+        String wasteCount = txtStckListWasteCount.getText();
 
         try {
             if (supplierId.isEmpty() ||
                     toolID.isEmpty() ||
                     toolName.isEmpty() ||
                     String.valueOf(qtyOnHand).isEmpty() ||
-                    String.valueOf(toolQuantitySuppliedCount).isEmpty()||
+                    String.valueOf(toolQuantitySuppliedCount).isEmpty() ||
                     String.valueOf(toolPriceUnit).isEmpty()) {
                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
                 return;
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
             return;
         }
 
-       Double total = calTotal(toolPriceUnit,toolQuantitySuppliedCount);
+        Double total = calTotal(toolPriceUnit, toolQuantitySuppliedCount);
         Button btn = new Button("remove");
         btn.setCursor(Cursor.HAND);
 
@@ -232,7 +235,7 @@ public class toolStockController {
             ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
             ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION,"Information", "Are you sure to remove?", yes, no).showAndWait();
+            Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Are you sure to remove?", yes, no).showAndWait();
 
             if (type.orElse(no) == yes) {
                 int index = tblSuppliedDetail.getSelectionModel().getSelectedIndex();
@@ -264,8 +267,8 @@ public class toolStockController {
         obList.add(new StockListTm(
                 supplierId,
                 supplierNameText,
-                toolID,toolName,
-                orderDate,qtyOnHand,
+                toolID, toolName,
+                orderDate, qtyOnHand,
                 toolQuantitySuppliedCount,
                 toolPriceUnit,
                 total,
@@ -277,7 +280,8 @@ public class toolStockController {
         calculateNetTotal();
         clearHistory();
     }
-    public  void clearHistory(){
+
+    public void clearHistory() {
         lblSupplierName.setText("");
         lblToolName.setText("");
         lblQtyOnHand.setText("");
@@ -289,11 +293,11 @@ public class toolStockController {
 
     private void calculateNetTotal() {
 
-            double total = 0;
-            for (int i = 0; i < tblSuppliedDetail.getItems().size(); i++) {
-                total += (double) colTotalPrice.getCellData(i);
-            }
-            lblNetTotal.setText(String.valueOf(total));
+        double total = 0;
+        for (int i = 0; i < tblSuppliedDetail.getItems().size(); i++) {
+            total += (double) colTotalPrice.getCellData(i);
+        }
+        lblNetTotal.setText(String.valueOf(total));
 
     }
 
@@ -305,7 +309,6 @@ public class toolStockController {
     @FXML
     public void cmbToolIdOnAction(ActionEvent actionEvent) {
         String code = (String) cmbToolID.getValue();
-
 
 
         try {
@@ -320,25 +323,23 @@ public class toolStockController {
     }
 
 
-
-
     public void btnPlaceNewStockOnAction(ActionEvent actionEvent) {
 
-       List<StockListTm> stockList = new ArrayList<>();
-       for (StockListTm stockListTm : obList) {
+        List<StockListTm> stockList = new ArrayList<>();
+        for (StockListTm stockListTm : obList) {
             stockList.add(stockListTm);
         }
         var stockListDto = new StockListDto(stockList);
-       try {
-           boolean isAdded = StockListModel.addStockList(stockListDto);
-           if (isAdded) {
-               new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Stock List Added Successfully!", ButtonType.OK).show();
-           }else {
-               new SystemAlert(Alert.AlertType.WARNING, "Error", "Stock List Not Added!", ButtonType.OK).show();
-           }
-       }catch (SQLException e){
-           new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
-       }
+        try {
+            boolean isAdded = StockListModel.addStockList(stockListDto);
+            if (isAdded) {
+                new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Stock List Added Successfully!", ButtonType.OK).show();
+            } else {
+                new SystemAlert(Alert.AlertType.WARNING, "Error", "Stock List Not Added!", ButtonType.OK).show();
+            }
+        } catch (SQLException e) {
+            new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+        }
 
     }
 
@@ -369,6 +370,16 @@ public class toolStockController {
             e.getMessage();
 
 
+        }
+    }
+
+    public void btnDashBoardOnAction(ActionEvent actionEvent) {
+        try {
+            Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+            this.root.getChildren().clear();
+            this.root.getChildren().add(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

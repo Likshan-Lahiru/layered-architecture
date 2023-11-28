@@ -185,4 +185,14 @@ public class SupplierFormController {
         this.root.getChildren().clear();
         this.root.getChildren().add(node);
     }
+
+    public void btnDashBoardOnAction(ActionEvent actionEvent) {
+        try {
+            Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+            this.root.getChildren().clear();
+            this.root.getChildren().add(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

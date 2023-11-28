@@ -27,7 +27,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="613.0" prefWidth="1163.0" style="-fx-background-color: #ced4da;">
                             <children>
-                                <Pane layoutX="496.0" layoutY="123.0" prefHeight="448.0" prefWidth="644.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                <Pane layoutX="496.0" layoutY="106.0" prefHeight="448.0" prefWidth="644.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                                     <children>
                                         <TableView fx:id="tblCart" layoutX="5.0" layoutY="5.0" prefHeight="363.0" prefWidth="638.0" stylesheets="@../style/table.css">
                                             <columns>
@@ -69,7 +69,7 @@
                               </JFXButton>
                                     </children>
                                 </Pane>
-                                <Label layoutX="828.0" layoutY="58.0" prefHeight="41.0" prefWidth="286.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="  Order Id    : " textFill="#4361ee">
+                                <Label layoutX="828.0" layoutY="48.0" prefHeight="41.0" prefWidth="286.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="  Order Id    : " textFill="#4361ee">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
@@ -79,7 +79,7 @@
                                         <Font size="20.0" />
                                     </font>
                                 </Label>
-                                <JFXButton fx:id="btnNewCustomerOnAction" buttonType="RAISED" layoutX="645.0" layoutY="62.0" onAction="#btnNewCustomerOnAction" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 10;" text="Add Customer" textFill="WHITE">
+                                <JFXButton fx:id="btnNewCustomerOnAction" buttonType="RAISED" layoutX="645.0" layoutY="51.0" onAction="#btnNewCustomerOnAction" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 10;" text="Add Customer" textFill="WHITE">
                                     <font>
                                         <Font name="Calibri Bold" size="17.0" />
                                     </font>
@@ -91,7 +91,7 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <Pane layoutX="20.0" layoutY="52.0" prefHeight="520.0" prefWidth="454.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                <Pane layoutX="20.0" layoutY="24.0" prefHeight="520.0" prefWidth="454.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../style/style.css">
                                     <children>
                                         <JFXComboBox fx:id="cmbCustomerId" layoutX="14.0" layoutY="49.0" onAction="#cmbCustomerOnAction" prefHeight="36.0" prefWidth="191.0" promptText="   Customer Id" unFocusColor="#0033ff" />
                                         <Label layoutX="235.0" layoutY="25.0" prefHeight="26.0" prefWidth="126.0" text="Customer Name:">
@@ -159,7 +159,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab closable="false" text="OrderDetail">
+                <Tab closable="false" text="                                                              Order Detail    ">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ced4da;">
                             <children>
@@ -234,5 +234,14 @@
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
+      <JFXButton buttonType="RAISED" layoutX="1170.0" onAction="#btnDashBoardOnAction" prefHeight="53.0" prefWidth="57.0" styleClass="transparent" stylesheets="@../style/style.css" text="." textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/icons8-home-500.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
     </children>
 </AnchorPane>

@@ -5,17 +5,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.SystemAlert;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class ToolFormController {
+    @FXML
+    private AnchorPane root;
     @FXML
     private TextField txtSearchId;
     @FXML
@@ -188,5 +194,15 @@ public class ToolFormController {
         txtRentPerDayPrice.clear();
         txtSearchId.clear();
 
+    }
+
+    public void btnDashBoardOnAction(ActionEvent actionEvent) {
+        try {
+            Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+            this.root.getChildren().clear();
+            this.root.getChildren().add(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

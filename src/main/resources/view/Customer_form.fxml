@@ -17,7 +17,7 @@
    <children>
       <Pane layoutX="13.0" layoutY="72.0" prefHeight="638.0" prefWidth="1184.0" style="-fx-background-color: #ced4da; -fx-background-radius: 20;">
          <children>
-            <Pane layoutX="777.0" layoutY="85.0" prefHeight="518.0" prefWidth="382.0" style="-fx-background-color: #caf0f8; -fx-background-radius: 15;">
+            <Pane layoutX="777.0" layoutY="85.0" prefHeight="518.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <children>
                   <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="26.0" layoutY="91.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer ID" unFocusColor="#0988e5">
                      <font>
@@ -101,7 +101,7 @@
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="1195.0" layoutY="-3.0" prefHeight="53.0" prefWidth="57.0" text="." textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="1195.0" layoutY="-3.0" onAction="#btnDashBoardOnAction" prefHeight="53.0" prefWidth="57.0" text="." textFill="WHITE">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
