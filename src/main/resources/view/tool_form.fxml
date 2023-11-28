@@ -18,7 +18,7 @@
    <children>
       <Pane layoutX="16.0" layoutY="68.0" prefHeight="637.0" prefWidth="1170.0" style="-fx-background-radius: 20; -fx-background-color: #ced4da;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="68.0">
          <children>
-            <TextField fx:id="txtSearchId" layoutX="851.0" layoutY="16.0" prefHeight="33.0" prefWidth="213.0" promptText="  Tool ID" style="-fx-background-radius: 30; -fx-background-color: #eaf4f4;" />
+            <TextField fx:id="txtSearchId" layoutX="851.0" layoutY="16.0" prefHeight="33.0" prefWidth="213.0" promptText="  Tool ID" style="-fx-background-radius: 30; -fx-background-color: #eaf4f4;" styleClass="search-box" stylesheets="@../style/style.css" />
             <Button layoutX="1058.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnSerchOnAction" prefHeight="33.0" prefWidth="30.0" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="26.0" preserveRatio="true">
@@ -28,7 +28,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Pane layoutX="17.0" layoutY="32.0" prefHeight="593.0" prefWidth="747.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Pane layoutX="17.0" layoutY="32.0" prefHeight="593.0" prefWidth="747.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <TableView fx:id="tblTool" layoutX="8.0" layoutY="11.0" prefHeight="496.0" prefWidth="731.0" stylesheets="@../style/table.css">
                     <columns>
@@ -41,14 +41,14 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane layoutX="793.0" layoutY="70.0" prefHeight="534.0" prefWidth="370.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Pane layoutX="793.0" layoutY="70.0" prefHeight="534.0" prefWidth="370.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
-                  <JFXButton buttonType="RAISED" layoutX="187.0" layoutY="471.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #2ec4b6;" text="Update">
+                  <JFXButton buttonType="RAISED" layoutX="187.0" layoutY="485.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField fx:id="txtToolQtyOnHand" labelFloat="true" layoutX="27.0" layoutY="308.0" prefHeight="25.0" prefWidth="282.0" promptText="Qty-on Hand" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtToolQtyOnHand" labelFloat="true" layoutX="27.0" layoutY="377.0" prefHeight="25.0" prefWidth="282.0" promptText="Qty-on Hand" unFocusColor="#0988e5">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -56,7 +56,7 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtxToolId" labelFloat="true" layoutX="27.0" layoutY="74.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="282.0" promptText="Tool ID" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtxToolId" labelFloat="true" layoutX="27.0" layoutY="208.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="282.0" promptText="Tool ID" unFocusColor="#0988e5">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -64,7 +64,7 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtToolName" labelFloat="true" layoutX="27.0" layoutY="147.0" prefHeight="25.0" prefWidth="282.0" promptText="Tool Name" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtToolName" labelFloat="true" layoutX="27.0" layoutY="259.0" prefHeight="25.0" prefWidth="282.0" promptText="Tool Name" unFocusColor="#0988e5">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtRentPerDayPrice" labelFloat="true" layoutX="27.0" layoutY="210.0" prefHeight="25.0" prefWidth="282.0" promptText="Rent Per Day_price" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtRentPerDayPrice" labelFloat="true" layoutX="27.0" layoutY="318.0" prefHeight="25.0" prefWidth="282.0" promptText="Rent Per Day_price" unFocusColor="#0988e5">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -80,21 +80,26 @@
                         <Cursor fx:constant="TEXT" />
                      </cursor>
                   </JFXTextField>
-                  <JFXButton buttonType="RAISED" layoutX="97.0" layoutY="471.0" onAction="#btnSaveOnActionS" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #fcbf49;" text="Save">
+                  <JFXButton buttonType="RAISED" layoutX="97.0" layoutY="485.0" onAction="#btnSaveOnActionS" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="471.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #5e60ce;" text="Clear" underline="true">
+                  <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="485.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="14.0" layoutY="471.0" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #da2c38;" text="Delete">
+                  <JFXButton layoutX="14.0" layoutY="485.0" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="27.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/bull.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children>

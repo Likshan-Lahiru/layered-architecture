@@ -42,8 +42,6 @@ public class LoginFormController {
 
     private String hiru = "lahiru212001@gmail.com";
     public void initialize(){
-        // txtShowPassword.setVisible(false);
-        // lblOpenEye.setVisible(false);
         setTime();
     }
     public void setTime(){
@@ -73,7 +71,6 @@ public class LoginFormController {
         if (nameText.isEmpty()||passwordText.isEmpty()){
             txtPassword.setStyle("-fx-border-color: #ff004f;");
             txtUserName.setStyle("-fx-border-color: #ff004f;");
-            //new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").showAndWait();
             return;
         }
 

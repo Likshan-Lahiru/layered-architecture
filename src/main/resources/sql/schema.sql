@@ -17,6 +17,7 @@ create table tool(
                      tool_id varchar (35) primary key ,
                      tool_name varchar(20) not null ,
                      qty_on_hand int not null,
+                     image longblob,
                      rent_per_day_price double
 );
 
