@@ -175,6 +175,12 @@ public class CustomerFormController {
                 return;
             }
         } else {
+            TxtColours.setErrorColours(txtCustomerId);
+            TxtColours.setErrorColours(txtCustomerName);
+            TxtColours.setErrorColours(txtCustomerAddress);
+            TxtColours.setErrorColours(txtCustomerNIC);
+            TxtColours.setErrorColours(txtCustomerContactNumber);
+
 
             new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").show();
             try {

@@ -13,7 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.ToolModel;
+import lk.ijse.util.RegExPatterns;
 import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -83,60 +85,124 @@ public class ToolFormController {
 
 
     public void btnSaveOnActionS(ActionEvent actionEvent) {
-        String toolIdText = txtxToolId.getText();
-        String toolNameText = txtToolName.getText();
-        int qtyOnHandText = Integer.parseInt(txtToolQtyOnHand.getText());
-        double perDayPriceText = Double.parseDouble(txtRentPerDayPrice.getText());
 
-        if (toolIdText.isEmpty()|| toolNameText.isEmpty()|| String.valueOf(qtyOnHandText).isEmpty()|| String.valueOf(perDayPriceText).isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Field NotFound!").show();
-            return;
-        }
+        if(!(txtxToolId.getText().isEmpty()||txtToolName.getText().isEmpty()||txtToolQtyOnHand.getText().isEmpty()||txtRentPerDayPrice.getText().isEmpty())){
+            if (RegExPatterns.gettoolId().matcher(txtxToolId.getText()).matches()){
+                TxtColours.setDefaultColours(txtxToolId);
+                if (RegExPatterns.getToolName().matcher(txtToolName.getText()).matches()){
+                    TxtColours.setDefaultColours(txtToolName);
+                    if (RegExPatterns.getDoublePattern().matcher(txtRentPerDayPrice.getText()).matches()){
+                        TxtColours.setDefaultColours(txtRentPerDayPrice);
+                        if (RegExPatterns.getIntPattern().matcher(txtToolQtyOnHand.getText()).matches()){
+                            TxtColours.setDefaultColours(txtToolQtyOnHand);
 
-        ToolDto dto = new ToolDto(toolIdText,toolNameText,qtyOnHandText,perDayPriceText);
-        ToolModel model = new ToolModel();
+                            String toolIdText = txtxToolId.getText();
+                            String toolNameText = txtToolName.getText();
+                            int qtyOnHandText = Integer.parseInt(txtToolQtyOnHand.getText());
+                            double perDayPriceText = Double.parseDouble(txtRentPerDayPrice.getText());
 
+                            ToolDto dto = new ToolDto(toolIdText,toolNameText,qtyOnHandText,perDayPriceText);
+                            ToolModel model = new ToolModel();
 
-        try {
-            boolean isSaved = model.saveTool(dto);
-            if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"New Tool Saved Success!").show();
-                loadAllTool();
-                clearText();
+                            try {
+                                boolean isSaved = model.saveTool(dto);
+                                if (isSaved){
+                                    new SystemAlert(Alert.AlertType.CONFIRMATION,"SUCCESS","Tool Save Successfully!",ButtonType.CLOSE).show();
+                                    loadAllTool();
+                                    clearText();
+                                }
+                            } catch (SQLException e){
+                                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                                clearText();
+                            }
+
+                        }else {
+                            TxtColours.setErrorColours(txtToolQtyOnHand);
+                            return;
+                        }
+                    }else{
+                        TxtColours.setErrorColours(txtRentPerDayPrice);
+                        return;
+                    }
+                }else{
+                    TxtColours.setErrorColours(txtToolName);
+                    return;
+                }
+            }else {
+                TxtColours.setErrorColours(txtxToolId);
+                return;
             }
-        } catch (SQLException e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-            clearText();
+        }else {
+            new SystemAlert(Alert.AlertType.WARNING,"WARNING","Please Enter The All Details!",ButtonType.CLOSE).show();
+            TxtColours.setErrorColours(txtxToolId);
+            TxtColours.setErrorColours(txtToolName);
+            TxtColours.setErrorColours(txtToolQtyOnHand);
+            TxtColours.setErrorColours(txtRentPerDayPrice);
         }
 
     }
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String toolIdText = txtxToolId.getText();
-        String toolNameText = txtToolName.getText();
-        int qtyOnHandText = Integer.parseInt(txtToolQtyOnHand.getText());
-        double rentPerDayPrice = Double.parseDouble(txtRentPerDayPrice.getText());
-        if (toolIdText.isEmpty()||toolNameText.isEmpty()||String.valueOf(qtyOnHandText).isEmpty()||String.valueOf(rentPerDayPrice).isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please enter the all information!").showAndWait();
-            return;
+        if(!(txtxToolId.getText().isEmpty()||txtToolName.getText().isEmpty()||txtToolQtyOnHand.getText().isEmpty()||txtRentPerDayPrice.getText().isEmpty())){
+            if (RegExPatterns.gettoolId().matcher(txtxToolId.getText()).matches()){
+                TxtColours.setDefaultColours(txtxToolId);
+
+                if (RegExPatterns.getToolName().matcher(txtToolName.getText()).matches()){
+                    TxtColours.setDefaultColours(txtToolName);
+
+                    if (RegExPatterns.getDoublePattern().matcher(txtRentPerDayPrice.getText()).matches()){
+                        TxtColours.setDefaultColours(txtRentPerDayPrice);
+
+                        if (RegExPatterns.getIntPattern().matcher(txtToolQtyOnHand.getText()).matches()){
+                            TxtColours.setDefaultColours(txtToolQtyOnHand);
+
+                            String toolIdText = txtxToolId.getText();
+                            String toolNameText = txtToolName.getText();
+                            int qtyOnHandText = Integer.parseInt(txtToolQtyOnHand.getText());
+                            double rentPerDayPrice = Double.parseDouble(txtRentPerDayPrice.getText());
+
+                            ToolDto dto = new ToolDto(toolIdText, toolNameText, qtyOnHandText, rentPerDayPrice);
+                            ToolModel model = new ToolModel();
+                            try {
+
+                                boolean isUpdateTool = model.updateToolId(dto);
+                                if (isUpdateTool){
+                                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Tool Enter successfully!", ButtonType.OK).show();
+                                    loadAllTool();
+                                }
+                                else {
+                                    new SystemAlert(Alert.AlertType.WARNING, "Error", "Something went wrong!", ButtonType.OK).show();
+                                }
+
+                            }catch (SQLException e){
+                                e.printStackTrace();
+                            }
+                            TxtColours.setDefaultColours(txtToolQtyOnHand);
+                        }else {
+                            TxtColours.setErrorColours(txtToolQtyOnHand);
+                            return;
+                        }
+                    }else{
+                        TxtColours.setErrorColours(txtRentPerDayPrice);
+                        return;
+                    }
+                }else{
+                    TxtColours.setErrorColours(txtToolName);
+                    return;
+                }
+            }else {
+                TxtColours.setErrorColours(txtxToolId);
+                return;
+            }
+        }else {
+            new SystemAlert(Alert.AlertType.WARNING,"WARNING","Please Enter The All Details!",ButtonType.CLOSE).show();
+            TxtColours.setErrorColours(txtxToolId);
+            TxtColours.setErrorColours(txtToolName);
+            TxtColours.setErrorColours(txtToolQtyOnHand);
+            TxtColours.setErrorColours(txtRentPerDayPrice);
         }
 
-        ToolDto dto = new ToolDto(toolIdText, toolNameText, qtyOnHandText, rentPerDayPrice);
-        ToolModel model = new ToolModel();
-        try {
 
-            boolean isUpdateTool = model.updateToolId(dto);
-            if (isUpdateTool){
-                new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Tool Enter successfully!", ButtonType.OK).show();
-                loadAllTool();
-            }
-            else {
-                new SystemAlert(Alert.AlertType.WARNING, "Error", "Somehing went wrong!", ButtonType.OK).show();
-            }
 
-        }catch (SQLException e){
-            e.printStackTrace();
-           // new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
 
 
 
@@ -149,7 +215,7 @@ public class ToolFormController {
     public void btnSerchOnAction(ActionEvent actionEvent) {
         String searchIdText = txtSearchId.getText();
         if (searchIdText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Search bar is empty! please enter tool Id!").show();
+            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Search bar is empty! please enter tool Id!", ButtonType.OK).show();
             return;
         }
         ToolDto dto = new ToolDto(searchIdText);
@@ -160,7 +226,8 @@ public class ToolFormController {
             if (dto1 !=null){
                 toolSetFields(dto1);
             }else {
-                new Alert(Alert.AlertType.CONFIRMATION,"Item Not Found!").show();
+
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Item Not Found!", ButtonType.OK).show();
             }
         }catch (SQLException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -205,6 +272,64 @@ public class ToolFormController {
             this.root.getChildren().add(node);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+
+        if(!(txtxToolId.getText().isEmpty()||txtToolName.getText().isEmpty()||txtToolQtyOnHand.getText().isEmpty()||txtRentPerDayPrice.getText().isEmpty())){
+
+            if (RegExPatterns.gettoolId().matcher(txtxToolId.getText()).matches()){
+                TxtColours.setDefaultColours(txtxToolId);
+
+                if (RegExPatterns.getToolName().matcher(txtToolName.getText()).matches()){
+                    TxtColours.setDefaultColours(txtToolName);
+
+                    if (RegExPatterns.getDoublePattern().matcher(txtRentPerDayPrice.getText()).matches()){
+                        TxtColours.setDefaultColours(txtRentPerDayPrice);
+
+                        if (RegExPatterns.getIntPattern().matcher(txtToolQtyOnHand.getText()).matches()){
+                            TxtColours.setDefaultColours(txtToolQtyOnHand);
+
+                            String toolId = txtxToolId.getText();
+                            String toolName = txtToolName.getText();
+                            Double perDayPrice = Double.valueOf(txtRentPerDayPrice.getText());
+                            int toolQtyOnHand = Integer.parseInt(txtToolQtyOnHand.getText());
+
+                            ToolDto dto = new ToolDto(toolId,toolName,toolQtyOnHand,perDayPrice);
+                            ToolModel model = new ToolModel();
+                            try {
+                                boolean isDeleted = model.deleteTool(dto);
+                                if(isDeleted){
+                                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Item Deleted!",ButtonType.OK).show();
+
+                                }else {
+                                    new SystemAlert(Alert.AlertType.WARNING,"Warning","Item Does Not Found!",ButtonType.OK).show();
+                                }
+                            }catch (SQLException e){
+                                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                            }
+                        }else {
+                            TxtColours.setErrorColours(txtToolQtyOnHand);
+                            return;
+                        }
+                   }else{
+                      TxtColours.setErrorColours(txtRentPerDayPrice);
+                      return;
+                    }
+                }else{
+                    TxtColours.setErrorColours(txtToolName);
+                }
+            }else {
+                TxtColours.setErrorColours(txtxToolId);
+                return;
+            }
+        }else {
+            new SystemAlert(Alert.AlertType.WARNING,"WARNING","Please Enter The All Details!",ButtonType.CLOSE).show();
+            TxtColours.setErrorColours(txtxToolId);
+            TxtColours.setErrorColours(txtToolName);
+            TxtColours.setErrorColours(txtToolQtyOnHand);
+            TxtColours.setErrorColours(txtRentPerDayPrice);
         }
     }
 }

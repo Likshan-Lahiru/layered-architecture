@@ -17,11 +17,15 @@ public class RegExPatterns {
     private static final Pattern passwordPattern = Pattern.compile("^[0-9a-zA-Z]{5,}$");
     private static final Pattern NICPattern = Pattern.compile("^(?:19|20)?\\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$");
     private static final Pattern contactNumberPattern = Pattern.compile("^[0]{1}[7]{1}[01245678]{1}[0-9]{7}$");
-    private static final Pattern addressPattern = Pattern.compile("[a-zA-Z]{15}");
+    private static final Pattern addressPattern = Pattern.compile("[a-zA-Z1-9]");
 
+    private static final Pattern toolName = Pattern.compile("^[a-zA-Z]{3,}$");
 
     public static Pattern getUserName() {
         return userName;
+    }
+    public static Pattern getToolName() {
+        return toolName;
     }
 
     public static Pattern getContactNumberPattern() {
@@ -59,7 +63,7 @@ public class RegExPatterns {
         return contactPattern;
     }
 
-    public static Pattern getoolId() {
+    public static Pattern gettoolId() {
         return toolId;
     }
 

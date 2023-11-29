@@ -148,4 +148,15 @@ public class ToolModel {
             return issaved;
 
     }
+
+    public boolean deleteTool(ToolDto dto) throws SQLException {
+       Connection connection = DbConnection.getInstance().getConnection();
+       String sql = "DELETE FROM tool WHERE tool_id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1,dto.getToolId());
+
+       boolean isDeleted = pstm.executeUpdate()>0;
+
+        return isDeleted;
+    }
 }

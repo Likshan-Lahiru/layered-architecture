@@ -90,7 +90,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="14.0" layoutY="461.0" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
+                  <JFXButton layoutX="14.0" layoutY="461.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
