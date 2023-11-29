@@ -348,6 +348,62 @@ public class CustomerFormController {
     }
     @FXML
     void btnCustomerDeleteOnAction(ActionEvent event) {
+        if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty())) {
+            if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()) {
+                TxtColours.setDefaultColours(txtCustomerId);
+                if (RegExPatterns.getNamePattern().matcher(txtCustomerName.getText()).matches()) {
+                    TxtColours.setDefaultColours(txtCustomerName);
+                    if (RegExPatterns.getNICPattern().matcher(txtCustomerNIC.getText()).matches()) {
+                        TxtColours.setDefaultColours(txtCustomerNIC);
+                        if (RegExPatterns.getContactNumberPattern().matcher(txtCustomerContactNumber.getText()).matches()) {
+                            TxtColours.setDefaultColours(txtCustomerContactNumber);
+                        } else {
+                            TxtColours.setErrorColours(txtCustomerContactNumber);
+                            return;
 
+                        }
+                    } else {
+                        TxtColours.setErrorColours(txtCustomerNIC);
+                        return;
+                    }
+                } else {
+                    TxtColours.setErrorColours(txtCustomerName);
+                    return;
+                }
+            } else {
+                TxtColours.setErrorColours(txtCustomerId);
+                return;
+            }
+        } else {
+            TxtColours.setErrorColours(txtCustomerId);
+            TxtColours.setErrorColours(txtCustomerName);
+            TxtColours.setErrorColours(txtCustomerAddress);
+            TxtColours.setErrorColours(txtCustomerNIC);
+            TxtColours.setErrorColours(txtCustomerContactNumber);
+
+
+            new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").show();
+            try {
+                boolean check = mainFormController.check();
+
+                if (check) {
+                    soundsAssits.insertAllDetail();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        String txtCustomerIdText = txtCustomerId.getText();
+        CustomerModel model = new CustomerModel();
+        try {
+           boolean isDeleted = model.deleteCustomer(txtCustomerIdText);
+           if (isDeleted) {
+               new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer Deleted successfully!", ButtonType.OK).show();
+
+        }
+    }catch (SQLException e){
+        new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+    }
     }
 }

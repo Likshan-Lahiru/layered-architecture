@@ -24,25 +24,25 @@ public class CustomerModel {
         pstm.setString(4, dto.getCustomerNic());
         pstm.setString(5, dto.getCustomerContactNumber());
 
-        boolean IsSaved =pstm.executeUpdate()>0;
+        boolean IsSaved = pstm.executeUpdate() > 0;
         return IsSaved;
     }
 
     public static List<CustomerDto> getAllCustomer() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql= "SELECT * FROM customer ";
+        String sql = "SELECT * FROM customer ";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
-        List<CustomerDto> customerDtoList =new ArrayList<>();
+        List<CustomerDto> customerDtoList = new ArrayList<>();
 
         ResultSet resultSet = pstm.executeQuery();
-        while (resultSet.next()){
-            String customer_id =resultSet.getString(1);
-            String customer_name =resultSet.getString(2);
-            String customer_address=resultSet.getString(3);
-            String customer_nic =resultSet.getString(4);
-            String customer_contact =resultSet.getString(5);
+        while (resultSet.next()) {
+            String customer_id = resultSet.getString(1);
+            String customer_name = resultSet.getString(2);
+            String customer_address = resultSet.getString(3);
+            String customer_nic = resultSet.getString(4);
+            String customer_contact = resultSet.getString(5);
 
             CustomerDto dto = new CustomerDto(customer_id, customer_name, customer_address, customer_nic, customer_contact);
             customerDtoList.add(dto);
@@ -55,16 +55,16 @@ public class CustomerModel {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM customer WHERE customer_id= ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,txtSearchCustomerIDText);
+        pstm.setString(1, txtSearchCustomerIDText);
         ResultSet resultSet = pstm.executeQuery();
         CustomerDto dto = null;
-        if (resultSet.next()){
-             dto = new CustomerDto(
-                resultSet.getString("customer_id"),
-                resultSet.getString("customer_name"),
-                resultSet.getString("address"),
-                resultSet.getString("NIC"),
-                resultSet.getString("contact_number")
+        if (resultSet.next()) {
+            dto = new CustomerDto(
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("customer_name"),
+                    resultSet.getString("address"),
+                    resultSet.getString("NIC"),
+                    resultSet.getString("contact_number")
             );
         }
 
@@ -84,9 +84,22 @@ public class CustomerModel {
         pstm.setString(4, dto.getCustomerContactNumber());
         pstm.setString(5, dto.getCustomerId());
 
-        boolean IsSaved =pstm.executeUpdate()>0;
+        boolean IsSaved = pstm.executeUpdate() > 0;
 
         return IsSaved;
+
+    }
+
+    public boolean deleteCustomer(String txtCustomerIdText) throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "DELETE FROM customer WHERE customer_id=?";
+        PreparedStatement pstm;
+
+        pstm = connection.prepareStatement(sql);
+        pstm.setString(1, txtCustomerIdText);
+        boolean isDeleted = pstm.executeUpdate() > 0;
+        return isDeleted;
 
     }
 }
