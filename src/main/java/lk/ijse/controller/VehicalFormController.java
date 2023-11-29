@@ -10,13 +10,17 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.VehicleDto;
 import lk.ijse.dto.tm.VehicleTm;
 import lk.ijse.model.VehicleModel;
+import lk.ijse.util.RegExPatterns;
 import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -47,7 +51,7 @@ public class VehicalFormController {
     public void initialize(){
         vehicleCellvalueFactory();
         loadAllvehicle();
-
+        setVehicle();
     }
 
 
@@ -93,26 +97,31 @@ public class VehicalFormController {
 
     }
     public void btnVehcleSaveOnAction(ActionEvent actionEvent) {
+
+
+        if(!(txtVehicleId.getText().isEmpty()||txtNumPlateNo.getText().isEmpty()||txtVehicleStatus.getText().isEmpty()||pickerLastServiceDate.getValue().toString().isEmpty())){
+            if (RegExPatterns.getVehicleId().matcher(txtVehicleId.getText()).matches()){
+                TxtColours.setDefaultColours(txtVehicleId);
+                if (RegExPatterns.getVehicleNumberPlate().matcher(txtNumPlateNo.getText()).matches()){
+                    TxtColours.setDefaultColours(txtNumPlateNo);
+                }else {
+                    TxtColours.setErrorColours(txtNumPlateNo);
+                }
+            }else {
+                TxtColours.setErrorColours(txtVehicleId);
+            }
+
+        }else {
+            TxtColours.setErrorColours(txtVehicleId);
+            TxtColours.setErrorColours(txtNumPlateNo);
+            TxtColours.setErrorColours(txtVehicleStatus);
+
+        }
         String txtVehicleIdText = txtVehicleId.getText();
         String txtNumPlateNoText = txtNumPlateNo.getText();
         String txtVehicleStatusText = txtVehicleStatus.getText();
         String pickerLastServiceDateValue = String.valueOf(pickerLastServiceDate.getValue());
 
-        if (txtNumPlateNoText.isEmpty()||txtNumPlateNoText.isEmpty()||txtVehicleStatusText.isEmpty()||String.valueOf(pickerLastServiceDateValue).isEmpty()){
-            new SystemAlert(Alert.AlertType.ERROR,"Error","Please enter the all details!").showAndWait();
-            return;
-        }
-
-        boolean matches = Pattern.matches("[C][0-9]{4}",txtVehicleIdText);
-        if (!matches){
-            new SystemAlert(Alert.AlertType.ERROR,"Error","Insert valid  code  ").show();
-            return;
-        }
-        boolean matches1 = Pattern.matches("[A-Z]{2}[0-9]{4}", txtNumPlateNoText);
-        if (!matches1){
-            new SystemAlert(Alert.AlertType.ERROR,"Error","Insert valid  Vehicle number plate!").show();
-            return;
-        }
         VehicleDto dto = new VehicleDto(txtVehicleIdText, txtNumPlateNoText, txtVehicleStatusText, pickerLastServiceDateValue);
 
         VehicleModel model = new VehicleModel();
@@ -133,11 +142,78 @@ public class VehicalFormController {
 
     }
     public void btnVehcleUpdateOnAction(ActionEvent actionEvent) {
+        if(!(txtVehicleId.getText().isEmpty()||txtNumPlateNo.getText().isEmpty()||txtVehicleStatus.getText().isEmpty()||pickerLastServiceDate.getValue().toString().isEmpty())){
+            if (RegExPatterns.getVehicleId().matcher(txtVehicleId.getText()).matches()){
+                TxtColours.setDefaultColours(txtVehicleId);
+                if (RegExPatterns.getVehicleNumberPlate().matcher(txtNumPlateNo.getText()).matches()){
+                    TxtColours.setDefaultColours(txtNumPlateNo);
+                }else {
+                    TxtColours.setErrorColours(txtNumPlateNo);
+                }
+            }else {
+                TxtColours.setErrorColours(txtVehicleId);
+            }
+
+        }else {
+            TxtColours.setErrorColours(txtVehicleId);
+            TxtColours.setErrorColours(txtNumPlateNo);
+            TxtColours.setErrorColours(txtVehicleStatus);
+
+        }
+        String txtVehicleIdText = txtVehicleId.getText();
+        String txtNumPlateNoText = txtNumPlateNo.getText();
+        String txtVehicleStatusText = txtVehicleStatus.getText();
+        String pickerLastServiceDateValue = String.valueOf(pickerLastServiceDate.getValue());
+
+        VehicleDto dto = new VehicleDto(txtVehicleIdText, txtNumPlateNoText, txtVehicleStatusText, pickerLastServiceDateValue);
+        VehicleModel model = new VehicleModel();
+        try {
+           boolean isUpdated =  model.updateVehicle(dto);
+           if (isUpdated){
+               new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Vehicle details is Updated!", ButtonType.OK).show();
+           }else {
+               new SystemAlert(Alert.AlertType.WARNING,"Warning","Vehicle details has not Updated!",ButtonType.OK).show();
+           }
+        }catch (SQLException e ){
+            new Alert(Alert.AlertType.ERROR,e.getMessage() ).showAndWait();
+        }
     }
     public void btnVehcleEditOnAction(ActionEvent actionEvent) {
         clearVehicleCol();
     }
     public void btnVehcleDeleteOnAction(ActionEvent actionEvent) {
+        if(!(txtVehicleId.getText().isEmpty()||txtNumPlateNo.getText().isEmpty()||txtVehicleStatus.getText().isEmpty()||pickerLastServiceDate.getValue().toString().isEmpty())){
+            if (RegExPatterns.getVehicleId().matcher(txtVehicleId.getText()).matches()){
+                TxtColours.setDefaultColours(txtVehicleId);
+                if (RegExPatterns.getVehicleNumberPlate().matcher(txtNumPlateNo.getText()).matches()){
+                    TxtColours.setDefaultColours(txtNumPlateNo);
+                }else {
+                    TxtColours.setErrorColours(txtNumPlateNo);
+                }
+            }else {
+                TxtColours.setErrorColours(txtVehicleId);
+            }
+
+        }else {
+            TxtColours.setErrorColours(txtVehicleId);
+            TxtColours.setErrorColours(txtNumPlateNo);
+            TxtColours.setErrorColours(txtVehicleStatus);
+
+        }
+        String txtVehicleIdText = txtVehicleId.getText();
+
+        VehicleModel model =  new VehicleModel();
+        try {
+            boolean isDeleted = model.deleteVehicle(txtVehicleIdText);
+            if (isDeleted){
+                new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Vehicle details is Deleted!", ButtonType.OK).show();
+            }else {
+                new SystemAlert(Alert.AlertType.WARNING,"Warning","Vehicle details has not Deleted!",ButtonType.OK).show();
+            }
+        }catch (SQLException e ){
+            new Alert(Alert.AlertType.ERROR,e.getMessage() ).showAndWait();
+        }
+
 
     }
     public void clearVehicleCol(){
@@ -155,6 +231,26 @@ public class VehicalFormController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    private void setVehicle(){
+        tblVehicleDetail.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldvalue,newValue)->{
+                    VehicleDto dto = new VehicleDto(
+                            newValue.getVehicleId(),
+                            newValue.getVehicleStatus(),
+                            newValue.getNumberPlateNo(),
+                            newValue.getLastServiceDate()
+
+                    );
+                    vehicleSetField(dto);
+                });
+    }
+    private void vehicleSetField(VehicleDto dto) {
+        txtVehicleId.setText(dto.getVehicleId());
+        txtVehicleStatus.setText(dto.getVehicleStatus());
+        txtNumPlateNo.setText(dto.getNumberPlateNo());
+        pickerLastServiceDate.setValue(LocalDate.parse(dto.getLastServiceDate()));
+
     }
 }
 

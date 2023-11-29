@@ -47,4 +47,31 @@ public class VehicleModel {
 
         return vehicleDtos;
     }
+
+    public boolean updateVehicle(VehicleDto dto) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "UPDATE vehical SET status=?, last_service_date=?, number_plate_no=? WHERE vehical_id=?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+
+            pstm.setString(1, dto.getVehicleStatus());
+            pstm.setString(2, dto.getLastServiceDate());
+            pstm.setString(3, dto.getNumberPlateNo());
+            pstm.setString(4, dto.getVehicleId());
+
+        boolean isUpdated = pstm.executeUpdate()>0;
+        return isUpdated;
+    }
+
+
+    public boolean deleteVehicle(String txtVehicleIdText) throws SQLException {
+        DbConnection connection = DbConnection.getInstance();
+        String sql = "DELETE FROM vehical WHERE vehical_id=?";
+        PreparedStatement pstm = connection.getConnection().prepareStatement(sql);
+
+        pstm.setString(1, txtVehicleIdText);
+
+        boolean isDeleted = pstm.executeUpdate() > 0;
+        return isDeleted;
+    }
 }
