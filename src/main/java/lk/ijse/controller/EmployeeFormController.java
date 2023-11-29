@@ -190,7 +190,6 @@ public class EmployeeFormController {
 
     public void btnEmployeeUpdateOnAction(ActionEvent actionEvent) {
 
-
         if (!(txtEmployeerId.getText().isEmpty()||txtEmployeeName.getText().isEmpty()||txtEmployeeNIC.getText().isEmpty()||txtEmployeeAddress.getText().isEmpty())){
             if (RegExPatterns.getEmployeeId().matcher(txtEmployeerId.getText()).matches()){
                 TxtColours.setDefaultColours(txtEmployeerId);
@@ -238,7 +237,6 @@ public class EmployeeFormController {
         try {
             boolean isUpdated = model.updateEmployee(dto);
             if (isUpdated){
-                loadAllEmployee();
                 new Alert(Alert.AlertType.CONFIRMATION,"Employee Updated!").showAndWait();
                 employeeFeildClear();
             }else {
