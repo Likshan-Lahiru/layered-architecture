@@ -15,20 +15,20 @@ public class SupplierModel {
     public static List<SupplierDto> getAllSupplier() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql= "SELECT * FROM supplier ";
+        String sql = "SELECT * FROM supplier ";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
-        List<SupplierDto> supplierDtoList =new ArrayList<>();
+        List<SupplierDto> supplierDtoList = new ArrayList<>();
 
         ResultSet resultSet = pstm.executeQuery();
-        while (resultSet.next()){
-            String Supplier_id =resultSet.getString(1);
-            String Supplier_name =resultSet.getString(2);
-            String Supplier_nic =resultSet.getString(3);
-            String Supplier_address=resultSet.getString(4);
-            String Supplier_contact =resultSet.getString(5);
+        while (resultSet.next()) {
+            String Supplier_id = resultSet.getString(1);
+            String Supplier_name = resultSet.getString(2);
+            String Supplier_nic = resultSet.getString(3);
+            String Supplier_address = resultSet.getString(4);
+            String Supplier_contact = resultSet.getString(5);
 
-            SupplierDto dto = new SupplierDto(Supplier_id,Supplier_name,Supplier_address,Supplier_nic,Supplier_contact);
+            SupplierDto dto = new SupplierDto(Supplier_id, Supplier_name, Supplier_address, Supplier_nic, Supplier_contact);
             supplierDtoList.add(dto);
         }
 
@@ -38,15 +38,15 @@ public class SupplierModel {
 
     public boolean saveSupplier(SupplierDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        String sql ="INSERT INTO supplier VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO supplier VALUES (?, ?, ?, ?, ?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,dto.getSupplierId());
-        pstm.setString(2,dto.getSupplierName());
+        pstm.setString(1, dto.getSupplierId());
+        pstm.setString(2, dto.getSupplierName());
         pstm.setString(3, dto.getSupplierNIC());
         pstm.setString(4, dto.getSupplierAddress());
         pstm.setString(5, dto.getSupplierContactNumber());
 
-       boolean isSvaed = pstm.executeUpdate()>0;
+        boolean isSvaed = pstm.executeUpdate() > 0;
 
         return isSvaed;
     }
@@ -55,10 +55,10 @@ public class SupplierModel {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM supplier WHERE supplier_id= ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,searchSupplierIDText);
+        pstm.setString(1, searchSupplierIDText);
         ResultSet resultSet = pstm.executeQuery();
         SupplierDto dto = null;
-        if (resultSet.next()){
+        if (resultSet.next()) {
             dto = new SupplierDto(
                     resultSet.getString("supplier_id"),
                     resultSet.getString("supplier_name"),
@@ -70,5 +70,28 @@ public class SupplierModel {
 
         return dto;
     }
-}
 
+    public boolean updateSupplier(SupplierDto dto) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "UPDATE supplier SET supplier_name=?, NIC=?, address=?, contact_number=? WHERE supplier_id=?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, dto.getSupplierName());
+        pstm.setString(2, dto.getSupplierNIC());
+        pstm.setString(3, dto.getSupplierAddress());
+        pstm.setString(4, dto.getSupplierContactNumber());
+        pstm.setString(5, dto.getSupplierId());
+
+        boolean isUpdated = pstm.executeUpdate() > 0;
+        return isUpdated;
+    }
+
+    public boolean deleteSupplier(String supplierId) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "DELETE FROM supplier WHERE supplier_id=?";
+
+            PreparedStatement pstm = connection.prepareStatement(sql);
+            pstm.setString(1, supplierId);
+            boolean isDeleted = pstm.executeUpdate() > 0;
+       return isDeleted;
+    }
+}

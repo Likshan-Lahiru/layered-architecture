@@ -7,16 +7,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.tm.SupplierTm;
 import lk.ijse.model.SupplierModel;
+import lk.ijse.util.RegExPatterns;
+import lk.ijse.util.SystemAlert;
+import lk.ijse.util.TxtColours;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -52,7 +52,8 @@ public class SupplierFormController {
     private TableColumn<?, ?> colSupplierName;
     @FXML
     private TableColumn<?, ?> colSupplierD;
-    public void initialize(){
+
+    public void initialize() {
         supplierCellvalueFactory();
         loadAllSupplier();
         setSupplier();
@@ -60,7 +61,7 @@ public class SupplierFormController {
 
     private void setSupplier() {
         tblSupplier.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldvalue,newValue)->{
+                .addListener((observable, oldvalue, newValue) -> {
                     SupplierDto dto = new SupplierDto(
                             newValue.getSupplierId(),
                             newValue.getSupplierName(),
@@ -85,8 +86,8 @@ public class SupplierFormController {
 
         ObservableList<SupplierTm> supplierTmObservableList = FXCollections.observableArrayList();
         try {
-            List<SupplierDto> supplierDtoList =model.getAllSupplier();
-            for (SupplierDto dto : supplierDtoList){
+            List<SupplierDto> supplierDtoList = model.getAllSupplier();
+            for (SupplierDto dto : supplierDtoList) {
                 supplierTmObservableList.add(
                         new SupplierTm(
                                 dto.getSupplierId(),
@@ -98,10 +99,10 @@ public class SupplierFormController {
                 );
             }
             tblSupplier.setItems(supplierTmObservableList);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        
+
     }
 
     private void supplierCellvalueFactory() {
@@ -110,30 +111,74 @@ public class SupplierFormController {
         colSupplierNIC.setCellValueFactory(new PropertyValueFactory<>("supplierNic"));
         colSupplierAddress.setCellValueFactory(new PropertyValueFactory<>("supplierAddress"));
         colSupplierContactNumber.setCellValueFactory(new PropertyValueFactory<>("supplierContactNumber"));
-        
+
     }
 
     public void btnSupplierIDSearchOnAction(ActionEvent actionEvent) {
         String searchSupplierIDText = txtSearchSupplierID.getText();
-        if (searchSupplierIDText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please Enter the Supplier Id").showAndWait();
+        if (searchSupplierIDText.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please Enter the Supplier Id").showAndWait();
             return;
         }
         SupplierModel model = new SupplierModel();
         try {
             SupplierDto dto = model.searchSupplier(searchSupplierIDText);
-            if(dto!=null){
+            if (dto != null) {
                 SupplierSetField(dto);
-            }else {
-                new Alert(Alert.AlertType.CONFIRMATION,"Supplier Does not Found!").showAndWait();
+            } else {
+                new Alert(Alert.AlertType.CONFIRMATION, "Supplier Does not Found!").showAndWait();
                 clearSupplierField();
             }
-        }catch (SQLException e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 
     public void btnSupplierDeleteOnAction(ActionEvent actionEvent) {
+        if (!(txtSupplierId.getText().isEmpty() || txtSupplierName.getText().isEmpty() || txtSupplierNIC.getText().isEmpty() || txtSupplierAddress.getText().isEmpty() || txtSupplierContactNumber.getText().isEmpty())) {
+            if (RegExPatterns.getNamePattern().matcher(txtSupplierName.getText()).matches()) {
+                TxtColours.setDefaultColours(txtSupplierName);
+                if (RegExPatterns.getNICPattern().matcher(txtSupplierNIC.getText()).matches()) {
+                    TxtColours.setDefaultColours(txtSupplierNIC);
+                    if (RegExPatterns.getAddressPattern().matcher(txtSupplierAddress.getText()).matches()) {
+                        TxtColours.setDefaultColours(txtSupplierAddress);
+                        if (RegExPatterns.getContactNumberPattern().matcher(txtSupplierContactNumber.getText()).matches()) {
+                            TxtColours.setDefaultColours(txtSupplierContactNumber);
+                        } else {
+                            TxtColours.setErrorColours(txtSupplierContactNumber);
+                        }
+                    } else {
+                        TxtColours.setErrorColours(txtSupplierAddress);
+                    }
+                } else {
+                    TxtColours.setErrorColours(txtSupplierNIC);
+                }
+
+            }else {
+                TxtColours.setErrorColours(txtSupplierName);
+            }
+        }else {
+            TxtColours.setErrorColours(txtSupplierId);
+            TxtColours.setErrorColours(txtSupplierName);
+            TxtColours.setErrorColours(txtSupplierNIC);
+            TxtColours.setErrorColours(txtSupplierAddress);
+            TxtColours.setErrorColours(txtSupplierContactNumber);
+        }
+        String supplierId = txtSupplierId.getText();
+        SupplierModel model = new SupplierModel();
+        try {
+            boolean isDeleted = model.deleteSupplier(supplierId);
+            if (isDeleted){
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Success", "Supplier Deleted Successfully!", ButtonType.OK).show();
+                clearSupplierField();
+            }else {
+                new SystemAlert(Alert.AlertType.ERROR, "Error", "Supplier Does not Found!", ButtonType.OK).show();
+            }
+
+
+        }catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+        }
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
@@ -141,58 +186,142 @@ public class SupplierFormController {
     }
 
     public void btnSupplierUpdateOnAction(ActionEvent actionEvent) {
-    }
+        if (!(txtSupplierId.getText().isEmpty() || txtSupplierName.getText().isEmpty() || txtSupplierNIC.getText().isEmpty() || txtSupplierAddress.getText().isEmpty() || txtSupplierContactNumber.getText().isEmpty())) {
+            if (RegExPatterns.getNamePattern().matcher(txtSupplierName.getText()).matches()) {
+                TxtColours.setDefaultColours(txtSupplierName);
+                if (RegExPatterns.getNICPattern().matcher(txtSupplierNIC.getText()).matches()) {
+                    TxtColours.setDefaultColours(txtSupplierNIC);
+                    if (RegExPatterns.getAddressPattern().matcher(txtSupplierAddress.getText()).matches()) {
+                        TxtColours.setDefaultColours(txtSupplierAddress);
+                        if (RegExPatterns.getContactNumberPattern().matcher(txtSupplierContactNumber.getText()).matches()) {
+                            TxtColours.setDefaultColours(txtSupplierContactNumber);
+                        } else {
+                            TxtColours.setErrorColours(txtSupplierContactNumber);
+                        }
+                    } else {
+                        TxtColours.setErrorColours(txtSupplierAddress);
+                    }
+                } else {
+                    TxtColours.setErrorColours(txtSupplierNIC);
+                }
 
-    public void btnCustomerSaveOnAction(ActionEvent actionEvent) {
+            }else {
+                TxtColours.setErrorColours(txtSupplierName);
+            }
+        }else {
+            TxtColours.setErrorColours(txtSupplierId);
+            TxtColours.setErrorColours(txtSupplierName);
+            TxtColours.setErrorColours(txtSupplierNIC);
+            TxtColours.setErrorColours(txtSupplierAddress);
+            TxtColours.setErrorColours(txtSupplierContactNumber);
+        }
         String supplierIdText = txtSupplierId.getText();
         String supplierNameText = txtSupplierName.getText();
         String supplierNICText = txtSupplierNIC.getText();
         String supplierAddressText = txtSupplierAddress.getText();
         String supplierContactNumberText = txtSupplierContactNumber.getText();
-        if (supplierIdText.isEmpty()||supplierNameText.isEmpty()||supplierNICText.isEmpty()||supplierAddressText.isEmpty()||supplierContactNumberText.isEmpty()){
-            new Alert(Alert.AlertType.ERROR,"Please Enter all Details!").showAndWait();
-            return;
-        }
 
-        SupplierDto dto = new SupplierDto(supplierIdText, supplierNameText, supplierNICText, supplierAddressText, supplierContactNumberText);
+        SupplierDto dto = new SupplierDto(
+                supplierIdText,
+                supplierNameText,
+                supplierNICText,
+                supplierAddressText,
+                supplierContactNumberText
+
+        );
         SupplierModel model = new SupplierModel();
-
         try {
-            boolean isSaved = model.saveSupplier(dto);
-            if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"New Supplier is entered!").showAndWait();
+            boolean isUpdated = model.updateSupplier(dto);
+            if (isUpdated){
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Supplier Updated Successfully!", ButtonType.OK).show();
                 clearSupplierField();
+            }else {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Supplier Does not Found!", ButtonType.OK).show();
             }
+
         }catch (SQLException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
-
-
-    }
-    public void clearSupplierField(){
-        txtSupplierId.clear();
-        txtSupplierName.clear();
-        txtSupplierAddress.clear();
-        txtSupplierContactNumber.clear();
-        txtSupplierNIC.clear();
-        txtSearchSupplierID.clear();
     }
 
+    public void btnCustomerSaveOnAction(ActionEvent actionEvent) {
+        if (!(txtSupplierId.getText().isEmpty() || txtSupplierName.getText().isEmpty() || txtSupplierNIC.getText().isEmpty() || txtSupplierAddress.getText().isEmpty() || txtSupplierContactNumber.getText().isEmpty())) {
+            if (RegExPatterns.getNamePattern().matcher(txtSupplierName.getText()).matches()) {
+                TxtColours.setDefaultColours(txtSupplierName);
+                if (RegExPatterns.getNICPattern().matcher(txtSupplierNIC.getText()).matches()) {
+                    TxtColours.setDefaultColours(txtSupplierNIC);
+                    if (RegExPatterns.getAddressPattern().matcher(txtSupplierAddress.getText()).matches()) {
+                        TxtColours.setDefaultColours(txtSupplierAddress);
+                        if (RegExPatterns.getContactNumberPattern().matcher(txtSupplierContactNumber.getText()).matches()) {
+                            TxtColours.setDefaultColours(txtSupplierContactNumber);
+                        } else {
+                            TxtColours.setErrorColours(txtSupplierContactNumber);
+                        }
+                    } else {
+                        TxtColours.setErrorColours(txtSupplierAddress);
+                    }
+                } else {
+                    TxtColours.setErrorColours(txtSupplierNIC);
+                }
 
-    public void btnStockListOnAction(ActionEvent actionEvent) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/tool_sctock_form.fxml"));
+            }else {
+                TxtColours.setErrorColours(txtSupplierName);
+            }
+        }else {
+            TxtColours.setErrorColours(txtSupplierId);
+            TxtColours.setErrorColours(txtSupplierName);
+            TxtColours.setErrorColours(txtSupplierNIC);
+            TxtColours.setErrorColours(txtSupplierAddress);
+            TxtColours.setErrorColours(txtSupplierContactNumber);
+        }
+        String supplierIdText = txtSupplierId.getText();
+        String supplierNameText = txtSupplierName.getText();
+        String supplierNICText = txtSupplierNIC.getText();
+        String supplierAddressText = txtSupplierAddress.getText();
+        String supplierContactNumberText = txtSupplierContactNumber.getText();
 
-        this.root.getChildren().clear();
-        this.root.getChildren().add(node);
-    }
+            SupplierDto dto = new SupplierDto(supplierIdText, supplierNameText, supplierNICText, supplierAddressText, supplierContactNumberText);
+            SupplierModel model = new SupplierModel();
 
-    public void btnDashBoardOnAction(ActionEvent actionEvent) {
-        try {
-            Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+            try {
+                boolean isSaved = model.saveSupplier(dto);
+                if (isSaved) {
+                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Supplier Saved Successfully!", ButtonType.OK).show();
+
+                    clearSupplierField();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+            }
+
+
+
+        }
+        public void clearSupplierField () {
+            txtSupplierId.clear();
+            txtSupplierName.clear();
+            txtSupplierAddress.clear();
+            txtSupplierContactNumber.clear();
+            txtSupplierNIC.clear();
+            txtSearchSupplierID.clear();
+        }
+
+
+        public void btnStockListOnAction (ActionEvent actionEvent) throws IOException {
+            Parent node = FXMLLoader.load(this.getClass().getResource("/view/tool_sctock_form.fxml"));
+
             this.root.getChildren().clear();
             this.root.getChildren().add(node);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
+        public void btnDashBoardOnAction (ActionEvent actionEvent){
+            try {
+                Parent node = FXMLLoader.load(this.getClass().getResource("/view/dashBoard_form.fxml"));
+                this.root.getChildren().clear();
+                this.root.getChildren().add(node);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
-}
