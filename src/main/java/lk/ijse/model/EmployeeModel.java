@@ -87,4 +87,17 @@ public class EmployeeModel {
 
         return isUpdated;
     }
+
+    public boolean deleteEmployee(String employeeId) throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "DELETE FROM employee WHERE employee_id=?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, employeeId);
+
+       boolean isDeleted =  pstm.executeUpdate()>0;
+
+       return isDeleted;
+
+    }
 }
