@@ -55,7 +55,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="progress" layoutX="24.0" layoutY="663.0" prefHeight="21.0" prefWidth="1198.0" progress="0.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../style/progressbar.css" />
+      <ProgressBar fx:id="progress" layoutX="12.0" layoutY="663.0" prefHeight="21.0" prefWidth="1175.0" progress="0.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../style/progressbar.css" />
       <ImageView fitHeight="270.0" fitWidth="408.0" layoutX="345.0" layoutY="386.0" styleClass="shadow">
          <image>
             <Image url="@../icon/kisspng-stock-photography-plumber-construction-worker-plum-construction-worker-5ab9120b89e902.6814390015220782195649.png" />

@@ -21,6 +21,7 @@ import lk.ijse.dto.EmployeeDto;
 import lk.ijse.dto.tm.EmployeeTm;
 import lk.ijse.model.EmployeeModel;
 import lk.ijse.util.RegExPatterns;
+import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 
@@ -63,6 +64,8 @@ public class EmployeeFormController {
     @FXML
     private TableView<EmployeeTm> tblEmployee;
     private File file;
+    MainFormController mainFormController = new MainFormController();
+    SoundsAssits soundsAssits =  new SoundsAssits();
 
     public void initialize(){
         employeeCellvalueFactory();
@@ -104,6 +107,16 @@ public class EmployeeFormController {
         String employeeIDText = txtSearchEmployeeID.getText();
         if (employeeIDText.isEmpty()){
             new Alert(Alert.AlertType.ERROR,"Please Enter the Employee Id").showAndWait();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.employee_valid_id();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return;
         }
         EmployeeModel model = new EmployeeModel();
         try {
@@ -112,6 +125,15 @@ public class EmployeeFormController {
                 employeeSetFeild(dto);
             }else {
                 new Alert(Alert.AlertType.CONFIRMATION,"Employee Does not Found!").showAndWait();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if(check){
+                        soundsAssits.employee_Does_not_found();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 employeeFeildClear();
             }
         }catch (SQLException e){
@@ -163,8 +185,18 @@ public class EmployeeFormController {
             TxtColours.setErrorColours(txtEmployeeNIC);
             TxtColours.setErrorColours(txtEmployeeName);
             TxtColours.setErrorColours(txtEmployeerId);
-            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").show();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return;
+
         }
 
 
@@ -175,10 +207,28 @@ public class EmployeeFormController {
             boolean isSaved = model.saveEmployee(dto);
             if (isSaved){
                     loadAllEmployee();
-                    new Alert(Alert.AlertType.CONFIRMATION,"New Employee Entered!").showAndWait();
+                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Success","Employee Saved Successfully!").show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if (check) {
+                        soundsAssits.employeeSave();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                     employeeFeildClear();
             }else {
-                new Alert(Alert.AlertType.ERROR,"new Employee enter failed!").showAndWait();
+                new SystemAlert(Alert.AlertType.ERROR,"Error","Employee Not Saved").show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if (check) {
+                        soundsAssits.employeeNotSaved();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }catch (SQLException e){
@@ -224,7 +274,16 @@ public class EmployeeFormController {
             TxtColours.setErrorColours(txtEmployeeNIC);
             TxtColours.setErrorColours(txtEmployeeName);
             TxtColours.setErrorColours(txtEmployeerId);
-            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").show();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return;
         }
         String employeeIDText = txtEmployeerId.getText();
@@ -237,10 +296,28 @@ public class EmployeeFormController {
         try {
             boolean isUpdated = model.updateEmployee(dto);
             if (isUpdated){
-                new Alert(Alert.AlertType.CONFIRMATION,"Employee Updated!").showAndWait();
+                new SystemAlert(Alert.AlertType.CONFIRMATION,"Success","Employee Updated Successfully").show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if (check) {
+                        soundsAssits.employeeUpdate();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 employeeFeildClear();
             }else {
-                new Alert(Alert.AlertType.ERROR,"Employee Update Failed!").showAndWait();
+                new SystemAlert(Alert.AlertType.ERROR,"Error","Employee Not Updated").show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if (check) {
+                        soundsAssits.employeeNotUpdate();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }catch (SQLException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
@@ -340,7 +417,16 @@ public class EmployeeFormController {
             TxtColours.setErrorColours(txtEmployeeNIC);
             TxtColours.setErrorColours(txtEmployeeName);
             TxtColours.setErrorColours(txtEmployeerId);
-            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").showAndWait();
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").show();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return;
         }
         String employeeId = txtEmployeerId.getText();
@@ -350,13 +436,35 @@ public class EmployeeFormController {
             boolean isDeleted = model.deleteEmployee(employeeId);
             if (isDeleted){
                 new SystemAlert(Alert.AlertType.CONFIRMATION,"Success","Employee Deleted Successfully").show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if (check) {
+                        soundsAssits.employeeDelete();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 employeeFeildClear();
             }else {
                 new SystemAlert(Alert.AlertType.ERROR,"Error","Employee Delete Failed").show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if (check) {
+                        soundsAssits.employeeDeleteFail();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
+
+    }
+    public void setMainFormController(MainFormController mainFormController) {
+        this.mainFormController = mainFormController;
 
     }
 }

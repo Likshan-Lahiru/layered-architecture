@@ -37,4 +37,44 @@ public class SoundsAssits {
         player = new MediaPlayer( new Media(uriString));
         player.play();
     }
+    public void employeeDelete(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employee_delete.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employeeUpdate(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employeeUpdate.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employeeNotUpdate(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employee_not_update.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employeeDeleteFail(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employee_delete_failed.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employeeNotSaved(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employee_not_saved.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employeeSave(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\Employee_saved_success.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employee_valid_id(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employee_valid_id.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void employee_Does_not_found(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\employee_Does_not_found.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
 }

@@ -33,7 +33,7 @@
       </JFXButton>
       <TabPane layoutX="12.0" layoutY="55.0" prefHeight="673.0" prefWidth="1196.0" styleClass="transparent" stylesheets="@../style/style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="                                    Employee Detail                                      ">
+          <Tab text="                               Employee Detail                          ">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -126,12 +126,12 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="                                    Employee Attandance                                      ">
+          <Tab text="                          Employee Attandance                          ">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-            <Tab text="                                    Attandance Mark                                     ">
+            <Tab text="                          Attandance Mark                          ">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>

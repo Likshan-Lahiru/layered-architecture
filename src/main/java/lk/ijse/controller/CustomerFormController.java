@@ -330,14 +330,7 @@ public class CustomerFormController {
         txtCustomerContactNumber.clear();
         txtSearchCustomerID.clear();
     }
-    public  boolean check(){
 
-        if (soundsAssistToggelBtn.isSelected()){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     public void setMainFormController(MainFormController mainFormController) {
         this.mainFormController = mainFormController;
