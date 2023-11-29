@@ -64,7 +64,7 @@
                         <Image url="@../icon/icons8-reception-50.png" />
                      </image>
                   </ImageView>
-                  <JFXButton buttonType="RAISED" layoutX="16.0" layoutY="465.0" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #da2c38;" text="Button">
+                  <JFXButton buttonType="RAISED" layoutX="16.0" layoutY="465.0" onAction="#btnCustomerDeleteOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #da2c38;" text="Delete">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

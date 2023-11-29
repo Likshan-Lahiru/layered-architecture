@@ -245,8 +245,76 @@ public class CustomerFormController {
     public void btnCustomerUpdateOnAction(ActionEvent actionEvent) {
 
 
+        if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty())) {
+            if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()) {
+                TxtColours.setDefaultColours(txtCustomerId);
+                if (RegExPatterns.getNamePattern().matcher(txtCustomerName.getText()).matches()) {
+                    TxtColours.setDefaultColours(txtCustomerName);
+                    if (RegExPatterns.getNICPattern().matcher(txtCustomerNIC.getText()).matches()) {
+                        TxtColours.setDefaultColours(txtCustomerNIC);
+                        if (RegExPatterns.getContactNumberPattern().matcher(txtCustomerContactNumber.getText()).matches()) {
+                            TxtColours.setDefaultColours(txtCustomerContactNumber);
+                        } else {
+                            TxtColours.setErrorColours(txtCustomerContactNumber);
+                            return;
 
+                        }
+                    } else {
+                        TxtColours.setErrorColours(txtCustomerNIC);
+                        return;
+                    }
+                } else {
+                    TxtColours.setErrorColours(txtCustomerName);
+                    return;
+                }
+            } else {
+                TxtColours.setErrorColours(txtCustomerId);
+                return;
+            }
+        } else {
+            TxtColours.setErrorColours(txtCustomerId);
+            TxtColours.setErrorColours(txtCustomerName);
+            TxtColours.setErrorColours(txtCustomerAddress);
+            TxtColours.setErrorColours(txtCustomerNIC);
+            TxtColours.setErrorColours(txtCustomerContactNumber);
+
+
+            new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").show();
+            try {
+                boolean check = mainFormController.check();
+
+                if (check) {
+                    soundsAssits.insertAllDetail();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        String txtCustomerIdText = txtCustomerId.getText();
+        String txtCustomerNameText = txtCustomerName.getText();
+        String txtCustomerAddressText = txtCustomerAddress.getText();
+        String txtCustomerNICText = txtCustomerNIC.getText();
+        String txtCustomerContactNumberText = txtCustomerContactNumber.getText();
+
+        CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText);
+        CustomerModel model = new CustomerModel();
+
+        try {
+            boolean isUpdated = model.updateCustomer(dto);
+            if (isUpdated) {
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer Update successfully!", ButtonType.OK).show();
+
+
+
+            }
+
+        }catch (SQLException e){
+            new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+
+        }
     }
+
     public void clearCustomerField(){
         txtCustomerId.clear();
         txtCustomerName.clear();
@@ -277,5 +345,9 @@ public class CustomerFormController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    void btnCustomerDeleteOnAction(ActionEvent event) {
+
     }
 }

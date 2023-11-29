@@ -94,7 +94,7 @@ public class LoginFormController {
         stage.setTitle("Order Form");
         stage.centerOnScreen();
 
-            try {
+          /*  try {
                 Mail mail = new Mail();
                 mail.setMsg(nameText+"emplloyee Login into Ashen Enterprise management System at"+" "+lblTime.getText());
 
@@ -106,7 +106,7 @@ public class LoginFormController {
                 new SystemAlert(Alert.AlertType.INFORMATION, "Success", "Mail sent!", ButtonType.OK).show();
             }catch (Exception e){
                 new SystemAlert(Alert.AlertType.ERROR, "Mail ", e.getMessage(), ButtonType.OK).show();
-            }
+            }*/
 
 
 
