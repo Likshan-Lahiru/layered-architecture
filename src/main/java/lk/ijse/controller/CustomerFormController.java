@@ -244,7 +244,6 @@ public class CustomerFormController {
 
     public void btnCustomerUpdateOnAction(ActionEvent actionEvent) {
 
-
         if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty())) {
             if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()) {
                 TxtColours.setDefaultColours(txtCustomerId);
@@ -304,7 +303,15 @@ public class CustomerFormController {
             boolean isUpdated = model.updateCustomer(dto);
             if (isUpdated) {
                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer Update successfully!", ButtonType.OK).show();
+                try {
+                    boolean check = mainFormController.check();
+                    if(check){
 
+                        soundsAssits.customerUpdate();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
 
             }
@@ -400,7 +407,15 @@ public class CustomerFormController {
            boolean isDeleted = model.deleteCustomer(txtCustomerIdText);
            if (isDeleted) {
                new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Customer Deleted successfully!", ButtonType.OK).show();
+               try {
+                   boolean check = mainFormController.check();
 
+                   if (check) {
+                       soundsAssits.customerDelete();
+                   }
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
         }
     }catch (SQLException e){
         new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
