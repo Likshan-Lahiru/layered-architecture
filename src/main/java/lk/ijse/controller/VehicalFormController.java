@@ -106,15 +106,18 @@ public class VehicalFormController {
                     TxtColours.setDefaultColours(txtNumPlateNo);
                 }else {
                     TxtColours.setErrorColours(txtNumPlateNo);
+                    return;
                 }
             }else {
                 TxtColours.setErrorColours(txtVehicleId);
+                return;
             }
 
         }else {
             TxtColours.setErrorColours(txtVehicleId);
             TxtColours.setErrorColours(txtNumPlateNo);
             TxtColours.setErrorColours(txtVehicleStatus);
+            return;
 
         }
         String txtVehicleIdText = txtVehicleId.getText();
@@ -149,15 +152,18 @@ public class VehicalFormController {
                     TxtColours.setDefaultColours(txtNumPlateNo);
                 }else {
                     TxtColours.setErrorColours(txtNumPlateNo);
+                    return;
                 }
             }else {
                 TxtColours.setErrorColours(txtVehicleId);
+                return;
             }
 
         }else {
             TxtColours.setErrorColours(txtVehicleId);
             TxtColours.setErrorColours(txtNumPlateNo);
             TxtColours.setErrorColours(txtVehicleStatus);
+            return;
 
         }
         String txtVehicleIdText = txtVehicleId.getText();
@@ -189,15 +195,18 @@ public class VehicalFormController {
                     TxtColours.setDefaultColours(txtNumPlateNo);
                 }else {
                     TxtColours.setErrorColours(txtNumPlateNo);
+                    return;
                 }
             }else {
                 TxtColours.setErrorColours(txtVehicleId);
+                return;
             }
 
         }else {
             TxtColours.setErrorColours(txtVehicleId);
             TxtColours.setErrorColours(txtNumPlateNo);
             TxtColours.setErrorColours(txtVehicleStatus);
+            return;
 
         }
         String txtVehicleIdText = txtVehicleId.getText();

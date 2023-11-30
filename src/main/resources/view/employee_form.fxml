@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -19,7 +20,7 @@
 
 <AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.EmployeeFormController">
    <children>
-      <Label alignment="BOTTOM_CENTER" layoutY="-101.0" prefHeight="147.0" prefWidth="1220.0" style="-fx-background-color: #164863;" text="Emoloyee Details" textFill="WHITE">
+      <Label alignment="BOTTOM_CENTER" layoutY="-101.0" prefHeight="147.0" prefWidth="1220.0" style="-fx-background-color: #164863;" text="Employee Details" textFill="WHITE">
          <font>
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>
@@ -51,7 +52,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Pane layoutX="20.0" layoutY="39.0" prefHeight="577.0" prefWidth="661.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+                              <Pane layoutX="20.0" layoutY="48.0" prefHeight="564.0" prefWidth="661.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                                  <children>
                                     <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="9.0" prefHeight="559.0" prefWidth="643.0" style="-fx-background-radius: 15;" stylesheets="@../style/table.css">
                                        <columns>
@@ -63,32 +64,53 @@
                                     </TableView>
                                  </children>
                               </Pane>
-                              <Pane layoutX="723.0" layoutY="51.0" prefHeight="559.0" prefWidth="435.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+                              <Pane layoutX="700.0" layoutY="51.0" prefHeight="559.0" prefWidth="483.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                                  <children>
-                                    <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="23.0" layoutY="366.0" prefHeight="26.0" prefWidth="315.0" promptText=" Address" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="23.0" layoutY="382.0" prefHeight="26.0" prefWidth="315.0" promptText=" Address" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="23.0" layoutY="179.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="23.0" layoutY="195.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXButton buttonType="RAISED" layoutX="327.0" layoutY="511.0" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="66.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="366.0" layoutY="511.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
+                                       <graphic>
+                                          <ImageView blendMode="SCREEN">
+                                             <image>
+                                                <Image url="@../icon/icons8-clear.gif" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </JFXButton>
-                                    <JFXButton buttonType="RAISED" layoutX="141.0" layoutY="511.0" onAction="#btnEmployeeSaveOnAction" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="131.0" layoutY="511.0" onAction="#btnEmployeeSaveOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
+                                       <graphic>
+                                          <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                                             <image>
+                                                <Image url="@../icon/icons8-save%20(1).gif" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </JFXButton>
-                                    <JFXButton buttonType="RAISED" layoutX="234.0" layoutY="511.0" onAction="#btnEmployeeUpdateOnAction" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="249.0" layoutY="511.0" onAction="#btnEmployeeUpdateOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
+                                       <graphic>
+                                          <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                                             <image>
+                                                <Image url="@../icon/icons8-update.gif" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </JFXButton>
                                     <Pane layoutX="285.0" layoutY="14.0" prefHeight="164.0" prefWidth="134.0" style="-fx-background-radius: 20; -fx-background-color: #f2e9e4;">
                                        <children>
@@ -100,24 +122,31 @@
                                        </children>
                                     </Pane>
                                     <JFXButton fx:id="btnImageChoosers" buttonType="RAISED" layoutX="193.0" layoutY="134.0" onAction="#btnImageChooserOnAction" prefHeight="25.0" prefWidth="75.0" text="Add photo" />
-                                    <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="23.0" layoutY="298.0" prefHeight="25.0" prefWidth="315.0" promptText=" NIC" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="23.0" layoutY="314.0" prefHeight="25.0" prefWidth="315.0" promptText=" NIC" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="23.0" layoutY="234.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="23.0" layoutY="255.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXButton buttonType="RAISED" layoutX="45.0" layoutY="511.0" onAction="#btnDeleteOnAction" prefHeight="34.0" prefWidth="75.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="511.0" onAction="#btnDeleteOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="15.0" />
                                        </font>
+                                       <graphic>
+                                          <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                                             <image>
+                                                <Image url="@../icon/icons8-delete%20(1).gif" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
                                     </JFXButton>
                                     <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../icon/icons8-user-menu-male-50.png" />
+                                          <Image url="@../icon/icons8-employees.gif" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -159,14 +188,15 @@
                                     <JFXComboBox fx:id="cmbQrEmployeeId" labelFloat="true" layoutX="37.0" layoutY="85.0" prefHeight="53.0" prefWidth="323.0" promptText="Employee" />
                                  </children>
                               </AnchorPane>
-                              <Pane layoutX="579.0" layoutY="64.0" prefHeight="529.0" prefWidth="548.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                              <Pane layoutX="511.0" layoutY="64.0" prefHeight="529.0" prefWidth="616.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                                  <children>
-                                    <TableView layoutX="6.0" layoutY="9.0" prefHeight="543.0" prefWidth="536.0" stylesheets="@../style/table.css">
+                                    <TableView fx:id="tblAttandance" layoutX="6.0" layoutY="9.0" prefHeight="515.0" prefWidth="604.0" stylesheets="@../style/table.css">
                                       <columns>
-                                        <TableColumn fx:id="colQrEmployeeId" prefWidth="114.99996948242188" text="Employee Id" />
-                                        <TableColumn fx:id="colQrEmployeeName" prefWidth="165.0" text="Employee Name" />
-                                          <TableColumn fx:id="colQrEmployeeDate" prefWidth="117.0" text="Date" />
-                                          <TableColumn fx:id="colQrEmployeeStatus" prefWidth="133.0" text="Mark" />
+                                        <TableColumn fx:id="colQrEmployeeId" prefWidth="106.0" text="Employee Id" />
+                                        <TableColumn fx:id="colQrEmployeeName" prefWidth="143.0" text="Employee Name" />
+                                          <TableColumn fx:id="colQrNic" prefWidth="120.0" text="NIC" />
+                                          <TableColumn fx:id="colQrEmployeeDate" prefWidth="113.0" text="Date" />
+                                          <TableColumn fx:id="colQrEmployeeStatus" prefWidth="120.0" text="Mark" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -210,16 +240,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Label layoutX="925.0" layoutY="17.0" prefHeight="26.0" prefWidth="47.0" text="Date:">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblOrderDate" layoutX="970.0" layoutY="18.0" prefHeight="24.0" prefWidth="143.0" textFill="#0033ff">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
+                              <DatePicker layoutX="953.0" layoutY="22.0" />
                            </children>
                         </Pane>
                      </children></AnchorPane>
@@ -231,88 +252,109 @@
                      <children>
                         <Pane layoutX="1.0" prefHeight="676.0" prefWidth="1220.0" style="-fx-background-color: #ced4da;">
                            <children>
-                              <AnchorPane fx:id="miniPanel" layoutX="45.0" layoutY="14.0" prefHeight="329.0" prefWidth="431.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                              <AnchorPane fx:id="miniPanel" layoutX="19.0" layoutY="14.0" prefHeight="475.0" prefWidth="484.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                                  <children>
-                                    <ImageView fitHeight="270.0" fitWidth="272.0" layoutX="81.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                                    <ImageView fitHeight="453.0" fitWidth="361.0" layoutX="49.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../icon/scanner1.png" />
+                                          <Image url="@../icon/Spin-1.4s-217px.gif" />
                                        </image>
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Pane layoutX="45.0" layoutY="393.0" prefHeight="258.0" prefWidth="431.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                              <Pane layoutX="542.0" layoutY="71.0" prefHeight="391.0" prefWidth="511.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="67.0" prefHeight="35.0" prefWidth="116.0" text=" Name                :-">
+                                    <Label layoutX="33.0" layoutY="144.0" prefHeight="35.0" prefWidth="149.0" text=" Name                     :-">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="113.0" prefHeight="35.0" prefWidth="111.0" text="Employee NIC    :-">
+                                    <Label layoutX="33.0" layoutY="203.0" prefHeight="35.0" prefWidth="176.0" text="Employee NIC        :-">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="156.0" prefHeight="35.0" prefWidth="111.0" text="Address             :-">
+                                    <Label layoutX="33.0" layoutY="263.0" prefHeight="35.0" prefWidth="146.0" text="Attandance Status:-">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="12.0" layoutY="25.0" prefHeight="35.0" prefWidth="116.0" text="Employee Id       :-">
+                                    <Label layoutX="33.0" layoutY="80.0" prefHeight="35.0" prefWidth="160.0" text="Employee Id            :-">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblQrScannerId" layoutX="138.0" layoutY="25.0" prefHeight="35.0" prefWidth="180.0">
+                                    <Label fx:id="lblQrScannerId" layoutX="187.0" layoutY="80.0" prefHeight="35.0" prefWidth="214.0">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblQrScannerName" layoutX="138.0" layoutY="67.0" prefHeight="35.0" prefWidth="180.0">
+                                    <Label fx:id="lblQrScannerName" layoutX="187.0" layoutY="144.0" prefHeight="35.0" prefWidth="180.0">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblQrScannerNic" layoutX="138.0" layoutY="113.0" prefHeight="35.0" prefWidth="180.0">
+                                    <Label fx:id="lblQrScannerNic" layoutX="187.0" layoutY="203.0" prefHeight="35.0" prefWidth="180.0">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblQrScannerAddress" layoutX="138.0" layoutY="156.0" prefHeight="35.0" prefWidth="180.0">
+                                    <Label fx:id="lblQrScannerAddress" layoutX="193.0" layoutY="263.0" prefHeight="35.0" prefWidth="180.0">
                                        <font>
-                                          <Font size="13.0" />
+                                          <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="38.0" fitWidth="88.0" layoutX="384.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="43.0" fitWidth="40.0" layoutX="455.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../icon/userGif.gif" />
+                                          <Image url="@../icon/icons8-user.gif" />
                                        </image>
                                     </ImageView>
+                                    <JFXButton layoutX="384.0" layoutY="333.0" onAction="#btnAttadanceOnAction" prefHeight="38.0" prefWidth="91.0" text="Finish">
+                                       <graphic>
+                                          <ImageView>
+                                             <image>
+                                                <Image url="@../icon/icons8-end.gif" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
                                  </children>
                               </Pane>
-                              <JFXButton fx:id="btnStart" buttonType="RAISED" layoutX="146.0" layoutY="348.0" onAction="#btnStartOnAction" prefHeight="39.0" prefWidth="90.0" style="-fx-background-color: #90e0ef;" text="Start">
+                              <JFXButton fx:id="btnStart" buttonType="RAISED" layoutX="117.0" layoutY="516.0" onAction="#btnStartOnAction" prefHeight="39.0" prefWidth="104.0" style="-fx-background-color: #90e0ef;" styleClass="shadow" text="Start" textFill="#1e1a1a">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView blendMode="SCREEN">
+                                       <image>
+                                          <Image url="@../icon/icons8-start.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </JFXButton>
-                              <JFXButton fx:id="btnEnd" buttonType="RAISED" layoutX="261.0" layoutY="348.0" onAction="#btnEndOnAction" prefHeight="39.0" prefWidth="90.0" style="-fx-background-color: #caf0f8;" text="Stop">
+                              <JFXButton fx:id="btnEnd" buttonType="RAISED" layoutX="239.0" layoutY="516.0" onAction="#btnEndOnAction" prefHeight="39.0" prefWidth="105.0" style="-fx-background-color: #caf0f8;" styleClass="shadow" text="Stop" textFill="#1e1a1a">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView blendMode="SCREEN" fitHeight="23.0" fitWidth="23.0">
+                                       <image>
+                                          <Image url="@../icon/icons8-stop.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </JFXButton>
                            </children>
                         </Pane>
-                        <Pane layoutX="504.0" layoutY="74.0" prefHeight="573.0" prefWidth="633.0" style="-fx-background-color: white; -fx-background-radius: 15;">
-                           <children>
-                              <TableView layoutX="6.0" layoutY="9.0" prefHeight="554.0" prefWidth="616.0" stylesheets="@../style/table.css">
-                                 <columns>
-                                    <TableColumn fx:id="colScannerId" prefWidth="149.0" text="Employee Id" />
-                                    <TableColumn fx:id="colScannerName" prefWidth="156.0" text="Employee Name" />
-                                    <TableColumn fx:id="colScannerDate" prefWidth="144.0" text="Date" />
-                                    <TableColumn fx:id="colScannerStatus" prefWidth="161.0" text="attandance Status" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </Pane>
+                        <Label layoutX="935.0" layoutY="27.0" prefHeight="26.0" prefWidth="47.0" text="Date:">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblAttandanceDate" layoutX="980.0" layoutY="28.0" prefHeight="24.0" prefWidth="143.0" textFill="#0033ff">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
                </content>
             </Tab>

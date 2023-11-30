@@ -36,10 +36,13 @@
                                     <TableColumn fx:id="colAction" minWidth="5.0" prefWidth="109.0" text="Action" />
                                  </columns>
                               </TableView>
-                              <JFXButton buttonType="RAISED" layoutX="536.0" layoutY="398.0" onAction="#btnPlaceNewStockOnAction" prefHeight="23.0" prefWidth="94.0" style="-fx-background-color: #34495e;" text="Finish" textFill="WHITE">
+                              <JFXButton buttonType="RAISED" layoutX="502.0" layoutY="388.0" onAction="#btnPlaceNewStockOnAction" prefHeight="35.0" prefWidth="128.0" style="-fx-background-color: #34495e;" text="Add New Stock" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </JFXButton>
                               <Label layoutX="16.0" layoutY="403.0" text="Net Total:">
                                  <font>
@@ -60,7 +63,7 @@
                            <graphic>
                               <ImageView blendMode="SCREEN" fitHeight="22.0" fitWidth="26.0">
                                  <image>
-                                    <Image url="@../icon/pluse.png" />
+                                    <Image url="@../icon/icons8-plus.gif" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -93,10 +96,13 @@
                                  </font>
                               </Label>
                               <TextField fx:id="txtToolQuantitySuppliedCount" layoutX="164.0" layoutY="319.0" prefHeight="30.0" prefWidth="210.0" />
-                              <JFXButton buttonType="RAISED" layoutX="307.0" layoutY="457.0" onAction="#btnAddToListOnAction" prefHeight="32.0" prefWidth="109.0" style="-fx-background-color: #3498db;" text="Add to list" textFill="WHITE">
+                              <JFXButton buttonType="RAISED" layoutX="307.0" layoutY="463.0" onAction="#btnAddToListOnAction" prefHeight="32.0" prefWidth="109.0" style="-fx-background-color: #3498db;" text="Add to list" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                               </JFXButton>
                               <TextField fx:id="txtToolPriceUnit" layoutX="164.0" layoutY="370.0" prefHeight="30.0" prefWidth="210.0" />
                               <Label layoutX="4.0" layoutY="372.0" prefHeight="26.0" prefWidth="142.0" text="Tool  Price(unit)    :">
@@ -104,10 +110,17 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <JFXButton layoutX="29.0" layoutY="461.0" onAction="#btnGetReportOnAction" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: fcbf49;" text="His-Report" textFill="WHITE">
+                              <JFXButton layoutX="29.0" layoutY="461.0" onAction="#btnGetReportOnAction" prefHeight="36.0" prefWidth="136.0" style="-fx-background-color: fcbf49;" text="His-Report" textFill="WHITE">
                                  <font>
-                                    <Font size="13.0" />
+                                    <Font name="System Bold" size="15.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView blendMode="SCREEN" fitHeight="26.0" fitWidth="30.0">
+                                       <image>
+                                          <Image url="@../icon/icons8-medical-history.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </JFXButton>
                            </children>
                         </Pane>

@@ -213,20 +213,9 @@ public class toolStockController {
         String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
         String wasteCount = txtStckListWasteCount.getText();
 
-        try {
-            if (supplierId.isEmpty() ||
-                    toolID.isEmpty() ||
-                    toolName.isEmpty() ||
-                    String.valueOf(qtyOnHand).isEmpty() ||
-                    String.valueOf(toolQuantitySuppliedCount).isEmpty() ||
-                    String.valueOf(toolPriceUnit).isEmpty()) {
-                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
-                return;
-            }
-        } catch (NumberFormatException e) {
-            new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
-            return;
-        }
+
+
+
 
         Double total = calTotal(toolPriceUnit, toolQuantitySuppliedCount);
         Button btn = new Button("remove");

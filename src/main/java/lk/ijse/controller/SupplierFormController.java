@@ -146,16 +146,20 @@ public class SupplierFormController {
                             TxtColours.setDefaultColours(txtSupplierContactNumber);
                         } else {
                             TxtColours.setErrorColours(txtSupplierContactNumber);
+                            return;
                         }
                     } else {
                         TxtColours.setErrorColours(txtSupplierAddress);
+                        return;
                     }
                 } else {
                     TxtColours.setErrorColours(txtSupplierNIC);
+                    return;
                 }
 
             }else {
                 TxtColours.setErrorColours(txtSupplierName);
+                return;
             }
         }else {
             TxtColours.setErrorColours(txtSupplierId);
@@ -163,6 +167,7 @@ public class SupplierFormController {
             TxtColours.setErrorColours(txtSupplierNIC);
             TxtColours.setErrorColours(txtSupplierAddress);
             TxtColours.setErrorColours(txtSupplierContactNumber);
+            return;
         }
         String supplierId = txtSupplierId.getText();
         SupplierModel model = new SupplierModel();
@@ -197,16 +202,20 @@ public class SupplierFormController {
                             TxtColours.setDefaultColours(txtSupplierContactNumber);
                         } else {
                             TxtColours.setErrorColours(txtSupplierContactNumber);
+                            return;
                         }
                     } else {
                         TxtColours.setErrorColours(txtSupplierAddress);
+                        return;
                     }
                 } else {
                     TxtColours.setErrorColours(txtSupplierNIC);
+                    return;
                 }
 
             }else {
                 TxtColours.setErrorColours(txtSupplierName);
+                return;
             }
         }else {
             TxtColours.setErrorColours(txtSupplierId);
@@ -214,6 +223,7 @@ public class SupplierFormController {
             TxtColours.setErrorColours(txtSupplierNIC);
             TxtColours.setErrorColours(txtSupplierAddress);
             TxtColours.setErrorColours(txtSupplierContactNumber);
+            return;
         }
         String supplierIdText = txtSupplierId.getText();
         String supplierNameText = txtSupplierName.getText();
@@ -256,16 +266,20 @@ public class SupplierFormController {
                             TxtColours.setDefaultColours(txtSupplierContactNumber);
                         } else {
                             TxtColours.setErrorColours(txtSupplierContactNumber);
+                            return;
                         }
                     } else {
                         TxtColours.setErrorColours(txtSupplierAddress);
+                        return;
                     }
                 } else {
                     TxtColours.setErrorColours(txtSupplierNIC);
+                    return;
                 }
 
             }else {
                 TxtColours.setErrorColours(txtSupplierName);
+                return;
             }
         }else {
             TxtColours.setErrorColours(txtSupplierId);
@@ -273,6 +287,7 @@ public class SupplierFormController {
             TxtColours.setErrorColours(txtSupplierNIC);
             TxtColours.setErrorColours(txtSupplierAddress);
             TxtColours.setErrorColours(txtSupplierContactNumber);
+            return;
         }
         String supplierIdText = txtSupplierId.getText();
         String supplierNameText = txtSupplierName.getText();

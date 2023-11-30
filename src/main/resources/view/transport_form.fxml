@@ -40,7 +40,7 @@
             <Label layoutX="879.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
          </children>
       </Pane>
-      <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="407.0" prefHeight="274.0" prefWidth="622.0" stylesheets="@../style/table.css">
+      <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="395.0" prefHeight="286.0" prefWidth="622.0" stylesheets="@../style/table.css">
          <columns>
             <TableColumn fx:id="colVehicleId" prefWidth="100.0" text="Vehicle ID" />
             <TableColumn fx:id="colVehicleStatus" prefWidth="153.0" text="Status" />
@@ -48,9 +48,9 @@
             <TableColumn fx:id="colNumberplateNo" prefWidth="170.0" text="Number plate NO" />
          </columns>
       </TableView>
-      <Pane layoutX="705.0" layoutY="409.0" prefHeight="274.0" prefWidth="465.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 15;">
+      <Pane layoutX="705.0" layoutY="397.0" prefHeight="286.0" prefWidth="465.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 15;">
          <children>
-            <JFXTextField fx:id="txtVehicleId" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="168.0" promptText="Vehicle ID">
+            <JFXTextField fx:id="txtVehicleId" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="49.0" prefHeight="25.0" prefWidth="168.0" promptText="Vehicle ID">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -64,8 +64,11 @@
                      </light>
                   </Lighting>
                </effect>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtNumPlateNo" focusColor="BLACK" labelFloat="true" layoutX="230.0" layoutY="20.0" prefHeight="25.0" prefWidth="179.0" promptText="Number plate NO">
+            <JFXTextField fx:id="txtNumPlateNo" focusColor="BLACK" labelFloat="true" layoutX="230.0" layoutY="49.0" prefHeight="25.0" prefWidth="179.0" promptText="Number plate NO">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -78,8 +81,11 @@
                      </light>
                   </Lighting>
                </effect>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtVehicleStatus" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="398.0" promptText="Vehicle Status">
+            <JFXTextField fx:id="txtVehicleStatus" focusColor="BLACK" labelFloat="true" layoutX="14.0" layoutY="104.0" prefHeight="25.0" prefWidth="398.0" promptText="Vehicle Status">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
@@ -93,15 +99,63 @@
                      </light>
                   </Lighting>
                </effect>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXTextField>
-            <JFXButton buttonType="RAISED" layoutX="147.0" layoutY="227.0" onAction="#btnVehcleSaveOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #fcbf49;" text="Save" />
-            <JFXButton buttonType="RAISED" layoutX="222.0" layoutY="227.0" onAction="#btnVehcleUpdateOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #2ec4b6;" text="Update" />
-            <JFXButton buttonType="RAISED" layoutX="384.0" layoutY="227.0" onAction="#btnVehcleDeleteOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #da2c38;" text="Delete" />
-            <JFXButton buttonType="RAISED" layoutX="301.0" layoutY="227.0" onAction="#btnVehcleEditOnAction" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: #f1faee;" text="Clear" />
-            <DatePicker fx:id="pickerLastServiceDate" blendMode="MULTIPLY" layoutX="14.0" layoutY="146.0" promptText="Last Service Date" style="-fx-background-color: #fefae0;" />
+            <DatePicker fx:id="pickerLastServiceDate" blendMode="MULTIPLY" layoutX="14.0" layoutY="157.0" prefHeight="34.0" prefWidth="179.0" promptText="Last Service Date" style="-fx-background-color: #fefae0;" />
+            <JFXButton buttonType="RAISED" layoutX="128.0" layoutY="233.0" onAction="#btnVehcleSaveOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../icon/icons8-save%20(1).gif" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="242.0" layoutY="233.0" onAction="#btnVehcleUpdateOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../icon/icons8-update.gif" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="233.0" onAction="#btnVehcleDeleteOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../icon/icons8-delete%20(1).gif" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="354.0" layoutY="233.0" onAction="#btnVehcleEditOnAction" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView blendMode="SCREEN">
+                     <image>
+                        <Image url="@../icon/icons8-clear.gif" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <ImageView fitHeight="35.0" fitWidth="41.0" layoutX="409.0" layoutY="14.0">
+               <image>
+                  <Image url="@../icon/icons8-loading-truck.gif" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
-      <Label alignment="BOTTOM_CENTER" layoutY="-97.0" prefHeight="147.0" prefWidth="1240.0" style="-fx-background-color: #164863;" text="Vehicle Detail" textFill="WHITE">
+      <Label alignment="BOTTOM_CENTER" layoutY="-97.0" prefHeight="147.0" prefWidth="1240.0" style="-fx-background-color: #164863;" text="        Vehicle Detail" textFill="WHITE">
          <font>
             <Font name="Barlow Condensed SemiBold" size="32.0" />
          </font>

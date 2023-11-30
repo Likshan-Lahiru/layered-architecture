@@ -57,6 +57,7 @@ create table employee(
 create table employee_attandance(
                                     employee_id varchar(35),
                                     employee_name varchar(50),
+                                    NIC varchar(14) not null ,
                                     date varchar(20) not null ,
                                     status varchar(20) not null ,
                                     constraint foreign key (employee_id) references employee (employee_id) on DELETE cascade on UPDATE cascade

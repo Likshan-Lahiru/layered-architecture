@@ -51,7 +51,7 @@ public class EmployeeModel {
         return employeeDtos;
     }
 
-    public EmployeeDto searchEmployee(String employeeIDText) throws SQLException {
+    public static EmployeeDto searchEmployee(String employeeIDText) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM employee WHERE employee_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -66,7 +66,14 @@ public class EmployeeModel {
                     resultSet.getString("address")
 
 
+
+
             );
+            System.out.println(dto.getEmployeeid());
+            System.out.println(dto.getEmployeeName());
+            System.out.println(dto.getEmployeeNIC());
+            System.out.println(dto.getEmployeeAddress());
+
         }
 
         return dto;

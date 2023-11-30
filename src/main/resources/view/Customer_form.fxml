@@ -17,7 +17,7 @@
    <children>
       <Pane layoutX="13.0" layoutY="72.0" prefHeight="638.0" prefWidth="1184.0" style="-fx-background-color: #ced4da; -fx-background-radius: 20;">
          <children>
-            <Pane layoutX="777.0" layoutY="85.0" prefHeight="518.0" prefWidth="382.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+            <Pane layoutX="687.0" layoutY="85.0" prefHeight="518.0" prefWidth="483.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="26.0" layoutY="91.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer ID" unFocusColor="#0988e5">
                      <font>
@@ -44,42 +44,70 @@
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton buttonType="RAISED" layoutX="297.0" layoutY="465.0" onAction="#btnClearOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #f1faee;" text="Clear">
+                  <JFXButton buttonType="RAISED" layoutX="373.0" layoutY="465.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="103.0" style="-fx-background-color: #5e60ce;" text="Clear" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView blendMode="SCREEN">
+                           <image>
+                              <Image url="@../icon/icons8-clear.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="108.0" layoutY="465.0" onAction="#btnCustomerSaveOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #fcbf49;" text="Save">
+                  <JFXButton buttonType="RAISED" layoutX="134.0" layoutY="465.0" onAction="#btnCustomerSaveOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #fcbf49;" text="Save" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                           <image>
+                              <Image url="@../icon/icons8-save%20(1).gif" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="201.0" layoutY="465.0" onAction="#btnCustomerUpdateOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #2ec4b6;" text="Update">
+                  <JFXButton buttonType="RAISED" layoutX="253.0" layoutY="465.0" onAction="#btnCustomerUpdateOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #2ec4b6;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                           <image>
+                              <Image url="@../icon/icons8-update.gif" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
                   <ImageView fitHeight="48.0" fitWidth="40.0" layoutX="333.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icon/icons8-reception-50.png" />
                      </image>
                   </ImageView>
-                  <JFXButton buttonType="RAISED" layoutX="16.0" layoutY="465.0" onAction="#btnCustomerDeleteOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #da2c38;" text="Delete">
+                  <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="465.0" onAction="#btnCustomerDeleteOnAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #da2c38;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView blendMode="SCREEN" fitHeight="28.0" fitWidth="26.0">
+                           <image>
+                              <Image url="@../icon/icons8-delete%20(1).gif" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
                </children>
             </Pane>
-            <Pane layoutX="14.0" layoutY="35.0" prefHeight="572.0" prefWidth="739.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
+            <Pane layoutX="14.0" layoutY="35.0" prefHeight="572.0" prefWidth="658.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
-                  <TableView fx:id="tblCustomer" layoutX="10.0" layoutY="8.0" prefHeight="507.0" prefWidth="720.0" stylesheets="@../style/table.css">
+                  <TableView fx:id="tblCustomer" layoutX="10.0" layoutY="8.0" prefHeight="534.0" prefWidth="642.0" stylesheets="@../style/table.css">
                     <columns>
                       <TableColumn fx:id="colCustomerId" prefWidth="100.0" text="Customer ID" />
                       <TableColumn fx:id="colcustomerName" prefWidth="126.99996948242188" text="Customer Name" />
                         <TableColumn fx:id="colCustomerAddress" prefWidth="190.0" text="Customer Address" />
                         <TableColumn fx:id="colCustomerNIC" prefWidth="99.0" text="NIC" />
-                        <TableColumn fx:id="colCustomerContactNumber" prefWidth="201.0" text="Contact Number" />
+                        <TableColumn fx:id="colCustomerContactNumber" prefWidth="123.0" text="Contact Number" />
                     </columns>
                   </TableView>
                </children>
@@ -89,7 +117,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0">
                      <image>
-                        <Image url="@../icon/Search.png" />
+                        <Image url="@../icon/icons8-search%20(2).gif" />
                      </image>
                   </ImageView>
                </graphic>

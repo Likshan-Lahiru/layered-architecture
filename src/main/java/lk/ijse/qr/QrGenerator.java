@@ -12,6 +12,8 @@ import lk.ijse.util.SystemAlert;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
+
 public class QrGenerator {
     private String data;
     private String path;
@@ -32,6 +34,7 @@ public class QrGenerator {
             Path path1 = Paths.get(path);
             MatrixToImageWriter.writeToPath(encode, "PNG", path1);
             new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "QR Successfully Generated").show();
+           // employeeController.setDetails();
 
         } catch (WriterException | IOException e) {
             e.printStackTrace();

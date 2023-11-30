@@ -18,8 +18,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import lk.ijse.dto.AttandanceDto;
+import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.EmployeeDto;
+import lk.ijse.dto.tm.AttandanceTm;
+import lk.ijse.dto.tm.CustomerTm;
 import lk.ijse.dto.tm.EmployeeTm;
+import lk.ijse.model.AttandanceModel;
+import lk.ijse.model.CustomerModel;
 import lk.ijse.model.EmployeeModel;
 import lk.ijse.qr.QrGenerator;
 import lk.ijse.util.RegExPatterns;
@@ -34,6 +40,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -116,17 +123,7 @@ public class EmployeeFormController {
 
     @FXML
     private Label lblQrScannerAddress;
-    @FXML
-    private TableColumn<?, ?> colScannerId;
 
-    @FXML
-    private TableColumn<?, ?> colScannerName;
-
-    @FXML
-    private TableColumn<?, ?> colScannerDate;
-
-    @FXML
-    private TableColumn<?, ?> colScannerStatus;
     @FXML
     private TableColumn<?, ?> colQrEmployeeId;
 
@@ -150,6 +147,13 @@ public class EmployeeFormController {
     private Webcam webcam;
     private WebcamPanel webcamPanel;
     private boolean isReading = false;
+    @FXML
+    private TableColumn<?, ?> colQrNic;
+
+    @FXML
+    private Label lblAttandanceDate;
+    @FXML
+    private TableView<AttandanceTm> tblAttandance;
 
 
     public void initialize(){
@@ -157,9 +161,12 @@ public class EmployeeFormController {
         loadAllEmployee();
         setEmployee();
         loadEmployeeIds();
+        loadAllCustomer();
+        setDateToday();
+        AttandanceCellvalueFactory();
     }
     private void setDateToday() {
-        lblOrderDate.setText(java.time.LocalDate.now().toString());
+        lblAttandanceDate.setText(java.time.LocalDate.now().toString());
     }
 
     private void loadAllEmployee() {
@@ -659,21 +666,16 @@ public class EmployeeFormController {
                     if (image != null) {
                         BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(image)));
                         Result result = new MultiFormatReader().decode(binaryBitmap);
-
-                         Employeeid = String.valueOf(result);
-
-
-
+                        Employeeid   = String.valueOf(result);
                         Platform.runLater(() -> {
                             if (result != null) {
                                 webcam.close();
-                                lblQrScannerId.setText(Employeeid);
+
                                 try {
                                     setDetails();
                                 } catch (SQLException e) {
                                     throw new RuntimeException(e);
                                 }
-                                new Alert(Alert.AlertType.INFORMATION, "Data Scanned Successfully!").showAndWait();
                             } else {
                                 new Alert(Alert.AlertType.ERROR, "No Data Found!").showAndWait();
                             }
@@ -688,12 +690,81 @@ public class EmployeeFormController {
         return true;
     }
     public void setDetails() throws SQLException {
-
         EmployeeDto dto = new EmployeeModel().searchEmployee(Employeeid);
+
             lblQrScannerId.setText(dto.getEmployeeid());
-           lblQrScannerName.setText(dto.getEmployeeName());
-            lblQrScannerAddress.setText(dto.getEmployeeAddress());
+            lblQrScannerName.setText(dto.getEmployeeName());
             lblQrScannerNic.setText(dto.getEmployeeNIC());
+            lblQrScannerAddress.setText("present!");
+    }
+
+    public void btnAttadanceOnAction(ActionEvent actionEvent) throws SQLException {
+        LocalDate date = LocalDate.now();
+        AttandanceModel model1 = new AttandanceModel();
+         boolean isExist = model1.isExist(date);
+         if (isExist) {
+             new SystemAlert(Alert.AlertType.ERROR, "Error", "Attandance Already Taken!", ButtonType.OK).show();
+             return;
+         }
+
+        if (!(lblQrScannerId.getText().isEmpty() || lblQrScannerName.getText().isEmpty() || lblQrScannerAddress.getText().isEmpty() || lblQrScannerNic.getText().isEmpty())) {
+        }else {
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Scan QR code!", ButtonType.OK).show();
+            return;
+        }
+        String scannerIdText = lblQrScannerId.getText();
+        String scannerNameText = lblQrScannerName.getText();
+        String scannerDate = lblAttandanceDate.getText();
+        String scannerNicText = lblQrScannerNic.getText();
+        String scannerStatus =  lblQrScannerAddress.getText();
+
+        AttandanceDto dto = new AttandanceDto(scannerIdText, scannerNameText, scannerDate, scannerNicText, scannerStatus);
+        AttandanceModel model = new AttandanceModel();
+        try {
+           boolean addAttandance = model.addAttandance(dto);
+            if (addAttandance) {
+                new SystemAlert(Alert.AlertType.INFORMATION, "Success", "Attandance Added successfully!", ButtonType.OK).show();
+            }else {
+                new SystemAlert(Alert.AlertType.ERROR, "Error", "Attandance Not Added", ButtonType.OK).show();
+            }
+        }catch (SQLException e) {
+            new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+        }
+
+
 
     }
+
+    public void loadAllCustomer(){
+        var model = new AttandanceModel();
+
+        ObservableList<AttandanceTm> tmObservableList = FXCollections.observableArrayList();
+        try {
+            List<AttandanceDto> attandanceDto =model.getAttandanceDetails();
+            for (AttandanceDto dto : attandanceDto ){
+                tmObservableList.add(
+                        new AttandanceTm(
+                                dto.getEmployeeId(),
+                                dto.getEmployeeName(),
+                                dto.getDate(),
+                                dto.getNIC(),
+                                dto.getStatus()
+                        )
+                );
+            }
+            tblAttandance.setItems(tmObservableList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public void AttandanceCellvalueFactory(){
+        colQrEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        colQrEmployeeName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
+       colQrEmployeeDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colQrNic.setCellValueFactory(new PropertyValueFactory<>("NIC"));
+        colQrEmployeeStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    }
+
 }
