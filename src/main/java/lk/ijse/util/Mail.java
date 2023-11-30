@@ -1,5 +1,7 @@
 package lk.ijse.util;
 
+import javafx.scene.image.ImageView;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -7,6 +9,7 @@ import java.util.Properties;
 
 public class Mail implements Runnable{
 
+    private ImageView imageView;
     private String msg;
     private String to;
     private String subject;
@@ -65,4 +68,6 @@ public class Mail implements Runnable{
             System.out.println("not sent. empty msg!");
          }
     }
+
+
 }

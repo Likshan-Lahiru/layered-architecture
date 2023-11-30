@@ -86,5 +86,10 @@
          </font>
       </Label>
       <Label fx:id="lblTime" layoutX="1076.0" layoutY="763.0" prefHeight="17.0" prefWidth="122.0" />
+      <ImageView fx:id="textPng" fitHeight="150.0" fitWidth="200.0" layoutX="569.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icon/placeOrder.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

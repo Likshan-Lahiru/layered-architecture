@@ -36,7 +36,10 @@ public class LoginFormController {
     private PasswordField txtPassword;
     @FXML
     private AnchorPane root;
+    @FXML
+    private ImageView textPng;
 
+    @FXML
 
     String time;
 
@@ -94,11 +97,12 @@ public class LoginFormController {
         stage.setTitle("Order Form");
         stage.centerOnScreen();
 
-          /*  try {
+         /*  try {
                 Mail mail = new Mail();
                 mail.setMsg(nameText+"emplloyee Login into Ashen Enterprise management System at"+" "+lblTime.getText());
 
-                mail.setTo(hiru);
+
+               mail.setTo(hiru);
                 mail.setSubject("Ashen Enterprise Management System Login");
 
                 Thread thread = new Thread(mail);

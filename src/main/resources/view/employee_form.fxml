@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -15,7 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.EmployeeFormController">
+<AnchorPane fx:id="root" prefHeight="750.0" prefWidth="1200.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.EmployeeFormController">
    <children>
       <Label alignment="BOTTOM_CENTER" layoutY="-101.0" prefHeight="147.0" prefWidth="1220.0" style="-fx-background-color: #164863;" text="Emoloyee Details" textFill="WHITE">
          <font>
@@ -31,7 +33,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <TabPane layoutX="12.0" layoutY="55.0" prefHeight="673.0" prefWidth="1196.0" styleClass="transparent" stylesheets="@../style/style.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="46.0" prefHeight="704.0" prefWidth="1220.0" styleClass="transparent" stylesheets="@../style/style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="                               Employee Detail                          ">
             <content>
@@ -51,24 +53,24 @@
                               </Button>
                               <Pane layoutX="20.0" layoutY="39.0" prefHeight="577.0" prefWidth="661.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                                  <children>
-                                    <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="9.0" prefHeight="559.0" prefWidth="626.0" style="-fx-background-radius: 15;" stylesheets="@../style/table.css">
+                                    <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="9.0" prefHeight="559.0" prefWidth="643.0" style="-fx-background-radius: 15;" stylesheets="@../style/table.css">
                                        <columns>
-                                          <TableColumn fx:id="colEmployeeId" prefWidth="150.0" text="Employee ID" />
-                                          <TableColumn fx:id="colEmployeeName" prefWidth="171.0" text="Employee Name" />
-                                          <TableColumn fx:id="colEmployeeNIC" prefWidth="130.0" text="NIC" />
-                                          <TableColumn fx:id="colEmployeeAddress" prefWidth="169.0" text="Employee Address" />
+                                          <TableColumn fx:id="colEmployeeId" prefWidth="135.0" text="Employee ID" />
+                                          <TableColumn fx:id="colEmployeeName" prefWidth="184.0" text="Employee Name" />
+                                          <TableColumn fx:id="colEmployeeNIC" prefWidth="116.0" text="NIC" />
+                                          <TableColumn fx:id="colEmployeeAddress" prefWidth="204.0" text="Employee Address" />
                                        </columns>
                                     </TableView>
                                  </children>
                               </Pane>
                               <Pane layoutX="723.0" layoutY="51.0" prefHeight="559.0" prefWidth="435.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                                  <children>
-                                    <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="23.0" layoutY="383.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Address" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeeAddress" labelFloat="true" layoutX="23.0" layoutY="366.0" prefHeight="26.0" prefWidth="315.0" promptText=" Address" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="23.0" layoutY="197.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeerId" labelFloat="true" layoutX="23.0" layoutY="179.0" prefHeight="36.0" prefWidth="315.0" promptText="Employee ID" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
@@ -98,12 +100,12 @@
                                        </children>
                                     </Pane>
                                     <JFXButton fx:id="btnImageChoosers" buttonType="RAISED" layoutX="193.0" layoutY="134.0" onAction="#btnImageChooserOnAction" prefHeight="25.0" prefWidth="75.0" text="Add photo" />
-                                    <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="23.0" layoutY="321.0" prefHeight="25.0" prefWidth="315.0" promptText="Employee NIC" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeeNIC" labelFloat="true" layoutX="23.0" layoutY="298.0" prefHeight="25.0" prefWidth="315.0" promptText=" NIC" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="23.0" layoutY="259.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5">
+                                    <JFXTextField fx:id="txtEmployeeName" labelFloat="true" layoutX="23.0" layoutY="234.0" prefHeight="26.0" prefWidth="315.0" promptText="Employee Name" unFocusColor="#0988e5">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
@@ -128,12 +130,190 @@
           </Tab>
           <Tab text="                          Employee Attandance                          ">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="648.0" prefWidth="1196.0" style="-fx-background-color: #ced4da;">
+                           <children>
+                              <AnchorPane layoutX="33.0" layoutY="34.0" prefHeight="256.0" prefWidth="453.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px;">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="25.0" text="Generate QR Code" textFill="#013a63">
+                                       <font>
+                                          <Font name="System Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXButton graphicTextGap="8.0" layoutX="37.0" layoutY="168.0" onAction="#getQRBtnOnAction" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #ffb703; -fx-background-radius: 10px;" text="Get QR Code">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <graphic>
+                                          <ImageView fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/icons8-qr-code.gif" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXComboBox fx:id="cmbQrEmployeeId" labelFloat="true" layoutX="37.0" layoutY="85.0" prefHeight="53.0" prefWidth="323.0" promptText="Employee" />
+                                 </children>
+                              </AnchorPane>
+                              <Pane layoutX="579.0" layoutY="64.0" prefHeight="529.0" prefWidth="548.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                 <children>
+                                    <TableView layoutX="6.0" layoutY="9.0" prefHeight="543.0" prefWidth="536.0" stylesheets="@../style/table.css">
+                                      <columns>
+                                        <TableColumn fx:id="colQrEmployeeId" prefWidth="114.99996948242188" text="Employee Id" />
+                                        <TableColumn fx:id="colQrEmployeeName" prefWidth="165.0" text="Employee Name" />
+                                          <TableColumn fx:id="colQrEmployeeDate" prefWidth="117.0" text="Date" />
+                                          <TableColumn fx:id="colQrEmployeeStatus" prefWidth="133.0" text="Mark" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="33.0" layoutY="324.0" prefHeight="294.0" prefWidth="454.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                 <children>
+                                    <ImageView fx:id="picture" fitHeight="111.0" fitWidth="103.0" layoutX="315.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/qr2.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="22.0" layoutY="58.0" prefHeight="35.0" prefWidth="116.0" text="Employee Name :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="130.0" prefHeight="35.0" prefWidth="111.0" text="Employee NIC    :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="205.0" prefHeight="35.0" prefWidth="111.0" text="Address             :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrName" layoutX="138.0" layoutY="59.0" prefHeight="33.0" prefWidth="152.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrNic" layoutX="133.0" layoutY="131.0" prefHeight="33.0" prefWidth="152.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrAddress" layoutX="133.0" layoutY="206.0" prefHeight="33.0" prefWidth="152.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Label layoutX="925.0" layoutY="17.0" prefHeight="26.0" prefWidth="47.0" text="Date:">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblOrderDate" layoutX="970.0" layoutY="18.0" prefHeight="24.0" prefWidth="143.0" textFill="#0033ff">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="                          Attandance Mark                          ">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane fx:id="mainPanel" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="1.0" prefHeight="676.0" prefWidth="1220.0" style="-fx-background-color: #ced4da;">
+                           <children>
+                              <AnchorPane fx:id="miniPanel" layoutX="45.0" layoutY="14.0" prefHeight="329.0" prefWidth="431.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                 <children>
+                                    <ImageView fitHeight="270.0" fitWidth="272.0" layoutX="81.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                                       <image>
+                                          <Image url="@../icon/scanner1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Pane layoutX="45.0" layoutY="393.0" prefHeight="258.0" prefWidth="431.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="67.0" prefHeight="35.0" prefWidth="116.0" text=" Name                :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="113.0" prefHeight="35.0" prefWidth="111.0" text="Employee NIC    :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="156.0" prefHeight="35.0" prefWidth="111.0" text="Address             :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="12.0" layoutY="25.0" prefHeight="35.0" prefWidth="116.0" text="Employee Id       :-">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrScannerId" layoutX="138.0" layoutY="25.0" prefHeight="35.0" prefWidth="180.0">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrScannerName" layoutX="138.0" layoutY="67.0" prefHeight="35.0" prefWidth="180.0">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrScannerNic" layoutX="138.0" layoutY="113.0" prefHeight="35.0" prefWidth="180.0">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblQrScannerAddress" layoutX="138.0" layoutY="156.0" prefHeight="35.0" prefWidth="180.0">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="38.0" fitWidth="88.0" layoutX="384.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/userGif.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <JFXButton fx:id="btnStart" buttonType="RAISED" layoutX="146.0" layoutY="348.0" onAction="#btnStartOnAction" prefHeight="39.0" prefWidth="90.0" style="-fx-background-color: #90e0ef;" text="Start">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="btnEnd" buttonType="RAISED" layoutX="261.0" layoutY="348.0" onAction="#btnEndOnAction" prefHeight="39.0" prefWidth="90.0" style="-fx-background-color: #caf0f8;" text="Stop">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="504.0" layoutY="74.0" prefHeight="573.0" prefWidth="633.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+                           <children>
+                              <TableView layoutX="6.0" layoutY="9.0" prefHeight="554.0" prefWidth="616.0" stylesheets="@../style/table.css">
+                                 <columns>
+                                    <TableColumn fx:id="colScannerId" prefWidth="149.0" text="Employee Id" />
+                                    <TableColumn fx:id="colScannerName" prefWidth="156.0" text="Employee Name" />
+                                    <TableColumn fx:id="colScannerDate" prefWidth="144.0" text="Date" />
+                                    <TableColumn fx:id="colScannerStatus" prefWidth="161.0" text="attandance Status" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>

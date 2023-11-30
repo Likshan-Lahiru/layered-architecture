@@ -53,11 +53,12 @@ create table employee(
                          address text not null
 );
 
+
 create table employee_attandance(
                                     employee_id varchar(35),
-                                    date date not null ,
-                                    in_time time not null ,
-                                    out_time time not null ,
+                                    employee_name varchar(50),
+                                    date varchar(20) not null ,
+                                    status varchar(20) not null ,
                                     constraint foreign key (employee_id) references employee (employee_id) on DELETE cascade on UPDATE cascade
 );
 

@@ -28,7 +28,7 @@ public class EmployeeModel {
         return isSaved;
     }
 
-    public List<EmployeeDto> getAllEmployee() throws SQLException {
+    public static List<EmployeeDto> getAllEmployee() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM employee ";

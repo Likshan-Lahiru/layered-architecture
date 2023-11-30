@@ -56,6 +56,7 @@ public class CustomerFormController {
     MainFormController mainFormController = new MainFormController();
 
 
+
     public void initialize(){
         customerCellvalueFactory();
         loadAllCustomer();
@@ -414,4 +415,6 @@ public class CustomerFormController {
         new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
     }
     }
+
+
 }
