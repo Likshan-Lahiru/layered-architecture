@@ -17,6 +17,7 @@ import lk.ijse.db.DbConnection;
 import lk.ijse.dto.StockListDto;
 import lk.ijse.dto.SupplierDto;
 import lk.ijse.dto.ToolDto;
+import lk.ijse.dto.tm.CartTm;
 import lk.ijse.dto.tm.StockListTm;
 import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.StockListModel;
@@ -202,83 +203,101 @@ public class toolStockController {
     }
 
     public void btnAddToListOnAction(ActionEvent actionEvent) {
-        String supplierId = (String) cmbSupplierId.getValue();
-        String toolID = (String) cmbToolID.getValue();
-        String toolName = lblToolName.getText();
-        int qtyOnHand = Integer.valueOf(lblQtyOnHand.getText());
-        int toolQuantitySuppliedCount = Integer.valueOf(txtToolQuantitySuppliedCount.getText());
-        Double toolPriceUnit = Double.valueOf(txtToolPriceUnit.getText());
-        String supplierNameText = lblSupplierName.getText();
-        String orderDate = lblSuppliedDate.getText();
-        String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
-        String wasteCount = txtStckListWasteCount.getText();
-
-
-
-
-
-        Double total = calTotal(toolPriceUnit, toolQuantitySuppliedCount);
-        Button btn = new Button("remove");
-        btn.setCursor(Cursor.HAND);
-
-        btn.setOnAction((e) -> {
-            ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
-            ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Are you sure to remove?", yes, no).showAndWait();
-
-            if (type.orElse(no) == yes) {
-                int index = tblSuppliedDetail.getSelectionModel().getSelectedIndex();
-
-                if (index >= 0 && index < obList.size()) {
-                    obList.remove(index);
-                    tblSuppliedDetail.refresh();
-                    calculateNetTotal();
-                } else {
-
-                    new Alert(Alert.AlertType.WARNING, "Please select an item to remove.", ButtonType.OK).show();
-                }
-            }
-        });
-        for (int i = 0; i < tblSuppliedDetail.getItems().size(); i++) {
-            if (toolID.equals(colToolId.getCellData(i))) {
-                toolQuantitySuppliedCount += (int) colOrderDetailsQty.getCellData(i);
-                total += (Double) colTotalPrice.getCellData(i) * toolQuantitySuppliedCount;
-
-                obList.get(i).setQty(toolQuantitySuppliedCount);
-                obList.get(i).setTotal(total);
-
-                tblSuppliedDetail.refresh();
-                calculateNetTotal();
+        try {
+            String toolId = (String) cmbToolID.getValue();
+            String supplierIdd = (String) cmbSupplierId.getValue();
+            if ((toolId.isEmpty() || supplierIdd.isEmpty()||txtToolQuantitySuppliedCount.getText().isEmpty()||txtToolPriceUnit.getText().isEmpty())){
+                new SystemAlert(Alert.AlertType.ERROR, "Error", "Please fill all the fields", ButtonType.OK).show();
                 return;
             }
+        }catch (Exception e){
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please fill all the fields", ButtonType.OK).show();
+            return;
         }
 
-        obList.add(new StockListTm(
-                supplierId,
-                supplierNameText,
-                toolID, toolName,
-                orderDate, qtyOnHand,
-                toolQuantitySuppliedCount,
-                toolPriceUnit,
-                total,
-                btn,
-                lastUpdatedDate,
-                wasteCount));
 
-        tblSuppliedDetail.setItems(obList);
-        calculateNetTotal();
-        clearHistory();
+
+            String supplierId = (String) cmbSupplierId.getValue();
+            String toolID = (String) cmbToolID.getValue();
+            String toolName = lblToolName.getText();
+            int qtyOnHand = Integer.valueOf(lblQtyOnHand.getText());
+            int toolQuantitySuppliedCount = Integer.valueOf(txtToolQuantitySuppliedCount.getText());
+            Double toolPriceUnit = Double.valueOf(txtToolPriceUnit.getText());
+            String supplierNameText = lblSupplierName.getText();
+            String orderDate = lblSuppliedDate.getText();
+            String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
+            String wasteCount = txtStckListWasteCount.getText();
+
+
+
+
+
+
+            Double total = calTotal(toolPriceUnit, toolQuantitySuppliedCount);
+            Button btn = new Button("remove");
+            btn.setCursor(Cursor.HAND);
+
+            btn.setOnAction((e) -> {
+                ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+                ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Are you sure to remove?", yes, no).showAndWait();
+
+                if (type.orElse(no) == yes) {
+                    int index = tblSuppliedDetail.getSelectionModel().getSelectedIndex();
+
+                    if (index >= 0 && index < obList.size()) {
+                        obList.remove(index);
+                        tblSuppliedDetail.refresh();
+                        calculateNetTotal();
+                    } else {
+
+                        new Alert(Alert.AlertType.WARNING, "Please select an item to remove.", ButtonType.OK).show();
+                    }
+                }
+            });
+            for (int i = 0; i < tblSuppliedDetail.getItems().size(); i++) {
+                if (toolID.equals(colToolId.getCellData(i))) {
+                    toolQuantitySuppliedCount += (int) colOrderDetailsQty.getCellData(i);
+                    total += (Double) colTotalPrice.getCellData(i) * toolQuantitySuppliedCount;
+
+                    obList.get(i).setQty(toolQuantitySuppliedCount);
+                    obList.get(i).setTotal(total);
+
+                    tblSuppliedDetail.refresh();
+                    calculateNetTotal();
+                    return;
+                }
+            }
+
+            obList.add(new StockListTm(
+                    supplierId,
+                    supplierNameText,
+                    toolID, toolName,
+                    orderDate, qtyOnHand,
+                    toolQuantitySuppliedCount,
+                    toolPriceUnit,
+                    total,
+                    btn,
+                    lastUpdatedDate,
+                    wasteCount));
+
+            tblSuppliedDetail.setItems(obList);
+            calculateNetTotal();
+            clearHistory();
+
+
+
     }
 
     public void clearHistory() {
+
+
         lblSupplierName.setText("");
         lblToolName.setText("");
         lblQtyOnHand.setText("");
         txtToolQuantitySuppliedCount.clear();
         txtToolPriceUnit.clear();
-        cmbSupplierId.getSelectionModel().clearSelection();
-        cmbToolID.getSelectionModel().clearSelection();
     }
 
     private void calculateNetTotal() {
@@ -314,6 +333,16 @@ public class toolStockController {
 
 
     public void btnPlaceNewStockOnAction(ActionEvent actionEvent) {
+        try {
+            ObservableList<StockListTm> dataList = tblSuppliedDetail.getItems();
+
+            if (dataList.isEmpty()) {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Stock List is Empty!", ButtonType.OK).show();
+                return;
+            }
+        }catch (Exception e){
+            System.out.println("TableView is empty");
+        }
 
         List<StockListTm> stockList = new ArrayList<>();
         for (StockListTm stockListTm : obList) {
@@ -324,6 +353,7 @@ public class toolStockController {
             boolean isAdded = StockListModel.addStockList(stockListDto);
             if (isAdded) {
                 new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Stock List Added Successfully!", ButtonType.OK).show();
+                tblSuppliedDetail.getItems().clear();
             } else {
                 new SystemAlert(Alert.AlertType.WARNING, "Error", "Stock List Not Added!", ButtonType.OK).show();
             }

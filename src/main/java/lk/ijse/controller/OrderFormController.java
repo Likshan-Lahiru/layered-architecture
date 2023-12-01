@@ -294,17 +294,14 @@ public class OrderFormController {
 
         tblCart.setItems(obList);
         calculateNetTotal();
+        clearHistory();
     }
 
 
     private void clearHistory() {
         txtQty.clear();
         txtRentalDays.clear();
-        lblDescription.setText("");
-        lblRentPerDay.setText("");
-        lblQutyOnHand.setText("");
-        cmbToolID.requestFocus();
-        cmbCustomerId.requestFocus();
+
     }
 
     private void calculateNetTotal() {
@@ -321,6 +318,18 @@ public class OrderFormController {
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+       try {
+           ObservableList<CartTm> dataList = tblCart.getItems();
+
+           if (dataList.isEmpty()) {
+               new SystemAlert(Alert.AlertType.WARNING, "Warning", "Cart is Empty!", ButtonType.OK).show();
+               return;
+           }
+       }catch (Exception e){
+           System.out.println("TableView is empty");
+       }
+
+
         String orderId = lblOrderId.getText();
         String customerId = (String) cmbCustomerId.getValue();
         String orderDate = lblOrderDate.getText();
