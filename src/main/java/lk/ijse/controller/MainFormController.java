@@ -125,10 +125,14 @@ public class MainFormController {
     }
 
     public void btnToolOnAction(ActionEvent actionEvent) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/tool_form.fxml"));
+        FXMLLoader loader =  new FXMLLoader(this.getClass().getResource("/view/tool_form.fxml"));
+        Parent node1 = loader.load();
+
+        ToolFormController toolFormController = loader.getController();
+        toolFormController.setMainFormController(this);
 
         this.root.getChildren().clear();
-        this.root.getChildren().add(node);
+        this.root.getChildren().add(node1);
     }
 
     public void btnSupplierOnAction(ActionEvent actionEvent) throws IOException {

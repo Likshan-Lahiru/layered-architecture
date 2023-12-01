@@ -14,6 +14,7 @@ import lk.ijse.dto.ToolDto;
 import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.ToolModel;
 import lk.ijse.util.RegExPatterns;
+import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 
@@ -46,6 +47,8 @@ public class ToolFormController {
     private TableColumn <?,?> colToolID;
     @FXML
     private TableView <ToolTm>  tblTool;
+    SoundsAssits soundsAssits =  new SoundsAssits();
+    MainFormController mainFormController = new MainFormController();
     public void initialize(){
         setCellValueFactory();
         loadAllTool();
@@ -109,6 +112,15 @@ public class ToolFormController {
                                 boolean isSaved = model.saveTool(dto);
                                 if (isSaved){
                                     new SystemAlert(Alert.AlertType.CONFIRMATION,"SUCCESS","Tool Save Successfully!",ButtonType.CLOSE).show();
+                                    try {
+                                        boolean check = mainFormController.check();
+
+                                        if(check){
+                                            soundsAssits.savedSucces();
+                                        }
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                     loadAllTool();
                                     clearText();
                                 }
@@ -139,6 +151,16 @@ public class ToolFormController {
             TxtColours.setErrorColours(txtToolName);
             TxtColours.setErrorColours(txtToolQtyOnHand);
             TxtColours.setErrorColours(txtRentPerDayPrice);
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return;
         }
 
     }
@@ -167,7 +189,16 @@ public class ToolFormController {
 
                                 boolean isUpdateTool = model.updateToolId(dto);
                                 if (isUpdateTool){
-                                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Tool Enter successfully!", ButtonType.OK).show();
+                                    new SystemAlert(Alert.AlertType.CONFIRMATION, "Confirmation", "Tool Updated successfully!", ButtonType.OK).show();
+                                    try {
+                                        boolean check = mainFormController.check();
+
+                                        if(check){
+                                            soundsAssits.updatedSucces();
+                                        }
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                     loadAllTool();
                                 }
                                 else {
@@ -200,6 +231,16 @@ public class ToolFormController {
             TxtColours.setErrorColours(txtToolName);
             TxtColours.setErrorColours(txtToolQtyOnHand);
             TxtColours.setErrorColours(txtRentPerDayPrice);
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return;
         }
 
 
@@ -217,6 +258,15 @@ public class ToolFormController {
         String searchIdText = txtSearchId.getText();
         if (searchIdText.isEmpty()){
             new SystemAlert(Alert.AlertType.WARNING, "Warning", "Search bar is empty! please enter tool Id!", ButtonType.OK).show();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.toolSearchButton();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return;
         }
         ToolDto dto = new ToolDto(searchIdText);
@@ -229,7 +279,16 @@ public class ToolFormController {
             }else {
 
                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Item Not Found!", ButtonType.OK).show();
-            }
+                try {
+                    boolean check = mainFormController.check();
+
+                    if(check){
+                        soundsAssits.itemDoesNotFound();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+              }
         }catch (SQLException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -307,10 +366,27 @@ public class ToolFormController {
                             try {
                                 boolean isDeleted = model.deleteTool(dto);
                                 if(isDeleted){
-                                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Item Deleted!",ButtonType.OK).show();
+                                    new SystemAlert(Alert.AlertType.CONFIRMATION,"Confirmation","Item Deleted successfully!",ButtonType.OK).show();
+                                    try {
+                                        boolean check = mainFormController.check();
 
+                                        if(check){
+                                            soundsAssits.deeletedSucces();
+                                        }
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                 }else {
                                     new SystemAlert(Alert.AlertType.WARNING,"Warning","Item Does Not Found!",ButtonType.OK).show();
+                                    try {
+                                        boolean check = mainFormController.check();
+
+                                        if(check){
+                                            soundsAssits.itemDoesNotFound();
+                                        }
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                 }
                             }catch (SQLException e){
                                 new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -336,6 +412,23 @@ public class ToolFormController {
             TxtColours.setErrorColours(txtToolName);
             TxtColours.setErrorColours(txtToolQtyOnHand);
             TxtColours.setErrorColours(txtRentPerDayPrice);
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return;
         }
+    }
+
+    public void setMainFormController(MainFormController mainFormController) {
+
+            this.mainFormController = mainFormController;
+
+
     }
 }

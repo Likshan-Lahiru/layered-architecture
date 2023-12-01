@@ -77,4 +77,32 @@ public class SoundsAssits {
         player = new MediaPlayer( new Media(uriString));
         player.play();
     }
+    public void itemDoesNotFound(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\item_Does_not_found.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void deeletedSucces(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\deleted_succes.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void savedSucces(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\save_success.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void updatedSucces(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\updated_success.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void toolSearchButton(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\tool_serachBar.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+
+
+
 }
