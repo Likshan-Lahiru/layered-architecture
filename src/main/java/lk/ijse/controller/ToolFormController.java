@@ -62,6 +62,7 @@ public class ToolFormController {
 
 
     private void loadAllTool(){
+
         ToolModel model = new ToolModel();
 
         ObservableList<ToolTm> toolList = FXCollections.observableArrayList();
@@ -236,16 +237,21 @@ public class ToolFormController {
 
     }
     private void setItem(){
-        tblTool.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldvalue,newValue)->{
-                    ToolDto dto = new ToolDto(
-                            newValue.getToolId(),
-                            newValue.getToolName(),
-                            newValue.getQtyOnHand(),
-                            newValue.getRentPerDay()
-                    );
-                    toolSetFields(dto);
-                });
+        try {
+            tblTool.getSelectionModel().selectedItemProperty()
+                    .addListener((observable, oldvalue,newValue)->{
+                        ToolDto dto = new ToolDto(
+                                newValue.getToolId(),
+                                newValue.getToolName(),
+                                newValue.getQtyOnHand(),
+                                newValue.getRentPerDay()
+                        );
+                        toolSetFields(dto);
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private void toolSetFields(ToolDto dto1) {

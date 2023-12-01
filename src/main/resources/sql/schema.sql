@@ -35,6 +35,7 @@ create table stock_list(
                 tool_name varchar(20),
                 qty_on_hand int not null,
                 waste_tool int,
+                last_updated_date varchar(20),
                 constraint foreign key (tool_id) references tool (tool_id) on delete  cascade on UPDATE cascade
 );
 

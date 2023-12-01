@@ -173,6 +173,18 @@
                               <TextField fx:id="txtStckListWasteCount" layoutX="169.0" layoutY="128.0" prefHeight="25.0" prefWidth="206.0" />
                               <TextField fx:id="txtStckListQtyOnHand" layoutX="169.0" layoutY="179.0" prefHeight="25.0" prefWidth="206.0" />
                               <JFXButton buttonType="RAISED" layoutX="305.0" layoutY="281.0" onAction="#btnWasteToolStock" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #f4a261;" text="Update" />
+                              <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="281.0" onAction="#btnWasteReportInAction" style="-fx-background-color: #2a9d8f;" text="waste-Report" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView blendMode="SCREEN" fitHeight="26.0" fitWidth="26.0">
+                                       <image>
+                                          <Image url="@../icon/icons8-medical-history.gif" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
                            </children>
                         </Pane>
                      </children>

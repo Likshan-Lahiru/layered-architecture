@@ -368,29 +368,15 @@ public class toolStockController {
     }
 
     public void btnGetReportOnAction(ActionEvent actionEvent) throws SQLException {
-        String supplierId = (String) cmbSupplierId.getValue();
-        String toolID = (String) cmbToolID.getValue();
-        String toolName = lblToolName.getText();
-        String supplierNameText = lblSupplierName.getText();
-        String orderDate = lblSuppliedDate.getText();
-        String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
-        String qtyOnHand = lblQtyOnHand.getText();
-        String lblNetTotalText = lblNetTotal.getText();
-
-
 
         try {
-            HashMap hashMap = new HashMap();
-            hashMap.put("Name",supplierNameText);
-            hashMap.put("qty",qtyOnHand);
-            hashMap.put("Date",orderDate);
-            hashMap.put("total",lblNetTotalText);
 
-            InputStream design = getClass().getResourceAsStream("/report/test.jrxml");
+
+            InputStream design = getClass().getResourceAsStream("/report/Supplier_history.jrxml");
             JasperDesign load = JRXmlLoader.load(design);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(load);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hashMap, new JREmptyDataSource());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JREmptyDataSource());
             JasperViewer.viewReport(jasperPrint, false);
 
         } catch (JRException e) {
@@ -411,10 +397,35 @@ public class toolStockController {
     }
     @FXML
     void btnWasteToolStock(ActionEvent event) {
+        try {
+            if ((lblStckListToolId.getText().isEmpty()||txtStckListWasteCount.getText().isEmpty()||
+                    txtStckListQtyOnHand.getText().isEmpty()||txtStckListWasteCount.getText().isEmpty())) {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Fill All Fields", ButtonType.OK).show();
+                return;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         String toolId = lblStckListToolId.getText();
         String toolName = lblStockToolName.getText();
-        int wasteCount = Integer.parseInt(txtStckListWasteCount.getText());
-        int qtyOnHand = Integer.parseInt(txtStckListQtyOnHand.getText());
+        String wasteCount = txtStckListWasteCount.getText();
+        String qtyOnHand = txtStckListQtyOnHand.getText();
+        String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
+
+        ToolWasteDetailDto dto = new ToolWasteDetailDto(toolId,toolName,Integer.parseInt(qtyOnHand),String.valueOf(wasteCount),lastUpdatedDate);
+        ToolModel model = new ToolModel();
+        try {
+            boolean isAdded = model.addToolWasteDetail(dto);
+            if (isAdded) {
+                new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Tool Waste Detail Added Successfully!", ButtonType.OK).show();
+            }else {
+                new SystemAlert(Alert.AlertType.WARNING, "Warning", "Tool Waste Detail Not Added!", ButtonType.OK).show();
+            }
+        }catch (SQLException e){
+            new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
+        }
+
 
     }
     private void settoolData(){
@@ -438,5 +449,23 @@ public class toolStockController {
         lblStockToolName.setText(dto.getToolName());
         txtStckListWasteCount.setText(String.valueOf(dto.getWasteCount()));
         txtStckListQtyOnHand.setText(String.valueOf(dto.getQtyOnhand()));
+    }
+
+    public void btnWasteReportInAction(ActionEvent actionEvent) {
+        try {
+
+
+            InputStream design = getClass().getResourceAsStream("/report/Waste_report.jrxml");
+            JasperDesign load = JRXmlLoader.load(design);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(load);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, new JREmptyDataSource());
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            e.printStackTrace();
+
+
+        }
     }
 }

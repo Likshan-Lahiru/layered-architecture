@@ -3,6 +3,7 @@ package lk.ijse.model;
 import lk.ijse.db.DbConnection;
 import lk.ijse.dto.OrderDetailsDto;
 import lk.ijse.dto.ToolDto;
+import lk.ijse.dto.ToolWasteDetailDto;
 import lk.ijse.dto.tm.CartTm;
 import lk.ijse.dto.tm.StockListTm;
 
@@ -158,5 +159,46 @@ public class ToolModel {
        boolean isDeleted = pstm.executeUpdate()>0;
 
         return isDeleted;
+    }
+
+    public boolean addToolWasteDetail(ToolWasteDetailDto dto) throws SQLException {
+         ToolModel toolModel = new ToolModel();
+         StockListModel stockListModel  =new StockListModel();
+        boolean result = false;
+        Connection connection = null;
+        try {
+            connection = DbConnection.getInstance().getConnection();
+            connection.setAutoCommit(false);
+
+            boolean isUpdated = toolModel.updateWasteQty(dto);
+            if(isUpdated) {
+                boolean isUpdated2 = stockListModel.updateWasteQty(dto);
+               if(isUpdated2) {
+                    connection.commit();
+                    result = true;
+                }
+            }
+        }catch (SQLException e) {
+            connection.rollback();
+        }finally {
+            connection.setAutoCommit(true);
+        }
+
+
+        return result;
+
+    }
+
+    private boolean updateWasteQty(ToolWasteDetailDto dto) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "UPDATE tool SET qty_on_hand = qty_on_hand - ? WHERE tool_id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, dto.getWasteCount());
+        pstm.setString(2, dto.getToolId());
+
+        boolean isUpdate = pstm.executeUpdate() > 0;
+
+
+        return isUpdate;
     }
 }
