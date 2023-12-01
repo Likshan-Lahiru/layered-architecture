@@ -30,4 +30,5 @@ public class StockListTm {
         this.toolName = toolName;
         this.qtyOnHand = qtyOnhand;
     }
+
 }

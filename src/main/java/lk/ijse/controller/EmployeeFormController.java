@@ -154,6 +154,8 @@ public class EmployeeFormController {
     private Label lblAttandanceDate;
     @FXML
     private TableView<AttandanceTm> tblAttandance;
+    @FXML
+    private DatePicker DatePicker;
 
 
     public void initialize(){
@@ -767,4 +769,21 @@ public class EmployeeFormController {
         colQrEmployeeStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
-}
+    @FXML
+    public void DatePickerOnAction(ActionEvent actionEvent)  {
+        var model = new AttandanceModel();
+        LocalDate date = LocalDate.parse(DatePicker.getValue().toString());
+        ObservableList<AttandanceTm> attendance = null;
+        try {
+            attendance = model.getAttendanceOfDay(String.valueOf(date));
+            tblAttandance.setItems(attendance);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        }
+
+        }
+    }
+
+
+
+

@@ -1,8 +1,10 @@
 package lk.ijse.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.db.DbConnection;
 import lk.ijse.dto.AttandanceDto;
-import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.tm.AttandanceTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -59,4 +61,27 @@ public class AttandanceModel {
         ResultSet resultSet = pstm.executeQuery();
         return resultSet.next();
     }
+
+    public ObservableList<AttandanceTm> getAttendanceOfDay(String date) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM employee_attandance WHERE date = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, date);
+
+        ResultSet resultSet =pstm.executeQuery();
+        ObservableList<AttandanceTm> tmList = FXCollections.observableArrayList();
+
+        while(resultSet.next()){
+            final var add = tmList.add(new AttandanceTm(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5)
+            ));
+        }
+        return tmList;
+
+}
 }

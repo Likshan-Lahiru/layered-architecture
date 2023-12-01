@@ -1,6 +1,5 @@
 package lk.ijse.controller;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
@@ -13,13 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.db.DbConnection;
-import lk.ijse.dto.StockListDto;
-import lk.ijse.dto.SupplierDto;
-import lk.ijse.dto.ToolDto;
-import lk.ijse.dto.tm.CartTm;
+import lk.ijse.dto.*;
 import lk.ijse.dto.tm.StockListTm;
-import lk.ijse.dto.tm.ToolTm;
 import lk.ijse.model.StockListModel;
 import lk.ijse.model.SupplierModel;
 import lk.ijse.model.ToolModel;
@@ -116,6 +110,7 @@ public class toolStockController {
         setCellValueFactory();
         setStockListCellValueFactory();
         loadStockList();
+        settoolData();
 
 
     }
@@ -228,11 +223,6 @@ public class toolStockController {
             String lastUpdatedDate = String.valueOf(pickerStockListLastUpdateDate.getValue());
             String wasteCount = txtStckListWasteCount.getText();
 
-
-
-
-
-
             Double total = calTotal(toolPriceUnit, toolQuantitySuppliedCount);
             Button btn = new Button("remove");
             btn.setCursor(Cursor.HAND);
@@ -273,8 +263,10 @@ public class toolStockController {
             obList.add(new StockListTm(
                     supplierId,
                     supplierNameText,
-                    toolID, toolName,
-                    orderDate, qtyOnHand,
+                    toolID,
+                    toolName,
+                    orderDate,
+                    qtyOnHand,
                     toolQuantitySuppliedCount,
                     toolPriceUnit,
                     total,
@@ -285,8 +277,6 @@ public class toolStockController {
             tblSuppliedDetail.setItems(obList);
             calculateNetTotal();
             clearHistory();
-
-
 
     }
 
@@ -418,5 +408,35 @@ public class toolStockController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    void btnWasteToolStock(ActionEvent event) {
+        String toolId = lblStckListToolId.getText();
+        String toolName = lblStockToolName.getText();
+        int wasteCount = Integer.parseInt(txtStckListWasteCount.getText());
+        int qtyOnHand = Integer.parseInt(txtStckListQtyOnHand.getText());
+
+    }
+    private void settoolData(){
+        tblStockList.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldvalue,newValue)->{
+                    ToolWasteDetailDto dto = new ToolWasteDetailDto(
+                            newValue.getToolId(),
+                            newValue.getToolName(),
+                            newValue.getQtyOnHand(),
+                            newValue.getWasteCount(),
+                            newValue.getLastUpdatedDate()
+
+
+                    );
+                    toolSetField(dto);
+                });
+    }
+
+    private void toolSetField(ToolWasteDetailDto dto) {
+        lblStckListToolId.setText(dto.getToolId());
+        lblStockToolName.setText(dto.getToolName());
+        txtStckListWasteCount.setText(String.valueOf(dto.getWasteCount()));
+        txtStckListQtyOnHand.setText(String.valueOf(dto.getQtyOnhand()));
     }
 }

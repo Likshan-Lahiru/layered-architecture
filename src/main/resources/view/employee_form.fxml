@@ -240,7 +240,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <DatePicker layoutX="953.0" layoutY="22.0" />
+                              <DatePicker fx:id="DatePicker" layoutX="953.0" layoutY="22.0" onAction="#DatePickerOnAction" />
                            </children>
                         </Pane>
                      </children></AnchorPane>

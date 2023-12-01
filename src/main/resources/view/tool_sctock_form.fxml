@@ -172,7 +172,7 @@
                               <Label fx:id="lblStockToolName" layoutX="169.0" layoutY="78.0" prefHeight="28.0" prefWidth="209.0" style="-fx-background-color: #e0e2db;" />
                               <TextField fx:id="txtStckListWasteCount" layoutX="169.0" layoutY="128.0" prefHeight="25.0" prefWidth="206.0" />
                               <TextField fx:id="txtStckListQtyOnHand" layoutX="169.0" layoutY="179.0" prefHeight="25.0" prefWidth="206.0" />
-                              <JFXButton buttonType="RAISED" layoutX="305.0" layoutY="281.0" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #f4a261;" text="Update" />
+                              <JFXButton buttonType="RAISED" layoutX="305.0" layoutY="281.0" onAction="#btnWasteToolStock" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #f4a261;" text="Update" />
                            </children>
                         </Pane>
                      </children>
