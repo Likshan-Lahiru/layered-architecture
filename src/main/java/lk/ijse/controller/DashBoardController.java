@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import lk.ijse.model.CustomerModel;
 import lk.ijse.model.EmployeeModel;
 import lk.ijse.model.OrderModel;
+import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lombok.SneakyThrows;
 
@@ -53,6 +54,7 @@ public class DashBoardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadDateandTime();
         allDetailsLoader();
+        welcomeVoice();
     }
     private void loadDateandTime() {
         Date date = new Date();
@@ -67,6 +69,9 @@ public class DashBoardController implements Initializable {
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+    }
+    public void welcomeVoice(){
+        new SoundsAssits().welcome();
     }
 
     public void allDetailsLoader() throws SQLException {

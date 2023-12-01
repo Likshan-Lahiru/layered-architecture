@@ -102,6 +102,21 @@ public class SoundsAssits {
         player = new MediaPlayer( new Media(uriString));
         player.play();
     }
+    public void OrderAreYouSure(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\OrderAreYouSure.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void orderSuccess(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\orderSuccess.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
+    public void welcome(){
+        String uriString = new File("C:\\Users\\user\\IdeaProjects\\semestser_final_project\\src\\main\\resources\\sounds\\welcome.mp3").toURI().toString();
+        player = new MediaPlayer( new Media(uriString));
+        player.play();
+    }
 
 
 

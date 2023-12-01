@@ -15,6 +15,7 @@ import lk.ijse.dto.LoginDto;
 import lk.ijse.dto.SignUpDto;
 import lk.ijse.model.LoginModel;
 import lk.ijse.util.Mail;
+import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 
 import java.io.IOException;
@@ -84,10 +85,7 @@ public class LoginFormController {
 
         model.checkCredentianl(dto);
 
-
-
-
-      try {
+        try {
             boolean checked = model.checkCredentianl(dto);
             if (checked){
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/Main_form.fxml"));
@@ -96,6 +94,7 @@ public class LoginFormController {
         stage.setScene(scene);
         stage.setTitle("Order Form");
         stage.centerOnScreen();
+        welcomeVoice();
 
           try {
                 Mail mail = new Mail();
@@ -124,6 +123,9 @@ public class LoginFormController {
 
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
       }
+    }
+    public void welcomeVoice(){
+        new SoundsAssits().welcome();
     }
 
 

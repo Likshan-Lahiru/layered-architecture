@@ -16,6 +16,7 @@ import lk.ijse.db.DbConnection;
 import lk.ijse.dto.*;
 import lk.ijse.dto.tm.CartTm;
 import lk.ijse.model.*;
+import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
 import net.sf.jasperreports.engine.*;
@@ -99,6 +100,8 @@ public class OrderFormController {
     private AnchorPane root;
 
     private String status;
+    SoundsAssits soundsAssits =  new SoundsAssits();
+    MainFormController mainFormController = new MainFormController();
 
     private final ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
@@ -234,10 +237,28 @@ public class OrderFormController {
 
             if (castToolId.isEmpty() || castCustomer.isEmpty() || castDescription.isEmpty() || castQty.isEmpty() || castRentalDays.isEmpty() || castRentPerDay.isEmpty()) {
                 new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if(check){
+                        soundsAssits.insertAllDetail();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 return;
             }
         } catch (Exception e) {
             new SystemAlert(Alert.AlertType.WARNING, "Warning", "Please Enter the all details!", ButtonType.OK).show();
+            try {
+                boolean check = mainFormController.check();
+
+                if(check){
+                    soundsAssits.insertAllDetail();
+                }
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }
             return;
         }
 
@@ -261,7 +282,15 @@ public class OrderFormController {
             ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
             Optional<ButtonType> type = new SystemAlert(Alert.AlertType.INFORMATION, "Information", "Are you sure to remove?", yes, no).showAndWait();
+            try {
+                boolean check = mainFormController.check();
 
+                if(check){
+                    soundsAssits.OrderAreYouSure();
+                }
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }
             if (type.orElse(no) == yes) {
                 int index = tblCart.getSelectionModel().getSelectedIndex();
 
@@ -350,7 +379,16 @@ public class OrderFormController {
             boolean isAdded = model.placeOrder(dto);
             if (isAdded) {
 
-                new SystemAlert(Alert.AlertType.CONFIRMATION, "Information", "Order Placed Successfully!", ButtonType.OK).show();
+                new SystemAlert(Alert.AlertType.CONFIRMATION, "Information", "Order Successfully!", ButtonType.OK).show();
+                try {
+                    boolean check = mainFormController.check();
+
+                    if(check){
+                        soundsAssits.orderSuccess();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 setOrderDetailCellValueFactory();
                 loadAllOrderDetails();
                 tblCart.getItems().clear();
@@ -505,5 +543,9 @@ public class OrderFormController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setMainFormController(MainFormController mainFormController) {
+        this.mainFormController = mainFormController;
     }
 }

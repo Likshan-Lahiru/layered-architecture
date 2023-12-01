@@ -76,10 +76,14 @@ public class MainFormController {
 
     @FXML
     private void btnOrderOnAction() throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/Order_form.fxml"));
+        FXMLLoader loader =  new FXMLLoader(this.getClass().getResource("/view/Order_form.fxml"));
+        Parent node2 = loader.load();
+
+        OrderFormController orderFormController = loader.getController();
+        orderFormController.setMainFormController(this);
 
         this.root.getChildren().clear();
-        this.root.getChildren().add(node);
+        this.root.getChildren().add(node2);
 
     }
     @FXML
