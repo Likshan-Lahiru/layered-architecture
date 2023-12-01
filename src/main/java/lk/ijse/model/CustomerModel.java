@@ -102,4 +102,15 @@ public class CustomerModel {
         return isDeleted;
 
     }
+
+    public String getTotalCustomers() throws SQLException {
+      Connection connection =   DbConnection.getInstance().getConnection();
+      String sql = "SELECT COUNT(customer_id) FROM customer";
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
+          return resultSet.getString(1);
+      }
+      return null;
+    }
 }

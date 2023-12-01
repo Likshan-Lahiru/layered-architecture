@@ -107,4 +107,15 @@ public class EmployeeModel {
        return isDeleted;
 
     }
+
+    public String getTotalEmployees() throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "SELECT COUNT(employee_id) FROM employee";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString(1);
+        }
+        return null;}
 }

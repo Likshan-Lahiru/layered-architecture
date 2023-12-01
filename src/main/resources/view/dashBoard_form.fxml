@@ -58,7 +58,7 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCustomer1" layoutX="23.0" layoutY="50.0" prefHeight="70.0" prefWidth="85.0" text="78" textFill="#ffbd00">
+                  <Label fx:id="lblOrders" layoutX="23.0" layoutY="50.0" prefHeight="70.0" prefWidth="85.0" text="78" textFill="#ffbd00">
                      <font>
                         <Font name="System Bold" size="48.0" />
                      </font>

@@ -6,11 +6,18 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import lk.ijse.model.CustomerModel;
+import lk.ijse.model.EmployeeModel;
+import lk.ijse.model.OrderModel;
+import lk.ijse.util.SystemAlert;
+import lombok.SneakyThrows;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +36,7 @@ public class DashBoardController implements Initializable {
     private Label lblCustomer;
 
     @FXML
-    private Label lblCustomer1;
+    private Label lblOrders;
 
     @FXML
     private BarChart<?, ?> barChart;
@@ -41,9 +48,11 @@ public class DashBoardController implements Initializable {
     private Label lblDate;
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadDateandTime();
+        allDetailsLoader();
     }
     private void loadDateandTime() {
         Date date = new Date();
@@ -60,5 +69,21 @@ public class DashBoardController implements Initializable {
         timeline.play();
     }
 
+    public void allDetailsLoader() throws SQLException {
+        try {
+            String totalCustomer = new CustomerModel().getTotalCustomers();
+            String totalEmployee =  new EmployeeModel().getTotalEmployees();
+            String totalOrders = new OrderModel().getAllOrdersCount();
+            System.out.println(totalCustomer+" "+totalEmployee+" "+totalOrders);
+            lblCustomer.setText(totalCustomer);
+            lblEmployee.setText(totalEmployee);
+            lblOrders.setText(totalOrders);
+        }catch (SQLException e){
+            e.printStackTrace();
+            new SystemAlert(Alert.AlertType.WARNING,"Warrning","Something went wrong").show();
+        }
+
+
+    }
 
 }
