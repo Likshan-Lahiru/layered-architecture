@@ -56,7 +56,7 @@ public class CustomerModel {
 
     public static CustomerDto searchCustomer(String txtSearchCustomerIDText) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM customer WHERE customer_id = ?";
+        String sql = "SELECT * FROM customer WHERE contact_number = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, txtSearchCustomerIDText);
         ResultSet resultSet = pstm.executeQuery();

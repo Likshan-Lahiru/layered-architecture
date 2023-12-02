@@ -104,7 +104,7 @@ public class CustomerFormController {
         String txtSearchCustomerIDText = txtSearchCustomerID.getText();
         if (txtSearchCustomerIDText.isEmpty()){
 
-            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the valid customer Id!", ButtonType.OK).show();
+            new SystemAlert(Alert.AlertType.ERROR, "Error", "Please Enter the valid customer contact number!", ButtonType.OK).show();
             try {
                    boolean check = mainFormController.check();
                 if(check){
