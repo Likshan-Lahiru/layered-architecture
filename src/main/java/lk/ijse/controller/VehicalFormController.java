@@ -104,6 +104,7 @@ public class VehicalFormController {
                 TxtColours.setDefaultColours(txtVehicleId);
                 if (RegExPatterns.getVehicleNumberPlate().matcher(txtNumPlateNo.getText()).matches()){
                     TxtColours.setDefaultColours(txtNumPlateNo);
+
                 }else {
                     TxtColours.setErrorColours(txtNumPlateNo);
                     return;

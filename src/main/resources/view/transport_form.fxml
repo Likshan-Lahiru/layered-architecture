@@ -43,9 +43,9 @@
       <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="395.0" prefHeight="286.0" prefWidth="622.0" stylesheets="@../style/table.css">
          <columns>
             <TableColumn fx:id="colVehicleId" prefWidth="100.0" text="Vehicle ID" />
-            <TableColumn fx:id="colVehicleStatus" prefWidth="153.0" text="Status" />
-            <TableColumn fx:id="colVehicleServiceDate" prefWidth="197.0" text="Last Service Date" />
-            <TableColumn fx:id="colNumberplateNo" prefWidth="170.0" text="Number plate NO" />
+            <TableColumn fx:id="colVehicleStatus" prefWidth="153.0" text="Number plate" />
+            <TableColumn fx:id="colVehicleServiceDate" prefWidth="197.0" text="Status" />
+            <TableColumn fx:id="colNumberplateNo" prefWidth="170.0" text="last service Date" />
          </columns>
       </TableView>
       <Pane layoutX="705.0" layoutY="397.0" prefHeight="286.0" prefWidth="465.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 15;">
