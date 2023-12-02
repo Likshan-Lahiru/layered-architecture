@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="supplied_report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0bae91a9-0d7f-404a-8f92-61bd5c257ebd">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Customer_form.jrdax"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM supplier_tool]]>
+	</queryString>
+	<field name="supplier_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="supplier_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="supplier_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier_tool"/>
+	</field>
+	<field name="supplier_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="supplier_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="supplier_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier_tool"/>
+	</field>
+	<field name="tool_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tool_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="tool_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier_tool"/>
+	</field>
+	<field name="tool_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tool_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="tool_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier_tool"/>
+	</field>
+	<field name="supplied_date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="supplied_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="supplied_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier_tool"/>
+	</field>
+	<field name="quantity_supplied" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="quantity_supplied"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantity_supplied"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="supplier_tool"/>
+	</field>
+	<group name="supplier_id">
+		<groupExpression><![CDATA[$F{supplier_id}]]></groupExpression>
+	</group>
+	<group name="supplier_name">
+		<groupExpression><![CDATA[$F{supplier_name}]]></groupExpression>
+	</group>
+	<group name="tool_id">
+		<groupExpression><![CDATA[$F{tool_id}]]></groupExpression>
+	</group>
+	<group name="tool_name">
+		<groupExpression><![CDATA[$F{tool_name}]]></groupExpression>
+	</group>
+	<group name="supplied_date">
+		<groupExpression><![CDATA[$F{supplied_date}]]></groupExpression>
+	</group>
+	<group name="quantity_supplied">
+		<groupExpression><![CDATA[$F{quantity_supplied}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="0" width="180" height="30" uuid="3c966512-fd13-426f-8fe0-e356eb2311e7"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Ashen Enterprise]]></text>
+			</staticText>
+			<image>
+				<reportElement x="-20" y="0" width="50" height="50" uuid="d5d1f084-45c5-4965-8620-ffa31c6dcd83"/>
+				<imageExpression><![CDATA["C:/Users/user/Desktop/Final Project/final project pic/png/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="460" y="0" width="100" height="19" uuid="865ebb6e-d189-4041-ac28-0ada8f569b36"/>
+				<text><![CDATA[con:-038234550]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="20" width="170" height="19" uuid="d37bdf34-ec91-4dc1-90c2-8c772ddc567c"/>
+				<text><![CDATA[email:-ashenenterprise@gmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="39" width="202" height="19" uuid="f9d6a708-2a84-470a-9ae1-a768d890004d"/>
+				<text><![CDATA[address:- no.457/A/1,arruggoda,allubomulla]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="458" y="60" width="100" height="21" uuid="ff2a861f-8fd8-4918-a3e6-94f66bf2ee67"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="60" width="40" height="21" uuid="68296c5f-0085-47b9-bdc7-f48b92a19136"/>
+				<textFieldExpression><![CDATA["Date:-"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-13" y="91" width="580" height="1" uuid="2b728da2-3a6c-4096-9193-44414273d284"/>
+			</line>
+			<staticText>
+				<reportElement x="30" y="28" width="180" height="42" uuid="23499b60-459c-4317-aa6d-39a86f4c7601"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Suppliers Tool Supplied Detail report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="0" width="90" height="30" uuid="77a92ae6-fdff-4b1f-9b84-d54e1100adba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87df4ccf-f302-4cc0-9649-eb6f339e922a"/>
+				</reportElement>
+				<text><![CDATA[Supplier Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="90" height="30" uuid="cfce31d4-d055-4ffc-94d9-dfa1745eaa79">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="69a133e8-79a1-494e-8361-a293998364ea"/>
+				</reportElement>
+				<text><![CDATA[Tool Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="100" height="30" uuid="37e37c49-d010-46c5-9367-3df0018f553e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="217c8976-c027-4f1e-819c-08e0f783ba01"/>
+				</reportElement>
+				<text><![CDATA[Supplied Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="30" uuid="594623dd-210c-4d73-bee7-3ba215194b6a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88de38da-dcb4-4bd6-8346-2f82406552ad"/>
+				</reportElement>
+				<text><![CDATA[Quantity Supplied]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="-20" y="0" width="90" height="30" uuid="8188463f-9829-499c-ac6d-f62a6d21227d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87df4ccf-f302-4cc0-9649-eb6f339e922a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{supplier_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="90" height="30" uuid="dd642fbb-ea9e-4ad8-b606-1aa36045394c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="69a133e8-79a1-494e-8361-a293998364ea"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tool_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="0" width="100" height="30" uuid="11729e38-306c-427d-8d38-cbe97589df92">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="217c8976-c027-4f1e-819c-08e0f783ba01"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{supplied_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="30" uuid="f0d313b2-979d-4b06-81a6-fa26e8450a2d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88de38da-dcb4-4bd6-8346-2f82406552ad"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{quantity_supplied}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

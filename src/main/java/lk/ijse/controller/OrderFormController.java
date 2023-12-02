@@ -16,6 +16,7 @@ import lk.ijse.db.DbConnection;
 import lk.ijse.dto.*;
 import lk.ijse.dto.tm.CartTm;
 import lk.ijse.model.*;
+import lk.ijse.util.Mail;
 import lk.ijse.util.SoundsAssits;
 import lk.ijse.util.SystemAlert;
 import lk.ijse.util.TxtColours;
@@ -25,11 +26,13 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,6 +94,8 @@ public class OrderFormController {
     @FXML
     private JFXComboBox cmbCustomerId;
     @FXML
+    private JFXComboBox cmbCustomerIddd;
+    @FXML
     private Label lblCustomerName;
     @FXML
     private JFXComboBox cmbToolID;
@@ -104,6 +109,8 @@ public class OrderFormController {
     MainFormController mainFormController = new MainFormController();
 
     private final ObservableList<CartTm> obList = FXCollections.observableArrayList();
+    @FXML
+    private Label lblCustomerEmail;
 
     public OrderFormController() {
     }
@@ -220,7 +227,7 @@ public class OrderFormController {
             for (CustomerDto dto : cusList) {
                 obList.add(dto.getCustomerId());
             }
-            cmbCustomerId.setItems(obList);
+            cmbCustomerIddd.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -360,9 +367,12 @@ public class OrderFormController {
 
 
         String orderId = lblOrderId.getText();
-        String customerId = (String) cmbCustomerId.getValue();
+        String customerId = (String) cmbCustomerIddd.getValue();
         String orderDate = lblOrderDate.getText();
         String descriptionText = lblDescription.getText();
+        String lblCustomerNameText =  lblCustomerName.getText();
+        String lblNetTotalText = lblNetTotal.getText();
+
 
 
         List<CartTm> cartTmList = new ArrayList<>();
@@ -380,6 +390,7 @@ public class OrderFormController {
             if (isAdded) {
 
                 new SystemAlert(Alert.AlertType.CONFIRMATION, "Information", "Order Successfully!", ButtonType.OK).show();
+                generateInvoice(orderId, lblCustomerNameText, lblNetTotalText);
                 try {
                     boolean check = mainFormController.check();
 
@@ -401,6 +412,42 @@ public class OrderFormController {
             new SystemAlert(Alert.AlertType.ERROR, "Error", e.getMessage(), ButtonType.OK).show();
         }
 
+    }
+
+    private void generateInvoice(String orderId, String lblCustomerNameText, String lblNetTotalText) {
+        if (orderId != null) {
+            new Thread(() -> {
+                try {
+                    InputStream resourceAsStream = getClass().getResourceAsStream("/report/Order_invoice.jrxml");
+                    JasperDesign load = JRXmlLoader.load(resourceAsStream);
+                    JasperReport report = JasperCompileManager.compileReport(load);
+
+                    HashMap map = new HashMap();
+                    map.put("id", orderId);
+                    map.put("Total", lblNetTotalText);
+                    map.put("cutsomer Name", lblCustomerNameText);
+
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, DbConnection.getInstance().getConnection());
+                    JasperViewer.viewReport(jasperPrint, false);
+
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\user\\Desktop\\report Invoice\\"+orderId+".pdf");
+                    Mail mail = new Mail();
+                    mail.setFile(new File("C:\\Users\\user\\Desktop\\report Invoice\\" + orderId + ".pdf"));
+                    mail.setTo(lblCustomerEmail.getText());
+                    mail.setSubject("Ashen Enterprise Invoice");
+                    mail.setMsg("Your Order has Placed and Invoice is attached here");
+
+                    Thread thread = new Thread(mail);
+                    thread.start();
+
+                } catch (SQLException | JRException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+                }
+            }).start();
+        }else {
+            new SystemAlert(Alert.AlertType.WARNING,"Warning","Please select an employee",ButtonType.OK).show();
+    }
     }
 
 
@@ -440,10 +487,18 @@ public class OrderFormController {
     }
 
     public void cmbCustomerOnAction(ActionEvent actionEvent) throws SQLException {
-        String id = (String) cmbCustomerId.getValue();
-        CustomerDto dto = CustomerModel.searchCustomer(id);
+       try {
+           String id = (String) cmbCustomerIddd.getValue();
+           CustomerDto dto = CustomerModel.searchCustomerId(id);
 
-        lblCustomerName.setText(dto.getCustomerName());
+
+           lblCustomerName.setText(dto.getCustomerName());
+           lblCustomerEmail.setText(dto.getCustomerEmail());
+       }catch (SQLException e){
+           throw new RuntimeException(e);
+       }
+
+
     }
 
     public void btnNewCustomerOnAction(ActionEvent actionEvent) throws IOException {
@@ -483,8 +538,7 @@ public class OrderFormController {
         String txtReStatusText = txtReStatus.getText();
 
 
-
-            OrderDetailsDto dto = new OrderDetailsDto(lblReOrderIdText, lblReToolIdText, lblReQtyText, txtReStatusText);
+             OrderDetailsDto dto = new OrderDetailsDto(lblReOrderIdText, lblReToolIdText, lblReQtyText, txtReStatusText);
             OrderDetailModel model = new OrderDetailModel();
 
 
@@ -511,29 +565,10 @@ public class OrderFormController {
 
     @FXML
     void btnPrintOnAction(ActionEvent event) throws IOException, JRException, SQLException {
-        try {
-            InputStream design = getClass().getResourceAsStream("/report/Invoice_form.jrxml");
-            JasperDesign load = JRXmlLoader.load(design);
-            JasperReport jasperReport = JasperCompileManager.compileReport(load);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jasperPrint, false);
 
-        } catch (JRException e) {
-           e.getMessage();
-        }
-       /* InputStream resourseAsStream = getClass().getResourceAsStream("src/main/java/lk/ijse/report/OrderForm.jrxml");
-        JasperDesign load = JRXmlLoader.load(resourseAsStream);
-        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+       }
 
-        JasperPrint jasperPrint =
-                JasperFillManager.fillReport(
-                        jasperReport,
-                        null,
-                        DbConnection.getInstance().getConnection()
-                );
-        JasperViewer.viewReport(jasperPrint, false);
-    }*/
-    }
+
     @FXML
     void btnDashBoardOnAction(ActionEvent event) {
         try {

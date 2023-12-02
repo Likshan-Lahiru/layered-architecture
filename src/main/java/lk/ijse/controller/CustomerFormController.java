@@ -54,6 +54,10 @@ public class CustomerFormController {
     private TableView<CustomerTm> tblCustomer;
     SoundsAssits soundsAssits =  new SoundsAssits();
     MainFormController mainFormController = new MainFormController();
+    @FXML
+    private JFXTextField txtCustomerEmail;
+    @FXML
+    private TableColumn<?, ?> colCustomerEmail;
 
 
 
@@ -69,6 +73,7 @@ public class CustomerFormController {
         colCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
         colCustomerNIC.setCellValueFactory(new PropertyValueFactory<>("customerNIC"));
         colCustomerContactNumber.setCellValueFactory(new PropertyValueFactory<>("customerNumber"));
+        colCustomerEmail.setCellValueFactory(new PropertyValueFactory<>("customerEmail"));
     }
     public void loadAllCustomer(){
        var model = new CustomerModel();
@@ -83,7 +88,8 @@ public class CustomerFormController {
                               dto.getCustomerName(),
                               dto.getCustomerAddress(),
                               dto.getCustomerNic(),
-                              dto.getCustomerContactNumber()
+                              dto.getCustomerContactNumber(),
+                              dto.getCustomerEmail()
                       )
                     );
             }
@@ -148,8 +154,9 @@ public class CustomerFormController {
         String txtCustomerAddressText = txtCustomerAddress.getText();
         String txtCustomerNICText = txtCustomerNIC.getText();
         String txtCustomerContactNumberText = txtCustomerContactNumber.getText();
+        String customerEmailText = txtCustomerEmail.getText();
 
-        if (!(txtCustomerId.getText().isEmpty()||txtCustomerName.getText().isEmpty()||txtCustomerAddress.getText().isEmpty()||txtCustomerNIC.getText().isEmpty()||txtCustomerContactNumber.getText().isEmpty())){
+        if (!(txtCustomerId.getText().isEmpty()||txtCustomerName.getText().isEmpty()||txtCustomerAddress.getText().isEmpty()||txtCustomerNIC.getText().isEmpty()||txtCustomerContactNumber.getText().isEmpty()||customerEmailText.isEmpty())){
             if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()){
                 TxtColours.setDefaultColours(txtCustomerId);
                 if (RegExPatterns.getNamePattern().matcher(txtCustomerName.getText()).matches()){
@@ -158,6 +165,12 @@ public class CustomerFormController {
                         TxtColours.setDefaultColours(txtCustomerNIC);
                         if (RegExPatterns.getContactNumberPattern().matcher(txtCustomerContactNumberText).matches()){
                             TxtColours.setDefaultColours(txtCustomerContactNumber);
+                            if (RegExPatterns.getEmailPattern().matcher(customerEmailText).matches()){
+                                TxtColours.setDefaultColours(txtCustomerEmail);
+                            }else {
+                                TxtColours.setErrorColours(txtCustomerEmail);
+                                return;
+                            }
                         }else {
                             TxtColours.setErrorColours(txtCustomerContactNumber);
                             return;
@@ -181,6 +194,7 @@ public class CustomerFormController {
             TxtColours.setErrorColours(txtCustomerAddress);
             TxtColours.setErrorColours(txtCustomerNIC);
             TxtColours.setErrorColours(txtCustomerContactNumber);
+            TxtColours.setErrorColours(txtCustomerEmail);
 
 
             new SystemAlert(Alert.AlertType.WARNING,"Warrning","Please Enter the all Details").show();
@@ -198,7 +212,7 @@ public class CustomerFormController {
 
 
 
-        CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText);
+        CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText, customerEmailText);
         CustomerModel model = new CustomerModel();
         try {
             boolean isSaved =model.saveCustomer(dto);
@@ -229,7 +243,8 @@ public class CustomerFormController {
                             newValue.getCustomerName(),
                             newValue.getCustomerAddress(),
                             newValue.getCustomerNIC(),
-                            newValue.getCustomerNumber()
+                            newValue.getCustomerNumber(),
+                            newValue.getCustomerEmail()
                     );
                     cutomerSetField(dto);
                 });
@@ -241,11 +256,12 @@ public class CustomerFormController {
         txtCustomerAddress.setText(dto.getCustomerAddress());
         txtCustomerNIC.setText(dto.getCustomerNic());
         txtCustomerContactNumber.setText(dto.getCustomerContactNumber());
+        txtCustomerEmail.setText(dto.getCustomerEmail());
     }
 
     public void btnCustomerUpdateOnAction(ActionEvent actionEvent) {
 
-        if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty())) {
+        if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty()||txtCustomerEmail.getText().isEmpty())) {
             if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()) {
                 TxtColours.setDefaultColours(txtCustomerId);
                 if (RegExPatterns.getNamePattern().matcher(txtCustomerName.getText()).matches()) {
@@ -254,6 +270,12 @@ public class CustomerFormController {
                         TxtColours.setDefaultColours(txtCustomerNIC);
                         if (RegExPatterns.getContactNumberPattern().matcher(txtCustomerContactNumber.getText()).matches()) {
                             TxtColours.setDefaultColours(txtCustomerContactNumber);
+                            if (RegExPatterns.getEmailPattern().matcher(txtCustomerEmail.getText()).matches()) {
+                                TxtColours.setDefaultColours(txtCustomerEmail);
+                            } else {
+                                TxtColours.setErrorColours(txtCustomerEmail);
+                                return;
+                            }
                         } else {
                             TxtColours.setErrorColours(txtCustomerContactNumber);
                             return;
@@ -277,6 +299,7 @@ public class CustomerFormController {
             TxtColours.setErrorColours(txtCustomerAddress);
             TxtColours.setErrorColours(txtCustomerNIC);
             TxtColours.setErrorColours(txtCustomerContactNumber);
+            TxtColours.setErrorColours(txtCustomerEmail);
 
 
             new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").show();
@@ -296,8 +319,10 @@ public class CustomerFormController {
         String txtCustomerAddressText = txtCustomerAddress.getText();
         String txtCustomerNICText = txtCustomerNIC.getText();
         String txtCustomerContactNumberText = txtCustomerContactNumber.getText();
+        String customerEmailText = txtCustomerEmail.getText();
 
-        CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText);
+
+        CustomerDto dto = new CustomerDto(txtCustomerIdText, txtCustomerNameText, txtCustomerAddressText, txtCustomerNICText, txtCustomerContactNumberText, customerEmailText);
         CustomerModel model = new CustomerModel();
 
         try {
@@ -330,6 +355,7 @@ public class CustomerFormController {
         txtCustomerAddress.clear();
         txtCustomerContactNumber.clear();
         txtSearchCustomerID.clear();
+        txtCustomerEmail.clear();
     }
 
 
@@ -349,7 +375,7 @@ public class CustomerFormController {
     }
     @FXML
     void btnCustomerDeleteOnAction(ActionEvent event) {
-        if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty())) {
+        if (!(txtCustomerId.getText().isEmpty() || txtCustomerName.getText().isEmpty() || txtCustomerAddress.getText().isEmpty() || txtCustomerNIC.getText().isEmpty() || txtCustomerContactNumber.getText().isEmpty()|| txtCustomerEmail.getText().isEmpty())) {
             if (RegExPatterns.getCustomerId().matcher(txtCustomerId.getText()).matches()) {
                 TxtColours.setDefaultColours(txtCustomerId);
                 if (RegExPatterns.getNamePattern().matcher(txtCustomerName.getText()).matches()) {
@@ -358,6 +384,12 @@ public class CustomerFormController {
                         TxtColours.setDefaultColours(txtCustomerNIC);
                         if (RegExPatterns.getContactNumberPattern().matcher(txtCustomerContactNumber.getText()).matches()) {
                             TxtColours.setDefaultColours(txtCustomerContactNumber);
+                            if (RegExPatterns.getEmailPattern().matcher(txtCustomerEmail.getText()).matches()) {
+                                TxtColours.setDefaultColours(txtCustomerEmail);
+                            }else {
+                                TxtColours.setErrorColours(txtCustomerEmail);
+                                return;
+                            }
                         } else {
                             TxtColours.setErrorColours(txtCustomerContactNumber);
                             return;
@@ -381,6 +413,7 @@ public class CustomerFormController {
             TxtColours.setErrorColours(txtCustomerAddress);
             TxtColours.setErrorColours(txtCustomerNIC);
             TxtColours.setErrorColours(txtCustomerContactNumber);
+            TxtColours.setErrorColours(txtCustomerEmail);
 
 
             new SystemAlert(Alert.AlertType.WARNING, "Warrning", "Please Enter the all Details").show();

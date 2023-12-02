@@ -26,9 +26,12 @@ public class OrderPlaceModel {
                if(isUpdated) {
                     boolean isOrderDetailSaved = orderDetailModel.saveOrderDetail(dto.getOrderId(), dto.getCartTms());
                   if(isOrderDetailSaved) {
-                      connection.commit();
+                      boolean isInvoiceSaved = InviceModel.invoiceDetailsSave(dto.getOrderId(), dto.getCartTms());
+                      if (isInvoiceSaved) {
+                          connection.commit();
+                          result = true;
+                      }
 
-                        result = true;
                     }
                 }
             }

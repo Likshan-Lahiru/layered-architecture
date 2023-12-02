@@ -1,18 +1,21 @@
 package lk.ijse.util;
 
-import javafx.scene.image.ImageView;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 public class Mail implements Runnable{
 
-    private ImageView imageView;
     private String msg;
     private String to;
     private String subject;
+
+    private File file;
 
     public void setMsg(String msg) {
         this.msg = msg;
@@ -22,11 +25,15 @@ public class Mail implements Runnable{
         this.to = to;
     }
 
+    public void setFile(File file) {
+        this.file = file;
+    }
+
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public void outMail() throws MessagingException {
+    public void outMail() throws MessagingException, IOException {
         String from = "lahiru212001@gmail.com"; //sender's email address
         String host = "localhost";
 
@@ -41,7 +48,7 @@ public class Mail implements Runnable{
 
         Session session = Session.getDefaultInstance(properties, new Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("lahiru212001@gmail.com", "mwid nwve ystm kvys");  // have to change some settings in SMTP
+                return new PasswordAuthentication("lahiru212001@gmail.com", "lsad gxfc pbco kqra");  // have to change some settings in SMTP
             }
         });
 
@@ -51,9 +58,25 @@ public class Mail implements Runnable{
         mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         mimeMessage.setSubject(this.subject);
         mimeMessage.setText(this.msg);
-        Transport.send(mimeMessage);
 
-        System.out.println("sent");
+        if (file != null) {
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.attachFile(this.file);
+
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mimeBodyPart);
+
+            mimeMessage.setContent(multipart);
+            Transport.send(mimeMessage);
+
+            System.out.println("sent");
+
+        } else {
+            Transport.send(mimeMessage);
+            System.out.println("sent");
+        }
+
     }
 
     @Override
@@ -63,11 +86,11 @@ public class Mail implements Runnable{
                 outMail();
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         } else {
             System.out.println("not sent. empty msg!");
-         }
+        }
     }
-
-
 }

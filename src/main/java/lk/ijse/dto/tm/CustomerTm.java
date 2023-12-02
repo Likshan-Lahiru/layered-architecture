@@ -15,4 +15,5 @@ public class CustomerTm {
     private String customerAddress;
     private String customerNIC;
     private String customerNumber;
+    private String customerEmail;
 }

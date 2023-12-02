@@ -43,8 +43,9 @@ create table customer(
                          customer_id varchar(35) primary key,
                          customer_name varchar(50)not null ,
                          address text not null,
-                         NIC varchar(14) not null,
-                         contact_number varchar(11) not null
+                         NIC varchar(14) not null unique,
+                         contact_number varchar(11) not null,
+                         email varchar(50) not null
 );
 
 create table employee(
@@ -107,4 +108,22 @@ create table delivery(
                          location text not null ,
                          constraint foreign key (order_id) references orders (order_id) on DELETE cascade on UPDATE cascade ,
                          constraint foreign key (vehical_id) references vehical (vehical_id) on DELETE cascade on UPDATE cascade
+);
+create table invoice(
+    order_id  varchar(35) NOT NULL,
+    tool_id   varchar(35) NOT NULL,
+    tool_name varchar(20) NOT NULL,
+    qty       int         NOT NULL,
+    tot       double      NOT NULL,
+    constraint foreign key (order_id) references orders (order_id) on DELETE cascade on UPDATE cascade,
+    constraint foreign key (tool_id) references tool (tool_id) on DELETE cascade on UPDATE cascade
+)
+
+create table suppliers_tool_supplied(
+                                    supplier_name varchar(155),
+                                    tool_name varchar(20),
+                                    supplied_date varchar(20),
+                                    unit_price double not null,
+                                    quantity_supplied int not null
+
 );

@@ -19,27 +19,27 @@
          <children>
             <Pane layoutX="687.0" layoutY="85.0" prefHeight="518.0" prefWidth="483.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
-                  <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="26.0" layoutY="91.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer ID" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtCustomerId" labelFloat="true" layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer ID" unFocusColor="#0988e5">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtCustomerNIC" labelFloat="true" layoutX="26.0" layoutY="282.0" prefHeight="31.0" prefWidth="319.0" promptText="NIC" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtCustomerNIC" labelFloat="true" layoutX="26.0" layoutY="227.0" prefHeight="31.0" prefWidth="319.0" promptText="NIC" unFocusColor="#0988e5">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtCustomerAddress" labelFloat="true" layoutX="26.0" layoutY="217.0" prefHeight="31.0" prefWidth="319.0" promptText="Address" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtCustomerAddress" labelFloat="true" layoutX="26.0" layoutY="162.0" prefHeight="31.0" prefWidth="319.0" promptText="Address" unFocusColor="#0988e5">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtCustomerContactNumber" labelFloat="true" layoutX="26.0" layoutY="362.0" prefHeight="31.0" prefWidth="319.0" promptText="Contact Number" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtCustomerContactNumber" labelFloat="true" layoutX="26.0" layoutY="294.0" prefHeight="31.0" prefWidth="319.0" promptText="Contact Number" unFocusColor="#0988e5">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtCustomerName" labelFloat="true" layoutX="26.0" layoutY="153.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer Name" unFocusColor="#0988e5">
+                  <JFXTextField fx:id="txtCustomerName" labelFloat="true" layoutX="26.0" layoutY="98.0" prefHeight="31.0" prefWidth="319.0" promptText="Customer Name" unFocusColor="#0988e5">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -97,22 +97,28 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXTextField fx:id="txtCustomerEmail" labelFloat="true" layoutX="26.0" layoutY="354.0" prefHeight="31.0" prefWidth="319.0" promptText="Contact email" unFocusColor="#0988e5">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextField>
                </children>
             </Pane>
             <Pane layoutX="14.0" layoutY="35.0" prefHeight="572.0" prefWidth="658.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../style/style.css">
                <children>
                   <TableView fx:id="tblCustomer" layoutX="10.0" layoutY="8.0" prefHeight="534.0" prefWidth="642.0" stylesheets="@../style/table.css">
                     <columns>
-                      <TableColumn fx:id="colCustomerId" prefWidth="100.0" text="Customer ID" />
-                      <TableColumn fx:id="colcustomerName" prefWidth="126.99996948242188" text="Customer Name" />
-                        <TableColumn fx:id="colCustomerAddress" prefWidth="190.0" text="Customer Address" />
-                        <TableColumn fx:id="colCustomerNIC" prefWidth="99.0" text="NIC" />
-                        <TableColumn fx:id="colCustomerContactNumber" prefWidth="123.0" text="Contact Number" />
+                      <TableColumn fx:id="colCustomerId" prefWidth="87.0" text="Customer ID" />
+                      <TableColumn fx:id="colcustomerName" prefWidth="107.0" text="Customer Name" />
+                        <TableColumn fx:id="colCustomerAddress" prefWidth="124.0" text="Customer Address" />
+                        <TableColumn fx:id="colCustomerNIC" prefWidth="94.0" text="NIC" />
+                        <TableColumn fx:id="colCustomerContactNumber" prefWidth="101.0" text="Contact Number" />
+                        <TableColumn fx:id="colCustomerEmail" prefWidth="124.0" text="customer Email" />
                     </columns>
                   </TableView>
                </children>
             </Pane>
-            <TextField fx:id="txtSearchCustomerID" layoutX="851.0" layoutY="23.0" prefHeight="34.0" prefWidth="184.0" promptText="Customer Id" style="-fx-background-radius: 30;" />
+            <TextField fx:id="txtSearchCustomerID" layoutX="851.0" layoutY="23.0" prefHeight="34.0" prefWidth="184.0" promptText="Customer contact" style="-fx-background-radius: 30;" />
             <Button layoutX="1023.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnCustomerIDSearchOnAction" prefHeight="34.0" prefWidth="40.0">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0">

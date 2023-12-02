@@ -23,8 +23,11 @@ public class StockListModel {
            if(isUpdated) {
                 boolean isSaved = SupplierToolModel.saveStockList(stockListDto.getStockListTms());
                if(isSaved) {
-                    connection.commit();
-                    result = true;
+
+
+                       connection.commit();
+                       result = true;
+
                 }
             }
         }catch (SQLException e) {

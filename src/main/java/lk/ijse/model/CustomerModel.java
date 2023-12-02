@@ -15,7 +15,7 @@ public class CustomerModel {
 
     public boolean saveCustomer(CustomerDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "INSERT INTO customer VALUES (?, ?, ?, ?, ?) ";
+        String sql = "INSERT INTO customer VALUES (?, ?, ?, ?, ?, ?) ";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getCustomerId());
@@ -23,6 +23,8 @@ public class CustomerModel {
         pstm.setString(3, dto.getCustomerAddress());
         pstm.setString(4, dto.getCustomerNic());
         pstm.setString(5, dto.getCustomerContactNumber());
+        pstm.setString(6, dto.getCustomerEmail());
+
 
         boolean IsSaved = pstm.executeUpdate() > 0;
         return IsSaved;
@@ -43,8 +45,9 @@ public class CustomerModel {
             String customer_address = resultSet.getString(3);
             String customer_nic = resultSet.getString(4);
             String customer_contact = resultSet.getString(5);
+            String customer_email = resultSet.getString(6);
 
-            CustomerDto dto = new CustomerDto(customer_id, customer_name, customer_address, customer_nic, customer_contact);
+            CustomerDto dto = new CustomerDto(customer_id, customer_name, customer_address, customer_nic, customer_contact, customer_email);
             customerDtoList.add(dto);
         }
 
@@ -52,6 +55,26 @@ public class CustomerModel {
     }
 
     public static CustomerDto searchCustomer(String txtSearchCustomerIDText) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM customer WHERE customer_id = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, txtSearchCustomerIDText);
+        ResultSet resultSet = pstm.executeQuery();
+        CustomerDto dto = null;
+        if (resultSet.next()) {
+            dto = new CustomerDto(
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("customer_name"),
+                    resultSet.getString("address"),
+                    resultSet.getString("NIC"),
+                    resultSet.getString("contact_number"),
+                    resultSet.getString("email")
+            );
+        }
+
+        return dto;
+    }
+    public static CustomerDto searchCustomerId(String txtSearchCustomerIDText) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM customer WHERE customer_id= ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -64,7 +87,8 @@ public class CustomerModel {
                     resultSet.getString("customer_name"),
                     resultSet.getString("address"),
                     resultSet.getString("NIC"),
-                    resultSet.getString("contact_number")
+                    resultSet.getString("contact_number"),
+                    resultSet.getString("email")
             );
         }
 
@@ -74,7 +98,7 @@ public class CustomerModel {
 
     public boolean updateCustomer(CustomerDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "UPDATE customer SET customer_name=?,address=?,NIC=?,contact_number=? WHERE customer_id=? ";
+        String sql = "UPDATE customer SET customer_name=?,address=?,NIC=?,contact_number=? ,email=? WHERE customer_id=? ";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
 
@@ -83,6 +107,8 @@ public class CustomerModel {
         pstm.setString(3, dto.getCustomerNic());
         pstm.setString(4, dto.getCustomerContactNumber());
         pstm.setString(5, dto.getCustomerId());
+        pstm.setString(6, dto.getCustomerId());
+
 
         boolean IsSaved = pstm.executeUpdate() > 0;
 
