@@ -372,7 +372,7 @@ public class toolStockController {
         try {
 
 
-            InputStream design = getClass().getResourceAsStream("/report/history.jrxml");
+            InputStream design = getClass().getResourceAsStream("/report/Waste_report.jrxml");
             JasperDesign load = JRXmlLoader.load(design);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(load);

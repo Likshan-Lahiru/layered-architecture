@@ -50,12 +50,12 @@ public class OrderModel {
             if (id == 11) {
                 id++;
                 System.out.println(id);
-                return "O0" + id;
+                return "O00" + id;
             }
             id++;
-            return "O0" + id;
+            return "O00" + id;
         }
-        return "O01";
+        return "O001";
     }
 
 
