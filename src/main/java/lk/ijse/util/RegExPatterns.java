@@ -17,7 +17,7 @@ public class RegExPatterns {
     private static final Pattern passwordPattern = Pattern.compile("^[0-9a-zA-Z]{5,}$");
     private static final Pattern NICPattern = Pattern.compile("^(?:19|20)?\\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$");
     private static final Pattern contactNumberPattern = Pattern.compile("^[0]{1}[7]{1}[01245678]{1}[0-9]{7}$");
-    private static final Pattern addressPattern = Pattern.compile("[a-z]{3,}");
+    private static final Pattern addressPattern = Pattern.compile("[a-zA-Z0-9. /]{4,}");
     private static final Pattern vehicleNumberPlate = Pattern.compile("^[a-zA-Z]{2}|[0-9]{4}$");
 
 
