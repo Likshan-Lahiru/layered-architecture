@@ -71,12 +71,25 @@ public class LoginFormController {
 
         String nameText = txtUserName.getText();
 
+
         String passwordText = txtPassword.getText();
         if (nameText.isEmpty()||passwordText.isEmpty()){
             txtPassword.setStyle("-fx-border-color: #ff004f;");
             txtUserName.setStyle("-fx-border-color: #ff004f;");
             return;
         }
+
+        SignUpDto dto1 = new LoginModel().getName(nameText);
+        String name = dto1.getUserName();
+        String name2 = dto1.getScondName();
+
+        System.out.println(dto1.getFirstName());
+        System.out.println(dto1.getScondName());
+        System.out.println(dto1.getEmail());
+        System.out.println(dto1.getPasssword());
+        System.out.println(dto1.getUserName());
+
+
 
 
        LoginDto dto = new LoginDto(nameText,passwordText);
@@ -98,7 +111,7 @@ public class LoginFormController {
 
           try {
                 Mail mail = new Mail();
-                mail.setMsg(nameText+"emplloyee Login into Ashen Enterprise management System at"+" "+lblTime.getText());
+                mail.setMsg("Dear "+name2+" "+name+" "+"emplloyee Login into Ashen Enterprise management System at"+"   "+lblTime.getText());
 
 
                mail.setTo(hiru);
