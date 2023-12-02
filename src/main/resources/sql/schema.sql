@@ -8,14 +8,14 @@ use EshenEnterprise;
 create table Supplier(
                          supplier_id varchar (35) primary key ,
                          supplier_name varchar (155) not null ,
-                         NIC varchar(14)not null ,
+                         NIC varchar(14)not null unique,
                          address text not null ,
-                         contact_number varchar (15) not null
+                         contact_number varchar (15) not null unique
 );
 
 create table tool(
                      tool_id varchar (35) primary key ,
-                     tool_name varchar(20) not null ,
+                     tool_name varchar(20) not null unique, ,
                      qty_on_hand int not null,
                      rent_per_day_price double
 );
@@ -44,14 +44,14 @@ create table customer(
                          customer_name varchar(50)not null ,
                          address text not null,
                          NIC varchar(14) not null unique,
-                         contact_number varchar(11) not null,
-                         email varchar(50) not null
+                         contact_number varchar(11) not null unique,
+                         email varchar(50) not null unique
 );
 
 create table employee(
                          employee_id varchar(35) primary key,
                          employee_name varchar(50) not null,
-                         NIC varchar(14) not null ,
+                         NIC varchar(14) not null unique, ,
                          address text not null
 );
 
@@ -98,7 +98,7 @@ create table vehical(
                         vehical_id varchar(35) primary key ,
                         status text not null ,
                         last_service_date varchar(20) not null,
-                        number_plate_no varchar(20)
+                        number_plate_no varchar(20) not null unique
 );
 
 create table delivery(
