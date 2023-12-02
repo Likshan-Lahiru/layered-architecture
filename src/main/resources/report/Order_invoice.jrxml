@@ -104,6 +104,10 @@
 				<reportElement x="120" y="82" width="100" height="19" uuid="b5ce3d07-1956-4440-ba0f-e815e3bbc734"/>
 				<textFieldExpression><![CDATA[$P{cutsomer Name}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="-20" y="0" width="46" height="51" uuid="25d2e752-ad52-433f-ab59-98bf4ae661a8"/>
+				<imageExpression><![CDATA["C:/Users/user/Desktop/Final Project/final project pic/png/logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>
