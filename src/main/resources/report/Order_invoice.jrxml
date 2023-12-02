@@ -61,10 +61,6 @@
 				</textElement>
 				<text><![CDATA[Ashen Enterprise]]></text>
 			</staticText>
-			<image>
-				<reportElement x="-20" y="0" width="50" height="50" uuid="74d5bf8b-0b28-4bdc-b843-6691e54ef82a"/>
-				<imageExpression><![CDATA["C:/Users/user/Desktop/Final Project/final project pic/png/logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="357" y="39" width="202" height="19" uuid="8d707757-6cd5-4713-bf59-3c4a5acf0afc"/>
 				<text><![CDATA[address:- no.457/A/1,arruggoda,allubomulla]]></text>
@@ -108,6 +104,10 @@
 				<reportElement x="120" y="82" width="100" height="19" uuid="b5ce3d07-1956-4440-ba0f-e815e3bbc734"/>
 				<textFieldExpression><![CDATA[$P{cutsomer Name}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="-19" y="0" width="46" height="50" uuid="a8dd8a9d-4cf1-4428-ac2b-379e2e1d9397"/>
+				<imageExpression><![CDATA["C:/Users/user/IdeaProjects/semestser_final_project/src/main/resources/icon/logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>
