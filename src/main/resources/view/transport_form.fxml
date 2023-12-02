@@ -19,7 +19,7 @@
    <children>
       <Pane blendMode="DARKEN" layoutX="53.0" layoutY="101.0" prefHeight="274.0" prefWidth="1117.0" style="-fx-background-color: #dee2e6; -fx-background-radius: 10;">
          <children>
-            <Label layoutX="151.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
+            <Label layoutX="151.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     DF 2323" textAlignment="CENTER" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="492.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="180.0" fitWidth="334.0" layoutX="34.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,13 +31,13 @@
                   <Image url="@../icon/lorry%202.png" />
                </image>
             </ImageView>
-            <Label layoutX="537.0" layoutY="216.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
+            <Label layoutX="537.0" layoutY="216.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     NC 9024" textAlignment="CENTER" />
             <ImageView fitHeight="212.0" fitWidth="438.0" layoutX="713.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icon/loeer%203.png" />
                </image>
             </ImageView>
-            <Label layoutX="879.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     Num Plate" textAlignment="CENTER" />
+            <Label layoutX="879.0" layoutY="214.0" prefHeight="39.0" prefWidth="86.0" style="-fx-background-color: #edede9;" text="     HC 7689" textAlignment="CENTER" />
          </children>
       </Pane>
       <TableView fx:id="tblVehicleDetail" layoutX="61.0" layoutY="395.0" prefHeight="286.0" prefWidth="622.0" stylesheets="@../style/table.css">
