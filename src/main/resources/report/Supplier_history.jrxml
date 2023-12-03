@@ -41,14 +41,10 @@
 	</background>
 	<title>
 		<band height="85" splitType="Stretch">
-			<image>
-				<reportElement x="50" y="10" width="50" height="50" uuid="82b9927d-ae40-4284-8cb8-fe3cb3ccb418"/>
-				<imageExpression><![CDATA["C:/Users/user/Desktop/Final Project/final project pic/png/logo.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="130" y="20" width="220" height="30" uuid="c211056d-4752-4fe2-b02a-651bf8f63a04"/>
+				<reportElement x="0" y="20" width="160" height="30" uuid="c211056d-4752-4fe2-b02a-651bf8f63a04"/>
 				<textElement>
-					<font size="20"/>
+					<font size="18"/>
 				</textElement>
 				<text><![CDATA[supplierd history ]]></text>
 			</staticText>
@@ -67,6 +63,13 @@
 			<line>
 				<reportElement x="-11" y="72" width="580" height="1" uuid="89edc128-c542-494e-b661-8703af1133db"/>
 			</line>
+			<staticText>
+				<reportElement x="0" y="-10" width="180" height="30" uuid="a0ca6097-d10d-4606-8665-a4ba13ec00ad"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Ashen Enterprise]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
