@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ItemDAOImpl implements ItemDAO {
+    @Override
     public ArrayList<ItemDTO> getAllItem() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
             Statement stm = connection.createStatement();
@@ -18,6 +19,7 @@ public class ItemDAOImpl implements ItemDAO {
         }
         return getAllItem;
     }
+    @Override
     public void itemDelete(String code) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM Item WHERE code=?");
@@ -25,6 +27,7 @@ public class ItemDAOImpl implements ItemDAO {
             pstm.executeUpdate();
 
     }
+    @Override
     public void saveItem(ItemDTO itemDTO) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
                 PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
@@ -34,6 +37,7 @@ public class ItemDAOImpl implements ItemDAO {
                 pstm.setInt(4, itemDTO.getQtyOnHand());
                 pstm.executeUpdate();
     }
+    @Override
     public boolean isExistItem(String code) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
@@ -41,6 +45,7 @@ public class ItemDAOImpl implements ItemDAO {
         return pstm.executeQuery().next();
 
     }
+    @Override
     public String generateNewItemCode() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         ResultSet rst = connection.createStatement().executeQuery("SELECT code FROM Item ORDER BY code DESC LIMIT 1;");
