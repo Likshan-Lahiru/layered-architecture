@@ -229,10 +229,6 @@ public class ManageCustomersFormController {
         return null;
     }
 
-    /*private String getLastCustomerId() {
-        List<CustomerTM> tempCustomersList = new ArrayList<>(tblCustomers.getItems());
-        Collections.sort(tempCustomersList);
-        return tempCustomersList.get(tempCustomersList.size() - 1).getId();
-    }*/
+
 
 }
