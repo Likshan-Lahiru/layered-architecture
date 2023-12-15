@@ -29,7 +29,7 @@ public class QrGenerator {
 
     public void getGenerator() throws IOException, WriterException {
         try {
-            path = "C:\\Users\\user\\Desktop\\qr\\" + data + ".png";
+            path = "C:\\Users\\Pamudi Narthana\\OneDrive\\Desktop\\employee qr\\" + data + ".png";
             BitMatrix encode = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 200, 200);
             Path path1 = Paths.get(path);
             MatrixToImageWriter.writeToPath(encode, "PNG", path1);

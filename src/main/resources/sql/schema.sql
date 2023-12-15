@@ -117,7 +117,7 @@ create table invoice(
     tot       double      NOT NULL,
     constraint foreign key (order_id) references orders (order_id) on DELETE cascade on UPDATE cascade,
     constraint foreign key (tool_id) references tool (tool_id) on DELETE cascade on UPDATE cascade
-)
+);
 
 create table suppliers_tool_supplied(
                                     supplier_name varchar(155),

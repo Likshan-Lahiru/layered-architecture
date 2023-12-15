@@ -106,7 +106,7 @@
 			</textField>
 			<image>
 				<reportElement x="-20" y="0" width="46" height="51" uuid="25d2e752-ad52-433f-ab59-98bf4ae661a8"/>
-				<imageExpression><![CDATA["C:/Users/user/Desktop/Final Project/final project pic/png/logo.png"]]></imageExpression>
+				<imageExpression></imageExpression>
 			</image>
 		</band>
 	</title>

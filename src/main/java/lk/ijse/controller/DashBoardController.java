@@ -54,7 +54,7 @@ public class DashBoardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadDateandTime();
         allDetailsLoader();
-        welcomeVoice();
+
     }
     private void loadDateandTime() {
         Date date = new Date();
@@ -70,9 +70,7 @@ public class DashBoardController implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
-    public void welcomeVoice(){
-        new SoundsAssits().welcome();
-    }
+
 
     public void allDetailsLoader() throws SQLException {
         try {

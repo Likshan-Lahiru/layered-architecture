@@ -232,6 +232,8 @@ public class CustomerFormController {
             }
         }catch (SQLException e){
             new SystemAlert(Alert.AlertType.ERROR, "Error", "Something went wrong!", ButtonType.OK).show();
+        }finally {
+            System.out.println("finally code test!");
         }
     }
 
@@ -248,7 +250,9 @@ public class CustomerFormController {
                     );
                     cutomerSetField(dto);
                 });
+
     }
+
 
     private void cutomerSetField(CustomerDto dto) {
         txtCustomerId.setText(dto.getCustomerId());
