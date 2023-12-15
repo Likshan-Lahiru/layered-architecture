@@ -2,6 +2,7 @@ package com.example.layeredarchitecture.dao;
 
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
+import com.jfoenix.controls.JFXComboBox;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -75,6 +76,16 @@ public class CustomerDAOImpl implements CustomerDAO {
             } else {
                 return "C00-001";
             }
+
+    }
+    public void loadAllCustomerId(JFXComboBox<String> cmbCustomerId) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stm = connection.createStatement();
+        ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
+
+        while (rst.next()) {
+            cmbCustomerId.getItems().add(rst.getString("id"));
+        }
 
     }
 

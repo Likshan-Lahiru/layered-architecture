@@ -1,5 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.dao.CustomerDAOImpl;
+import com.example.layeredarchitecture.dao.ItemDAOImpl;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.CustomerDTO;
 import com.example.layeredarchitecture.model.ItemDTO;
@@ -213,13 +215,8 @@ public class PlaceOrderFormController {
 
     private void loadAllCustomerIds() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
-
-            while (rst.next()) {
-                cmbCustomerId.getItems().add(rst.getString("id"));
-            }
+            CustomerDAOImpl customerDAO = new CustomerDAOImpl();
+            customerDAO.loadAllCustomerId(cmbCustomerId);
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
@@ -230,13 +227,8 @@ public class PlaceOrderFormController {
 
     private void loadAllItemCodes() {
         try {
-            /*Get all items*/
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
-            while (rst.next()) {
-                cmbItemCode.getItems().add(rst.getString("code"));
-            }
+            ItemDAOImpl itemDAO = new ItemDAOImpl();
+            itemDAO.laodAllItemCode(cmbItemCode);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {

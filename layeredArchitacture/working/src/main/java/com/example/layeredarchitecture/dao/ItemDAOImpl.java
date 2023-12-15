@@ -2,6 +2,7 @@ package com.example.layeredarchitecture.dao;
 
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.ItemDTO;
+import com.jfoenix.controls.JFXComboBox;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -56,5 +57,14 @@ public class ItemDAOImpl implements ItemDAO {
         } else {
             return "I00-001";
         }
+    }
+    public void laodAllItemCode(JFXComboBox<String> cmbItemCode) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stm = connection.createStatement();
+        ResultSet rst = stm.executeQuery("SELECT * FROM Item");
+        while (rst.next()) {
+            cmbItemCode.getItems().add(rst.getString("code"));
+        }
+
     }
 }
