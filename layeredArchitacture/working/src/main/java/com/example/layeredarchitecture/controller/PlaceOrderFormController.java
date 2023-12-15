@@ -330,7 +330,7 @@ public class PlaceOrderFormController {
     }
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
-        /*Transaction*/
+
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
